@@ -1,0 +1,76 @@
+@import ~bulma/sass/utilities/initial-variables
+@import ~bulma/sass/utilities/functions
+
+@import './variables.sass'
+
+@import ~bulma
+@import ~bulma-tooltip
+
+.is-shady
+  animation: flyintoright 0.4s backwards
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.27) 0 0 4px
+  border-radius: 4px
+  display: inline-block
+  margin: 0 5px
+  position: relative
+  transition: all 0.2s ease-in-out
+
+  &:hover
+    box-shadow: rgba(0, 0, 0, 0.69) 0px 0px 4px
+    border-radius: 4px
+
+.sale-card__image
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18)
+
+.sale-card_content
+  margin: 0 !important
+
+.sale-card__hr
+  margin: 0.5rem 0
+
+.features
+  padding: 5rem 0
+
+.content_h2
+  margin: 1em auto
+
+
+@keyframes fadeIn
+  from
+    opacity: 0
+
+  to
+    opacity: 1
+
+.imageFade
+  animation-name: fadeIn
+  animation-duration: 1s
+  animation-timing-function: ease
+
+.text-container
+  position: relative
+  color: white
+  overflow: hidden
+
+.bottom-left
+  position: absolute
+  bottom: 0px
+  left: 0px
+  font-size: 0.75rem
+  text-align: left
+  width: 100%
+  padding: 10px
+  background-color: rgba(0, 0, 0, 0.6)
+
+.detail-header
+  background-color: #d7d7d7
+  padding: 8px
+  font-weight: 500
+  overflow: hidden
+  max-height: 40px
+
+.detail-content
+  padding: 8px
+  overflow: hidden
+  max-height: 135px
