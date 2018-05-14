@@ -1,5 +1,5 @@
 <template>
-  <div class="grid-sale is-shady">
+  <div class="grid-sale is-shady is-scale">
     <sale-type :types="sale.fields.type"/>
     <nuxt-link
       :to="{ path: '/sales/' + sale.fields.alias }">
