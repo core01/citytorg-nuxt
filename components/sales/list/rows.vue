@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x">
-    <table class="table is-narrow is-fullwidth is-hoverable nowrap">
+    <table class="table is-narrow is-fullwidth is-hoverable">
       <tbody>
         <sale
           v-for="sale in sales"

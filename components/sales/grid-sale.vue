@@ -76,7 +76,6 @@ export default {
     color: $red
     text-decoration: underline
 
-
 .grid-sale__description
   color: #949494
   line-height: 1.25
