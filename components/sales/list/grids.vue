@@ -6,7 +6,7 @@
       <div
         v-for="sale in sales"
         :key="sale.sys.id"
-        class="column is-12-mobile is-4-tablet is-3-desktop is-2-fullhd">
+        class="column is-12-mobile is-4-tablet is-2-desktop is-2-fullhd">
         <sale :sale="sale"/>
       </div>
     </div>

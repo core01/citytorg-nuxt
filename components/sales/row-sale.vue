@@ -23,7 +23,7 @@
         </nuxt-link>
         <sale-type :types="sale.fields.type"/>
       </div>
-      <p class="row-sale__description">
+      <p class="row-sale__description is-hidden-mobile">
         {{ sale.fields.description | truncate(205) }}
       </p>
     </td>
@@ -107,5 +107,5 @@ export default {
 
 .prices-td
   vertical-align: middle
-  width: 15%
+  min-width: 15%
 </style>

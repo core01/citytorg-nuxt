@@ -3,25 +3,24 @@
     <sale-type :types="sale.fields.type"/>
     <nuxt-link
       :to="{ path: '/sales/' + sale.fields.alias }">
-      <img
-        v-if="sale.fields.photos"
-        :src="sale.fields.photos[0].fields.file.url"
-        :alt="sale.fields.title"
-        class="grid-sale__img imageFade" >
-      <img
-        v-else
-        :alt="sale.fields.title"
-        src="http://via.placeholder.com/350x250"
-        class="grid-sale__img imageFade" >
+      <div class="grid-sale__img-container">
+        <img
+          v-if="sale.fields.photos"
+          :src="sale.fields.photos[0].fields.file.url"
+          :alt="sale.fields.title"
+          class="grid-sale__img imageFade" >
+        <img
+          v-else
+          :alt="sale.fields.title"
+          src="http://via.placeholder.com/350x250"
+          class="grid-sale__img imageFade" >
+      </div>
     </nuxt-link>
     <nuxt-link
       :to="{ path: '/sales/' + sale.fields.alias }"
       class="grid-sale__title">
       {{ sale.fields.title | truncate(45) }}
     </nuxt-link>
-    <p class="grid-sale__description has-text-justified is-hidden-mobile">
-      {{ sale.fields.description | truncate(100) }}
-    </p>
     <div class="grid-sale-prices">
       <div class="grid-sale__price">
         {{ sale.fields.price }} ₸
@@ -56,15 +55,15 @@ export default {
 
 <style lang="sass" scoped>
 @import ~assets/sass/variables
-
+.grid-sale__img-container
+  min-height: 155px
 .grid-sale
-  max-width: 420px
   background-color: white
   padding: 10px
   text-align: center
   display: flex
   flex-direction: column
-  height: 420px
+  height: 320px
   margin-bottom: 20px
 
 .grid-sale__title
@@ -76,6 +75,7 @@ export default {
   &:hover
     color: $red
     text-decoration: underline
+
 
 .grid-sale__description
   color: #949494
@@ -94,7 +94,7 @@ export default {
   text-decoration: line-through
 
 .grid-sale__img
-  max-width: 200px
+  max-width: 160px
   margin: 0 auto
 
 .grid-sale__button

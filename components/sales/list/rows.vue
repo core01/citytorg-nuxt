@@ -1,12 +1,14 @@
 <template>
-  <table class="table is-narrow is-fullwidth is-hoverable">
-    <tbody>
-      <sale
-        v-for="sale in sales"
-        :sale="sale"
-        :key="sale.sys.id"/>
-    </tbody>
-  </table>
+  <div class="overflow-x">
+    <table class="table is-narrow is-fullwidth is-hoverable nowrap">
+      <tbody>
+        <sale
+          v-for="sale in sales"
+          :sale="sale"
+          :key="sale.sys.id"/>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
 import sale from '../row-sale.vue'
@@ -33,6 +35,5 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.column
-  min-width: 350px
+
 </style>
