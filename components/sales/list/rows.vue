@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x">
-    <table class="table is-narrow is-fullwidth is-hoverable">
+    <table class="table is-narrow is-fullwidth is-hoverable sales-table">
       <tbody>
         <sale
           v-for="sale in sales"
@@ -35,5 +35,7 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-
+  .sales-table
+    max-width: 1152px
+    margin: 0 auto
 </style>

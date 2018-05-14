@@ -80,6 +80,8 @@ export default {
   font-weight: bold
   font-size: 28px
   width: 50%
+  word-wrap: normal
+  white-space: nowrap
 
 .row-sale__old-price
   color: #f60
@@ -87,6 +89,8 @@ export default {
   font-size: 22px
   text-decoration: line-through
   width: 50%
+  word-wrap: normal
+  white-space: nowrap
 
 .row-sale__prices
   display: flex
