@@ -18,12 +18,12 @@
           <div class="column is-6-desktop">
             <sales-tabs
               v-if="mode === 'sales'"
-              :div-class="' is-toggle is-right'"
+              :div-class="'is-toggle is-right-desktop'"
               :type="type"
               @switch-type="switchType"/>
             <shops-tabs
               v-else
-              :div-class="' is-toggle is-right'"
+              :div-class="'is-toggle is-right-desktop'"
               :type="type"
               @switch-type="switchType"/>
           </div>
