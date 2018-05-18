@@ -13,7 +13,7 @@
         </div>
         <div class="columns">
           <div class="column is-4">
-            <figure class="image is-4by3">
+            <figure class="image is-4by3 shop-image">
               <img
                 v-if="shop.fields.photos"
                 :src="shop.fields.photos[0].fields.file.url"
@@ -22,6 +22,7 @@
                 v-else
                 :alt="shop.fields.title"
                 src="http://via.placeholder.com/350x250" >
+              <div class="shop-image__text">Образец</div>
             </figure>
 
             <table class="table">
@@ -144,56 +145,53 @@ export default {
   mounted() {}
 }
 </script>
-<style scoped>
-.sales {
-  background-color: #eff3f4;
-  padding: 5rem 0;
-}
+<style lang="sass" scoped>
+@import ~assets/sass/variables
 
-.sale-card_content {
-  margin: 0 !important;
-}
+.sales
+  background-color: #eff3f4
+  padding: 5rem 0
 
-.card-image > .fa {
-  font-size: 8rem;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  color: #209cee;
-}
+.sale-card_content
+  margin: 0 !important
 
-.card-content .content {
-  font-size: 14px;
-  margin: 1rem 1rem;
-}
+.card-image > .fa
+  font-size: 8rem
+  padding-top: 2rem
+  padding-bottom: 2rem
+  color: #209cee
 
-.card-content .content h4 {
-  font-size: 16px;
-  font-weight: 700;
-}
+.card-content .content
+  font-size: 14px
+  margin: 1rem 1rem
 
-.card {
+.card-content
+  .content
+    h4
+      font-size: 16px
+      font-weight: 700
+
+
+.card
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
   margin-bottom: 2rem;
-}
 
-.tile.notification {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
+.tile.notification
+  display: flex
+  justify-content: center
+  flex-direction: column
 
-.is-shady {
-  animation: flyintoright 0.4s backwards;
-  background: #fff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0;
-  border-radius: 4px;
-  display: inline-block;
-  margin: 10px;
-  position: relative;
-  transition: all 0.2s ease-in-out;
-}
+.is-shady
+  animation: flyintoright 0.4s backwards
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0
+  border-radius: 4px
+  display: inline-block
+  margin: 10px
+  position: relative
+  transition: all 0.2s ease-in-out
 
-.is-shady:hover {
-  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.13), 0 6px 6px rgba(0, 0, 0, 0.19);
-}
+.is-shady
+  &:hover
+    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.13), 0 6px 6px rgba(0, 0, 0, 0.19)
 </style>

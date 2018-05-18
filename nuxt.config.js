@@ -84,7 +84,8 @@ module.exports = {
     { src: '~plugins/vue-scrollto', ssr: false },
     { src: '~plugins/contentful' },
     { src: '~plugins/date-format' },
-    { src: '~plugins/truncate' }
+    { src: '~plugins/truncate' },
+    { src: '~plugins/veevalidate' }
   ],
 
   /*

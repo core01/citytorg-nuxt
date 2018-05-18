@@ -69,10 +69,16 @@
                 class="navbar-item">
                 <a>О проекте</a>
               </nuxt-link>
+              <nuxt-link
+                :exact="true"
+                tag="li"
+                to="/request"
+                active-class="is-active"
+                class="navbar-item">
+                <a>Обратная связь</a>
+              </nuxt-link>
             </ul>
           </div>
-
-
         </div>
       </div>
     </div>

@@ -13,3 +13,4 @@ dist
 .idea
 .vscode
 .contentful.json
+.env

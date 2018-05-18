@@ -2,7 +2,7 @@
 
   <div class="is-shady grid-shop">
     <nuxt-link :to="{ path: '/shops/' + shop.fields.alias }">
-      <div class="grid-shop__img-container">
+      <div class="grid-shop__img-container shop-image">
         <img
           v-if="shop.fields.photos"
           :src="shop.fields.photos[0].fields.file.url"
@@ -12,7 +12,10 @@
           v-else
           :alt="shop.fields.title"
           src="http://via.placeholder.com/350x250"
-          class="grid-shop__img imageFade" >
+          class="grid-shop__img imageFade">
+        <div class="shop-image__text">
+          Образец
+        </div>
       </div>
     </nuxt-link>
     <nuxt-link
@@ -88,5 +91,4 @@ export default {
 
 .grid-shop__img-container
   min-height: 205px
-
 </style>
