@@ -23,10 +23,11 @@ router.post('/', function(req, res, next) {
   });
   const email = new Email()
   email.render('../components/email/application', {
-      subject: req.body.subject,
+      subject: sanitizeHtml(req.body.subject),
       message: sanitizeHtml(req.body.message),
-      name: req.body.name,
-      phone: req.body.phone
+      type: sanitizeHtml(req.body.type),
+      name: sanitizeHtml(req.body.name),
+      phone: sanitizeHtml(req.body.phone)
     })
     .then((html) => {
       let mailOptions = {

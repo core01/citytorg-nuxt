@@ -16,7 +16,6 @@
 export default {
   data() {
     return {
-
     }
   },
 computed: {
@@ -28,8 +27,16 @@ computed: {
 </script>
 <style lang="sass" scoped>
 @import ~assets/sass/variables
+.spinner-container
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: rgba(255, 255, 255, 0.8)
+  z-index: 100
 .spinner
-  margin: 100px auto
+  margin: 49vh auto
   width: 50px
   height: 40px
   text-align: center

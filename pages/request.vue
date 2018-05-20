@@ -12,10 +12,6 @@
             class="request-form"
             data-vv-scope="request-form">
             <h2 class="has-text-centered content_h2">Форма обратной связи</h2>
-            <div
-              v-if="error || success"
-              :class="{'is-danger': error, 'is-primary': success }"
-              class="notification">{{ statusText }}</div>
             <div class="field">
               <label class="label">Как вас зовут?</label>
               <div class="control has-icons-left">
@@ -80,6 +76,43 @@
               </div>
             </div>
             <div class="field">
+              <div class="label">Кто вы?</div>
+              <div class="control">
+                <label class="radio">
+                  <input
+                    v-validate="'required'"
+                    v-model="type"
+                    type="radio"
+                    name="type"
+                    value="Поставщик/Производитель">
+                  Поставщик/Производитель
+                </label>
+                <label class="radio">
+                  <input
+                    v-validate="'required'"
+                    v-model="type"
+                    type="radio"
+                    name="type"
+                    value="Магазин">
+                  Магазин
+                </label>
+                <label class="radio">
+                  <input
+                    v-validate="'required'"
+                    v-model="type"
+                    type="radio"
+                    name="type"
+                    value="Частное лицо">
+                  Частное лицо
+                </label>
+                <span
+                  v-show="errors.has('request-form.type')"
+                  class="help is-danger">
+                  {{ errors.first('request-form.type') }}
+                </span>
+              </div>
+            </div>
+            <div class="field">
               <label class="label">Тема обращения</label>
               <div class="control">
                 <div
@@ -89,9 +122,8 @@
                     v-validate="'required'"
                     v-model="subject"
                     name="subject">
-                    <option value="Хочу участвовать в проекте">Хочу участвовать в проекте</option>
-                    <option value="Предложение/жалоба/вопрос">Предложение/жалоба/вопрос</option>
-                    <option value="Другое">Другое</option>
+                    <option value="Заявка на участие в проекте Citytorg.kz">Заявка на участие в проекте Citytorg.kz</option>
+                    <option value="Прочие вопросы">Прочие вопросы</option>
                   </select>
                 </div>
                 <span
@@ -119,7 +151,10 @@
                 </span>
               </div>
             </div>
-
+            <div
+              v-if="error || success"
+              :class="{'is-danger': error, 'is-primary': success }"
+              class="notification">{{ statusText }}</div>
             <div class="field is-grouped">
               <div class="control">
                 <button
@@ -140,10 +175,16 @@
 </template>
 <script>
 import navbar from '../components/navbar/navbar.vue'
-
 export default {
   head: {
-    title: 'Обратная связь'
+    title: 'Обратная связь',
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Форма обратной связи'
+      }
+    ]
   },
   components: {
     navbar
@@ -152,7 +193,8 @@ export default {
     return {
       email: '',
       name: '',
-      subject: 'Хочу участвовать в проекте',
+      subject: 'Заявка на участие в проекте Citytorg.kz',
+      type: 'Поставщик/Производитель',
       message: '',
       phone: '',
       error: false,
@@ -173,9 +215,10 @@ export default {
       vm.success = false
       this.$validator.validateAll('request-form').then(result => {
         if (result) {
-          this.$store.commit('spinner/show', true)
-          this.$axios.$post('/application', this.$data).then(response => {
-            this.$store.commit('spinner/show', false)
+          vm.$store.commit('spinner/show', true)
+          vm.$axios.$post('/application', vm.$data).then(response => {
+          vm.$store.commit('spinner/show', false)
+            vm.pending = false
             if (response.status) {
               vm.success = true
               vm.statusText = 'Ваше обращение успешно отправлено!'
@@ -190,6 +233,7 @@ export default {
           vm.statusText = 'Ошибка при заполнении формы, пожалуйста проверьте все поля и попробуйте снова!'
         }
       })
+
     }
   }
 }

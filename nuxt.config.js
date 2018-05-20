@@ -8,8 +8,8 @@ const ctfConfig = getConfigForKeys([
   // 'CTF_CMA_ACCESS_TOKEN',
   // 'CTF_PERSON_ID'
 ])
-const { createClient } = require('./plugins/contentful')
-const cdaClient = createClient(ctfConfig)
+// const { createClient } = require('./plugins/contentful')
+// const cdaClient = createClient(ctfConfig)
 module.exports = {
   debug: true,
   mode: 'universal',
@@ -103,6 +103,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.baseURL
   },
 
   /*

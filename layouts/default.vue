@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt v-if="showSpinner === false"/>
+    <nuxt/>
     <spinner/>
   </div>
 </template>
@@ -16,9 +16,7 @@ export default {
     return {}
   },
   computed: {
-    showSpinner(){
-      return this.$store.state.spinner.show
-    }
+
   }
 }
 </script>
