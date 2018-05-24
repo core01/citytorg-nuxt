@@ -75,7 +75,7 @@ export default {
     await client
       .getEntries({
         'sys.contentType.sys.id[in]': 'sales,shops',
-        order: '-sys.createdAt'
+        order: '-sys.updatedAt'
       })
       .then(entries => {
         let items = entries.items

@@ -52,7 +52,7 @@ export default {
     return await client
       .getEntries({
         content_type: 'sales',
-        order: '-sys.createdAt'
+        order: '-sys.updatedAt'
       })
       .then(entries => {
         return {
