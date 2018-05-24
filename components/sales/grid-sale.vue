@@ -82,12 +82,12 @@ export default {
   font-size: 1rem
 
 .grid-sale__price
-  color: $red
+  color: $blue
   font-weight: bold
   font-size: 28px
 
 .grid-sale__old-price
-  color: #f60
+  color: $red
   font-weight: bold
   font-size: 22px
   text-decoration: line-through

@@ -17,11 +17,11 @@
       <span
         v-if="type === 'oneplusone'"
         class="tag is-link tooltip is-tooltip-link is-tooltip-multiline"
-        data-tooltip="При покупке одного товара, второй бесплатно">1+1</span>
+        data-tooltip="Скидка при покупке комплекта из двух товаров">1+1</span>
       <span
         v-if="type === 'threefortwo'"
         class="tag is-warning tooltip is-tooltip-warning"
-        data-tooltip="Три товара по цене двух">2=3</span>
+        data-tooltip="Три товара по цене двух">1+1=3</span>
       <span
         v-if="type === 'new'"
         class="tag is-info tooltip is-tooltip-info"

@@ -88,6 +88,7 @@ export default {
 .grid-shop__img
   width: 100%
   max-height: 200px
+  object-fit: contain
 
 .grid-shop__img-container
   min-height: 205px

@@ -241,6 +241,8 @@ export default {
 <style lang="sass" scoped>
 
 @import ~bulma/sass/utilities/_all
+.request-form
+  margin-bottom: 2em
 +mobile
   .request-form
     width: 100%
@@ -250,6 +252,6 @@ export default {
 +desktop
   .request-form
     width: 60%
-    margin: 0 auto
+    margin: 0 auto 2em auto
 
 </style>

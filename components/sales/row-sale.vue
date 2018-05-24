@@ -72,11 +72,12 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
+@import ~assets/sass/variables
 .row-sale__img
   max-width: 100px
 
 .row-sale__price
-  color: red
+  color: $blue
   font-weight: bold
   font-size: 28px
   width: 50%
@@ -84,7 +85,7 @@ export default {
   white-space: nowrap
 
 .row-sale__old-price
-  color: #f60
+  color: $red
   font-weight: bold
   font-size: 22px
   text-decoration: line-through
