@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import sale from '../grid-sale.vue'
+import sale from '../grid-sale.vue';
 export default {
   components: {
     sale
@@ -35,9 +35,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
   methods: {}
-}
+};
 </script>

@@ -29,12 +29,12 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   methods: {
     switchType(type) {
-      this.$emit('switch-type', type)
+      this.$emit('switch-type', type);
     }
   }
-}
+};
 </script>

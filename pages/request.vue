@@ -174,7 +174,7 @@
   </div>
 </template>
 <script>
-import navbar from '../components/navbar/navbar.vue'
+import navbar from '../components/navbar/navbar.vue';
 export default {
   head: {
     title: 'Обратная связь',
@@ -200,43 +200,43 @@ export default {
       error: false,
       success: false,
       statusText: ''
-    }
+    };
   },
   methods: {
     reset() {
-      this.email = ''
-      this.name = ''
-      this.message = ''
-      this.phone = ''
+      this.email = '';
+      this.name = '';
+      this.message = '';
+      this.phone = '';
     },
     sendMessage() {
-      let vm = this
-      vm.error = false
-      vm.success = false
+      let vm = this;
+      vm.error = false;
+      vm.success = false;
       this.$validator.validateAll('request-form').then(result => {
         if (result) {
-          vm.$store.commit('spinner/show', true)
+          vm.$store.commit('spinner/show', true);
           vm.$axios.$post('/application', vm.$data).then(response => {
-          vm.$store.commit('spinner/show', false)
-            vm.pending = false
+            vm.$store.commit('spinner/show', false);
+            vm.pending = false;
             if (response.status) {
-              vm.success = true
-              vm.statusText = 'Ваше обращение успешно отправлено!'
+              vm.success = true;
+              vm.statusText = 'Ваше обращение успешно отправлено!';
             } else {
-              vm.error = true
-              vm.statusText = 'Ошибка при отправке сообщения, пожалуйста попробуйте позже!'
+              vm.error = true;
+              vm.statusText = 'Ошибка при отправке сообщения, пожалуйста попробуйте позже!';
             }
-          })
+          });
         } else {
           // notification
-          vm.error = true
-          vm.statusText = 'Ошибка при заполнении формы, пожалуйста проверьте все поля и попробуйте снова!'
+          vm.error = true;
+          vm.statusText = 'Ошибка при заполнении формы, пожалуйста проверьте все поля и попробуйте снова!';
         }
-      })
+      });
 
     }
   }
-}
+};
 </script>
 <style lang="sass" scoped>
 

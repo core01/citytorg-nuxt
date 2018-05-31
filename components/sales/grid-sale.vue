@@ -34,7 +34,7 @@
   </div>
 </template>
 <script>
-import saleType from '../sales/type.vue'
+import saleType from '../sales/type.vue';
 export default {
   components: {
     saleType
@@ -46,11 +46,11 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
   methods: {}
-}
+};
 </script>
 
 <style lang="sass" scoped>

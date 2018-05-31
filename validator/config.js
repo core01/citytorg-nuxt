@@ -1,4 +1,4 @@
-import attributes from './attributes'
+import attributes from './attributes';
 
 export const config = {
   locale: 'ru',
@@ -8,6 +8,6 @@ export const config = {
     },
   },
   events: '',
-}
+};
 
-export default config
+export default config;

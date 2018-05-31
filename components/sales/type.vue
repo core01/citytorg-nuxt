@@ -34,21 +34,21 @@ export default {
   props: {
     types: {
       default() {
-        return ['default']
+        return ['default'];
       },
       type: Array
     },
     className: {
       default() {
-        return 'tags-center'
+        return 'tags-center';
       },
       type: String
     }
   },
   data() {
-    return {}
+    return {};
   }
-}
+};
 </script>
 <style lang="sass" scoped>
 .tags-center

@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import gridShop from '../grid-shop.vue'
+import gridShop from '../grid-shop.vue';
 
 export default {
   components: {
@@ -22,9 +22,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
   methods: {}
-}
+};
 </script>

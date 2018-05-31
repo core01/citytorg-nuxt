@@ -51,18 +51,18 @@
 </template>
 
 <script>
-import navbar from '../components/navbar/navbar.vue'
-import { createClient } from '~/plugins/contentful.js'
-import salesListGrids from '../components/sales/list/grids.vue'
-import salesListRows from '../components/sales/list/rows.vue'
+import navbar from '../components/navbar/navbar.vue';
+import { createClient } from '~/plugins/contentful.js';
+import salesListGrids from '../components/sales/list/grids.vue';
+import salesListRows from '../components/sales/list/rows.vue';
 
-import salesTabs from '../components/tabs/sales.vue'
-import mainTabs from '../components/tabs/main.vue'
-import shopsTabs from '../components/tabs/shops.vue'
+import salesTabs from '../components/tabs/sales.vue';
+import mainTabs from '../components/tabs/main.vue';
+import shopsTabs from '../components/tabs/shops.vue';
 
-import shopsListGrids from '../components/shops/list/grids.vue'
-import shopsListMap from '../components/shops/list/map.vue'
-const client = createClient()
+import shopsListGrids from '../components/shops/list/grids.vue';
+import shopsListMap from '../components/shops/list/map.vue';
+const client = createClient();
 export default {
   head: {
     title: 'Главная страница'
@@ -71,23 +71,23 @@ export default {
     let data = {
       sales: [],
       shops: []
-    }
+    };
     await client
       .getEntries({
         'sys.contentType.sys.id[in]': 'sales,shops',
         order: '-sys.updatedAt'
       })
       .then(entries => {
-        let items = entries.items
+        let items = entries.items;
         for (let i = 0; i < items.length; i++) {
           if (items[i].sys.contentType.sys.id === 'shops') {
-            data.shops.push(items[i])
+            data.shops.push(items[i]);
           } else {
-            data.sales.push(items[i])
+            data.sales.push(items[i]);
           }
         }
-      })
-    return data
+      });
+    return data;
   },
   components: {
     navbar,
@@ -103,21 +103,21 @@ export default {
     return {
       mode: 'sales',
       type: 'grids'
-    }
+    };
   },
   mounted() {
     // let vm = this;
   },
   methods: {
     switchMode(mode) {
-      this.mode = mode
-      this.type = 'grids'
+      this.mode = mode;
+      this.type = 'grids';
     },
     switchType(type) {
-      this.type = type
+      this.type = type;
     }
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>

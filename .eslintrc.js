@@ -17,5 +17,15 @@ module.exports = {
   // required to lint *.vue files
   plugins: ['vue'],
   // add your custom rules here
-  rules: {}
+  rules: {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "eqeqeq": "warn",
+    "no-plusplus": 0,
+    "no-console": 0,
+    "dot-notation": 0,
+    "eol-last": ["error", "never"]
+  }
 }

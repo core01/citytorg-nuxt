@@ -1,13 +1,13 @@
 // const pkg = require('./package')
-process.env.DEBUG = 'nuxt:*'
-const { getConfigForKeys } = require('./lib/config.js')
+process.env.DEBUG = 'nuxt:*';
+const { getConfigForKeys } = require('./lib/config.js');
 const ctfConfig = getConfigForKeys([
   'CTF_BLOG_POST_TYPE_ID',
   'CTF_SPACE_ID',
   'CTF_CDA_ACCESS_TOKEN'
   // 'CTF_CMA_ACCESS_TOKEN',
   // 'CTF_PERSON_ID'
-])
+]);
 // const { createClient } = require('./plugins/contentful')
 // const cdaClient = createClient(ctfConfig)
 module.exports = {
@@ -103,7 +103,7 @@ module.exports = {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.baseURL
+    baseURL: process.env.BASE_URL
   },
 
   /*
@@ -130,7 +130,7 @@ module.exports = {
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/
-        })
+        });
       }
     },
     vendor: ['vue-scrollto', 'contentful']
@@ -141,4 +141,4 @@ module.exports = {
     // CTF_PERSON_ID: ctfConfig.CTF_PERSON_ID,
     // CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID
   }
-}
+};

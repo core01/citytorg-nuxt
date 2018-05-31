@@ -113,24 +113,24 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue'
-import shopListGrids from '../../components/shops/list/grids.vue'
-import shopListMap from '../../components/shops/list/map.vue'
-import saleType from '../../components/sales/type.vue'
-import { createClient } from '~/plugins/contentful.js'
-import marked from 'marked'
+import navbar from '../../components/navbar/navbar.vue';
+import shopListGrids from '../../components/shops/list/grids.vue';
+import shopListMap from '../../components/shops/list/map.vue';
+import saleType from '../../components/sales/type.vue';
+import { createClient } from '~/plugins/contentful.js';
+import marked from 'marked';
 
-const client = createClient()
+const client = createClient();
 
 marked.setOptions({
   renderer: new marked.Renderer(),
   sanitize: true,
   smartLists: true,
   smartypants: true
-})
+});
 export default {
   async asyncData({ env, params }) {
-    let saleData = {}
+    let saleData = {};
     await client
       .getEntries({
         content_type: 'sales',
@@ -138,10 +138,10 @@ export default {
         'fields.alias': params.alias
       })
       .then(async entries => {
-        saleData.sale = entries.items[0]
+        saleData.sale = entries.items[0];
         saleData.sale.fields.description = marked(
           saleData.sale.fields.description
-        )
+        );
         // salesData.shop = entries.items[0];
         // await client.getEntries({
         //   'links_to_entry': shopData.shop.sys.id
@@ -150,8 +150,8 @@ export default {
         // }).catch(error => {
         //   console.log(error)
         // })
-      })
-    return saleData
+      });
+    return saleData;
   },
   head() {
     return {
@@ -165,7 +165,7 @@ export default {
             ', срок действия, магазины'
         }
       ]
-    }
+    };
   },
   components: {
     navbar,
@@ -176,15 +176,15 @@ export default {
   data() {
     return {
       mode: 'list'
-    }
+    };
   },
   mounted() {},
   methods: {
     switchMode(mode) {
-      this.mode = mode
+      this.mode = mode;
     }
   }
-}
+};
 </script>
 <style lang="sass" scoped>
 

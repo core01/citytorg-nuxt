@@ -29,14 +29,14 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue'
-import { createClient } from '~/plugins/contentful.js'
-import salesGridsList from '../../components/sales/list/grids.vue'
-import salesRowsList from '../../components/sales/list/rows.vue'
+import navbar from '../../components/navbar/navbar.vue';
+import { createClient } from '~/plugins/contentful.js';
+import salesGridsList from '../../components/sales/list/grids.vue';
+import salesRowsList from '../../components/sales/list/rows.vue';
 
-import salesTabs from '../../components/tabs/sales.vue'
+import salesTabs from '../../components/tabs/sales.vue';
 
-const client = createClient()
+const client = createClient();
 export default {
   head: {
     title: 'Все акции',
@@ -57,8 +57,8 @@ export default {
       .then(entries => {
         return {
           sales: entries.items
-        }
-      })
+        };
+      });
   },
   components: {
     navbar,
@@ -70,17 +70,17 @@ export default {
     return {
       type: 'grids',
       absence_text: 'Информации о действующих акциях на данный момент нет'
-    }
+    };
   },
   mounted() {
     // let vm = this
   },
   methods: {
     switchType(type) {
-      this.type = type
+      this.type = type;
     }
   }
-}
+};
 </script>
 <style>
 </style>

@@ -15,10 +15,10 @@
   </l-marker>
 </template>
 <script>
-let Vue2Leaflet = {}
+let Vue2Leaflet = {};
 
 if (process.browser) {
-  Vue2Leaflet = require('vue2-leaflet')
+  Vue2Leaflet = require('vue2-leaflet');
 }
 export default {
   components: {
@@ -44,26 +44,26 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     icon() {
       if (this.isCurrent) {
-        return this.selectedIcon
+        return this.selectedIcon;
       }
-      return this.defaultIcon
+      return this.defaultIcon;
     }
   },
   mounted() {},
   methods: {
     openPopup(event) {
-      let vm = this
+      let vm = this;
       if (this.isCurrent) {
         vm.$nextTick(() => {
-          event.target.openPopup()
-        })
+          event.target.openPopup();
+        });
       }
     }
   }
-}
+};
 </script>

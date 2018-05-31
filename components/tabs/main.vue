@@ -23,12 +23,12 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   methods: {
     switchMode(mode) {
-      this.$emit('switch-mode', mode)
+      this.$emit('switch-mode', mode);
     }
   }
-}
+};
 </script>

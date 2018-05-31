@@ -19,16 +19,16 @@
 <style>
 </style>
 <script>
-import spinner from '../components/spinner.vue'
+import spinner from '../components/spinner.vue';
 export default {
   components: {
     spinner
   },
   data(){
-    return {}
+    return {};
   },
   computed: {
 
   }
-}
+};
 </script>

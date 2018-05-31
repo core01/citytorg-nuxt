@@ -1,5 +1,5 @@
-import VueScrollTo from 'vue-scrollto'
-import Vue from 'vue'
+import VueScrollTo from 'vue-scrollto';
+import Vue from 'vue';
 
 Vue.use(VueScrollTo, {
   container: 'body',
@@ -12,4 +12,4 @@ Vue.use(VueScrollTo, {
   onCancel: false,
   x: false,
   y: true
-})
+});

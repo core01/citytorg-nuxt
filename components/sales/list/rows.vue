@@ -11,7 +11,7 @@
   </div>
 </template>
 <script>
-import sale from '../row-sale.vue'
+import sale from '../row-sale.vue';
 export default {
   components: {
     sale
@@ -28,11 +28,11 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   mounted() {},
   methods: {}
-}
+};
 </script>
 <style lang="sass" scoped>
   .sales-table

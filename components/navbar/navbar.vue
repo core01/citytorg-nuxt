@@ -89,14 +89,14 @@ export default {
   data() {
     return {
       show: false
-    }
+    };
   },
   methods: {
     showMenu() {
-      this.show = !this.show
+      this.show = !this.show;
     }
   }
-}
+};
 </script>
 <style scoped>
 .tabs ul {

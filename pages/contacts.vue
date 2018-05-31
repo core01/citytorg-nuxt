@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import navbar from '../components/navbar/navbar.vue'
+import navbar from '../components/navbar/navbar.vue';
 export default {
   head: {
     title: 'Контакты'
@@ -11,7 +11,7 @@ export default {
   components: {
     navbar
   }
-}
+};
 </script>
 
 <style>

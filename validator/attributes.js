@@ -4,5 +4,5 @@ const attributes = {
   message: 'Сообщение',
   type: 'Тип'
 
-}
-export default attributes
+};
+export default attributes;

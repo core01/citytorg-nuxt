@@ -16,14 +16,14 @@
 export default {
   data() {
     return {
+    };
+  },
+  computed: {
+    show(){
+      return this.$store.state.spinner.show;
     }
   },
-computed: {
-  show(){
-     return this.$store.state.spinner.show
-  }
-},
-}
+};
 </script>
 <style lang="sass" scoped>
 @import ~assets/sass/variables

@@ -42,7 +42,7 @@
   </tr>
 </template>
 <script>
-import saleType from '../sales/type.vue'
+import saleType from '../sales/type.vue';
 export default {
   components: {
     saleType
@@ -54,22 +54,22 @@ export default {
     }
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
     price() {
-      return this.sale.fields.price + ' ₸'
+      return this.sale.fields.price + ' ₸';
     },
     oldPrice() {
       if (this.sale.fields.old_price) {
-        return this.sale.fields.old_price + ' ₸'
+        return this.sale.fields.old_price + ' ₸';
       }
-      return false
+      return false;
     }
   },
   mounted() {},
   methods: {}
-}
+};
 </script>
 <style lang="sass" scoped>
 @import ~assets/sass/variables

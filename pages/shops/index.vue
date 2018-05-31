@@ -30,15 +30,15 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue'
-import shopListMap from '../../components/shops/list/map.vue'
-import shopListGrids from '../../components/shops/list/grids.vue'
+import navbar from '../../components/navbar/navbar.vue';
+import shopListMap from '../../components/shops/list/map.vue';
+import shopListGrids from '../../components/shops/list/grids.vue';
 
-import shopsTabs from '../../components/tabs/shops.vue'
+import shopsTabs from '../../components/tabs/shops.vue';
 
-import { createClient } from '~/plugins/contentful.js'
+import { createClient } from '~/plugins/contentful.js';
 
-const client = createClient()
+const client = createClient();
 export default {
   head: {
     title: 'Все магазины',
@@ -60,8 +60,8 @@ export default {
       .then(entries => {
         return {
           shops: entries.items
-        }
-      })
+        };
+      });
   },
   components: {
     navbar,
@@ -75,15 +75,15 @@ export default {
       map: null,
       tileLayer: null,
       layers: []
-    }
+    };
   },
   mounted() {},
   methods: {
     switchType(type) {
-      this.type = type
+      this.type = type;
     }
   }
-}
+};
 </script>
 <style scoped>
 /* .shops {

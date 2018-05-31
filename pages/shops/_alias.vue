@@ -76,11 +76,11 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue'
-import gridSales from '../../components/sales/list/grids.vue'
-import shopListMap from '../../components/shops/list/map.vue'
-import { createClient } from '~/plugins/contentful.js'
-const client = createClient()
+import navbar from '../../components/navbar/navbar.vue';
+import gridSales from '../../components/sales/list/grids.vue';
+import shopListMap from '../../components/shops/list/map.vue';
+import { createClient } from '~/plugins/contentful.js';
+const client = createClient();
 export default {
   async asyncData({ env, params }) {
     let data = {
@@ -88,7 +88,7 @@ export default {
       sales: {},
       shops: [],
       currentIndex: -1
-    }
+    };
     await client
       .getEntries({
         content_type: 'shops',
@@ -97,11 +97,11 @@ export default {
         // 'fields.alias': params.alias
       })
       .then(async entries => {
-        data.shops = entries.items
+        data.shops = entries.items;
         for (let i = 0; i < data.shops.length; i++) {
           if (data.shops[i].fields.alias === params.alias) {
-            data.shop = data.shops[i]
-            data.currentIndex = i
+            data.shop = data.shops[i];
+            data.currentIndex = i;
           }
         }
         await client
@@ -109,13 +109,13 @@ export default {
             links_to_entry: data.shop.sys.id
           })
           .then(entries => {
-            data.sales = entries.items
+            data.sales = entries.items;
           })
           .catch(error => {
-            console.log(error)
-          })
-      })
-    return data
+            console.log(error);
+          });
+      });
+    return data;
   },
   head() {
     return {
@@ -130,7 +130,7 @@ export default {
             this.shop.fields.address
         }
       ]
-    }
+    };
   },
   components: {
     navbar,
@@ -140,10 +140,10 @@ export default {
   data() {
     return {
       absence_text: 'Информации о действующих акциях на данный момент нет'
-    }
+    };
   },
   mounted() {}
-}
+};
 </script>
 <style lang="sass" scoped>
 @import ~assets/sass/variables

@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import navbar from '../components/navbar/navbar.vue'
+import navbar from '../components/navbar/navbar.vue';
 export default {
   head: {
     title: 'О нас'
@@ -34,7 +34,7 @@ export default {
   components: {
     navbar
   }
-}
+};
 </script>
 
 <style lang="sass" scoped>
