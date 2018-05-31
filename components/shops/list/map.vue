@@ -22,15 +22,15 @@
   </no-ssr>
 </template>
 <script>
-let Vue2Leaflet = {}
+let Vue2Leaflet = {};
 let L = {
   icon: () => {}
-}
+};
 if (process.browser) {
-  Vue2Leaflet = require('vue2-leaflet')
-  L = require('leaflet')
+  Vue2Leaflet = require('vue2-leaflet');
+  L = require('leaflet');
 }
-import mapShop from '../map-shop.vue'
+import mapShop from '../map-shop.vue';
 export default {
   components: {
     'l-map': Vue2Leaflet.LMap,
@@ -55,7 +55,7 @@ export default {
   data() {
     return {
       center: [49.9553, 82.6134],
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      url: '/osm/?z={z}&x={x}&y={y}&s={s}',
       attribution:
         '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       // marker: L.latLng(49.9553, 82.6134),
@@ -63,30 +63,30 @@ export default {
       minZoom: 11,
       selectedIcon: L.icon({
         shadowUrl: require('~/assets/markers/marker-shadow.png'),
-       // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
+        // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
         iconUrl: require('~/assets/markers/marker-icon-red.png'),
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -41]
       }),
       defaultIcon: L.icon({
         shadowUrl: require('~/assets/markers/marker-shadow.png'),
-       // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
+        // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
         iconUrl: require('~/assets/markers/marker-icon.png'),
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -41]
       })
-    }
+    };
   },
   computed: {
     markers() {
-      let markers = []
+      let markers = [];
       for (let i = 0; i < this.shops.length; i++) {
         markers.push([
           this.shops[i].fields.coordinates.lat,
           this.shops[i].fields.coordinates.lon
-        ])
+        ]);
       }
-      return markers
+      return markers;
     }
   },
   mounted() {
@@ -95,7 +95,7 @@ export default {
     // })
   },
   methods: {}
-}
+};
 </script>
 <style lang="sass" scoped>
 @import "../../../node_modules/leaflet/dist/leaflet.css";
