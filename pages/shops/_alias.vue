@@ -16,7 +16,7 @@
             <figure class="image is-4by3 shop-image">
               <img
                 v-if="shop.images"
-                :src="shop.images[0]['450x320']"
+                :src="UPLOADS_URL + shop.images[0]['450x320']"
                 :alt="shop.title">
               <img
                 v-else
@@ -126,6 +126,11 @@ export default {
     return {
       absence_text: 'Информации о действующих акциях на данный момент нет'
     };
+  },
+  computed: {
+    UPLOADS_URL(){
+      return process.env.UPLOADS_URL;
+    },
   },
   mounted() {}
 };
