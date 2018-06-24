@@ -72,7 +72,7 @@
       class="hero is-fullheight sales">
       <grid-sales
         :sales="sales"
-        absence-text="absence_text"/>
+        absence_text="absence_text"/>
     </section>
   </div>
 </template>
@@ -80,8 +80,7 @@
 import navbar from '../../components/navbar/navbar.vue';
 import gridSales from '../../components/sales/list/grids.vue';
 import shopListMap from '../../components/shops/list/map.vue';
-// import { createClient } from '~/plugins/contentful.js';
-// const client = createClient();
+
 export default {
   async asyncData({ app, params }) {
     let [id]  = params.alias.split('-');
@@ -96,12 +95,11 @@ export default {
     for (let i = 0; i < data.shops.length; i++) {
       if (data.shops[i].id === id) {
         data.shop = data.shops[i];
-        // console.log(data.shop);
         data.currentIndex = i;
         data.sales = data.shop.sales;
       }
     }
-    // console.log(data.shop);
+
     return data;
   },
   head() {

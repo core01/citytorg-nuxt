@@ -19,24 +19,21 @@
         <sales-grids-list
           v-if="type === 'grids'"
           :sales="sales"
-          :absence-text="absence_text"/>
+          :absence_text="absence_text"/>
         <sales-rows-list
           v-else
           :sales="sales"
-          :absence-text="absence_text"/>
+          :absence_text="absence_text"/>
       </div>
     </section>
   </div>
 </template>
 <script>
 import navbar from '../../components/navbar/navbar.vue';
-// import { createClient } from '~/plugins/contentful.js';
 import salesGridsList from '../../components/sales/list/grids.vue';
 import salesRowsList from '../../components/sales/list/rows.vue';
-
 import salesTabs from '../../components/tabs/sales.vue';
 
-// const client = createClient();
 export default {
   head: {
     title: 'Все акции',
@@ -51,17 +48,8 @@ export default {
   async asyncData({ app, params }) {
     let data = {};
     data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales');
+
     return data;
-    // return await client
-    //   .getEntries({
-    //     content_type: 'sales',
-    //     order: '-sys.updatedAt'
-    //   })
-    //   .then(entries => {
-    //     return {
-    //       sales: entries.items
-    //     };
-    //   });
   },
   components: {
     navbar,

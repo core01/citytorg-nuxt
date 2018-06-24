@@ -21,7 +21,7 @@ export default {
       type: Array,
       required: true
     },
-    'absence-text': {
+    'absence_text': {
       type: String,
       required: false,
       default: 'Нет действующих акций на данный момент'

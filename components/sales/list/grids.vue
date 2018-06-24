@@ -12,7 +12,7 @@
     </div>
     <div v-else>
       <div class="content">
-        <h3 class="has-text-centered">{{ absence-text }} </h3>
+        <h3 class="has-text-centered">{{ absence_text }} </h3>
       </div>
     </div>
   </div>
@@ -28,7 +28,7 @@ export default {
       type: Array,
       required: true
     },
-    'absence-text': {
+    'absence_text': {
       type: String,
       required: false,
       default: 'Нет действующих акций на данный момент'
