@@ -1,37 +1,40 @@
 // const pkg = require('./package')
 process.env.DEBUG = 'nuxt:*';
-const { getConfigForKeys } = require('./lib/config.js');
-const ctfConfig = getConfigForKeys([
-  'CTF_BLOG_POST_TYPE_ID',
-  'CTF_SPACE_ID',
-  'CTF_CDA_ACCESS_TOKEN'
-  // 'CTF_CMA_ACCESS_TOKEN',
-  // 'CTF_PERSON_ID'
-]);
-// const { createClient } = require('./plugins/contentful')
-// const cdaClient = createClient(ctfConfig)
 module.exports = {
   debug: true,
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     titleTemplate: '%s - Citytorg.kz',
-    meta: [
-      { charset: 'utf-8' },
+    meta: [{
+        charset: 'utf-8'
+      },
       {
         name: 'viewport',
-        content:
-          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+        content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
       },
-      { hid: 'description', name: 'description', content: 'Citytorg.kz' },
-      { name: 'theme-color', content: '#ffffff' },
-      { name: 'msapplication-TileColor', content: '#00a300' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Citytorg.kz'
+      },
+      {
+        name: 'theme-color',
+        content: '#ffffff'
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#00a300'
+      }
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    link: [{
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
@@ -50,9 +53,16 @@ module.exports = {
         href: '/favicon-16x16.png'
       },
 
-      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5' },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg',
+        color: '#5bbad5'
+      },
 
-      { rel: 'manifest', href: '/site.webmanifest' },
+      {
+        rel: 'manifest',
+        href: '/site.webmanifest'
+      },
       {
         rel: 'stylesheet',
         href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
@@ -60,55 +70,67 @@ module.exports = {
       {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
-        integrity:
-          'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
+        integrity: 'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
         crossorigin: 'anonymous'
       }
     ]
   },
 
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#204B98' },
+   ** Customize the progress-bar color
+   */
+  loading: {
+    color: '#204B98'
+  },
 
   /*
-  ** Global CSS
-  */
-  css: [{ src: '@/assets/sass/app.sass', lang: 'sass' }],
+   ** Global CSS
+   */
+  css: [{
+    src: '@/assets/sass/app.sass',
+    lang: 'sass'
+  }],
 
   /*
-  ** Plugins to load before mounting the App
-  */
-  plugins: [
-    { src: '~plugins/vue-scrollto', ssr: false },
-    { src: '~plugins/contentful' },
-    { src: '~plugins/date-format' },
-    { src: '~plugins/truncate' },
-    { src: '~plugins/veevalidate' }
+   ** Plugins to load before mounting the App
+   */
+  plugins: [{
+      src: '~plugins/vue-scrollto',
+      ssr: false
+    },
+    {
+      src: '~plugins/date-format'
+    },
+    {
+      src: '~plugins/truncate'
+    },
+    {
+      src: '~plugins/veevalidate'
+    }
   ],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
     // Doc:https://github.com/nuxt-community/modules/tree/master/packages/bulma
-    // '@nuxtjs/bulma'
+    // '@nuxtjs/bulma',
+    '@nuxtjs/dotenv',
   ],
 
   /*
-  ** Axios module configuration
-  */
+   ** Axios module configuration
+   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     baseURL: process.env.BASE_URL
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     postcss: {
       plugins: {
@@ -120,8 +142,8 @@ module.exports = {
       }
     },
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -133,12 +155,7 @@ module.exports = {
         });
       }
     },
-    vendor: ['vue-scrollto', 'contentful']
+    vendor: ['vue-scrollto']
   },
-  env: {
-    CTF_SPACE_ID: ctfConfig.CTF_SPACE_ID,
-    CTF_CDA_ACCESS_TOKEN: ctfConfig.CTF_CDA_ACCESS_TOKEN
-    // CTF_PERSON_ID: ctfConfig.CTF_PERSON_ID,
-    // CTF_BLOG_POST_TYPE_ID: ctfConfig.CTF_BLOG_POST_TYPE_ID
-  }
+  env: {}
 };

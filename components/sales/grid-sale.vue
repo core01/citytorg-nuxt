@@ -1,34 +1,33 @@
 <template>
   <div class="grid-sale is-shady is-scale">
-    <sale-type :types="sale.fields.type"/>
-    <nuxt-link
-      :to="{ path: '/sales/' + sale.fields.alias }">
+    <sale-type :sale="sale" />
+    <nuxt-link :to="{ path: path }">
       <div class="grid-sale__img-container">
         <img
-          v-if="sale.fields.photos"
-          :src="sale.fields.photos[0].fields.file.url"
-          :alt="sale.fields.title"
-          class="grid-sale__img imageFade" >
+          v-if="sale.images"
+          :src="UPLOADS_URL + sale.images[0]['450x320']"
+          :alt="sale.title"
+          class="grid-sale__img imageFade">
         <img
           v-else
-          :alt="sale.fields.title"
+          :alt="sale.title"
           src="http://via.placeholder.com/350x250"
-          class="grid-sale__img imageFade" >
+          class="grid-sale__img imageFade">
       </div>
     </nuxt-link>
     <nuxt-link
-      :to="{ path: '/sales/' + sale.fields.alias }"
+      :to="{ path: path }"
       class="grid-sale__title">
-      {{ sale.fields.title | truncate(45) }}
+      {{ sale.title | truncate(45) }}
     </nuxt-link>
     <div class="grid-sale-prices">
       <div class="grid-sale__price">
-        {{ sale.fields.price }} ₸
+        {{ sale.price }} ₸
       </div>
       <div
-        v-if="sale.fields.old_price"
+        v-if="sale.old_price"
         class="grid-sale__old-price">
-        {{ sale.fields.old_price }} ₸
+        {{ sale.old_price }} ₸
       </div>
     </div>
   </div>
@@ -47,6 +46,14 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    UPLOADS_URL() {
+      return process.env.UPLOADS_URL;
+    },
+    path(){
+      return '/sales/' + this.sale.id + '-' + this.sale.alias;
+    }
   },
   mounted() {},
   methods: {}
@@ -104,6 +111,7 @@ export default {
   justify-content: space-around
   align-items: flex-end
   flex-grow: 1
+  white-space: nowrap
 
 .grid-sale-tags
   margin: 0 auto !important

@@ -5,7 +5,7 @@
         <sale
           v-for="sale in sales"
           :sale="sale"
-          :key="sale.sys.id"/>
+          :key="sale.id"/>
       </tbody>
     </table>
   </div>

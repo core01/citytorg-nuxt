@@ -13,7 +13,7 @@
       <map-shop
         v-for="(shop,index) in shops"
         :shop="shop"
-        :key="shop.fields.id"
+        :key="shop.id"
         :is-current="currentIndex === index"
         :default-icon="defaultIcon"
         :selected-icon="selectedIcon"
@@ -82,8 +82,8 @@ export default {
       let markers = [];
       for (let i = 0; i < this.shops.length; i++) {
         markers.push([
-          this.shops[i].fields.coordinates.lat,
-          this.shops[i].fields.coordinates.lon
+          this.shops[i].lat,
+          this.shops[i].lon
         ]);
       }
       return markers;

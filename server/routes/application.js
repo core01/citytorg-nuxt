@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
   if (!req.body.message || !req.body.email || !req.body.phone || !req.body.email) {
     return res.status(400).json({
       status: false
-    })
+    });
   }
   let transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -21,14 +21,14 @@ router.post('/', function(req, res, next) {
       pass: process.env.SMTP_PASS
     }
   });
-  const email = new Email()
+  const email = new Email();
   email.render('../components/email/application', {
-      subject: sanitizeHtml(req.body.subject),
-      message: sanitizeHtml(req.body.message),
-      type: sanitizeHtml(req.body.type),
-      name: sanitizeHtml(req.body.name),
-      phone: sanitizeHtml(req.body.phone)
-    })
+    subject: sanitizeHtml(req.body.subject),
+    message: sanitizeHtml(req.body.message),
+    type: sanitizeHtml(req.body.type),
+    name: sanitizeHtml(req.body.name),
+    phone: sanitizeHtml(req.body.phone)
+  })
     .then((html) => {
       let mailOptions = {
         from: process.env.ADMIN_EMAIL, // sender address
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
           console.log(error);
           return res.status(500).json({
             status: false
-          })
+          });
         }
         return res.status(200).json({
           status: true
@@ -51,11 +51,11 @@ router.post('/', function(req, res, next) {
       });
     })
     .catch((error) => {
-      console.log(error)
+      console.log(error);
       return res.status(500).json({
         status: false
-      })
-    })
-})
+      });
+    });
+});
 
-module.exports = router
+module.exports = router;

@@ -5,7 +5,7 @@
       class="columns is-multiline is-gapless">
       <div
         v-for="sale in sales"
-        :key="sale.sys.id"
+        :key="sale.id"
         class="column is-12-mobile is-4-tablet is-one-fifth-desktop">
         <sale :sale="sale"/>
       </div>

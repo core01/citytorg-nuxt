@@ -9,36 +9,38 @@
       class="hero is-fullheight shop">
       <div class="container">
         <div class="content">
-          <h2 class="has-text-centered content_h2">{{ shop.fields.title }}</h2>
+          <h2 class="has-text-centered content_h2">{{ shop.title }}</h2>
         </div>
         <div class="columns">
           <div class="column is-4">
             <figure class="image is-4by3 shop-image">
               <img
-                v-if="shop.fields.photos"
-                :src="shop.fields.photos[0].fields.file.url"
-                :alt="shop.fields.photos[0].fields.title">
+                v-if="shop.images"
+                :src="shop.images[0]['450x320']"
+                :alt="shop.title">
               <img
                 v-else
-                :alt="shop.fields.title"
+                :alt="shop.title"
                 src="http://via.placeholder.com/350x250" >
               <div class="shop-image__text">Образец</div>
             </figure>
 
             <table class="table">
-              <tr v-if="shop.fields.phone">
-                <th>Телефон:</th>
-                <td>{{ shop.fields.phone }}</td>
-              </tr>
-              <tr>
-                <th>Адрес:</th>
-                <td>{{ shop.fields.address }}</td>
-              </tr>
-              <tr>
-                <td
-                  colspan="2"
-                  v-html="shop.fields.description"/>
-              </tr>
+              <tbody>
+                <tr v-if="shop.phone">
+                  <th>Телефон:</th>
+                  <td>{{ shop.phone }}</td>
+                </tr>
+                <tr>
+                  <th>Адрес:</th>
+                  <td>{{ shop.address }}</td>
+                </tr>
+                <tr>
+                  <td
+                    colspan="2"
+                    v-html="shop.description"/>
+                </tr>
+              </tbody>
             </table>
             <div
               v-if="sales.length >0"
@@ -64,7 +66,6 @@
         </div>
       </div>
     </section>
-
     <section
       v-if="sales.length > 0"
       id="sales"
@@ -79,55 +80,41 @@
 import navbar from '../../components/navbar/navbar.vue';
 import gridSales from '../../components/sales/list/grids.vue';
 import shopListMap from '../../components/shops/list/map.vue';
-import { createClient } from '~/plugins/contentful.js';
-const client = createClient();
+// import { createClient } from '~/plugins/contentful.js';
+// const client = createClient();
 export default {
-  async asyncData({ env, params }) {
+  async asyncData({ app, params }) {
+    let [id]  = params.alias.split('-');
+    id = parseInt(id);
     let data = {
       shop: {},
-      sales: {},
+      sales: [],
       shops: [],
       currentIndex: -1
     };
-    await client
-      .getEntries({
-        content_type: 'shops',
-        order: '-sys.createdAt',
-        'fields.active': true
-        // 'fields.alias': params.alias
-      })
-      .then(async entries => {
-        data.shops = entries.items;
-        for (let i = 0; i < data.shops.length; i++) {
-          if (data.shops[i].fields.alias === params.alias) {
-            data.shop = data.shops[i];
-            data.currentIndex = i;
-          }
-        }
-        await client
-          .getEntries({
-            links_to_entry: data.shop.sys.id
-          })
-          .then(entries => {
-            data.sales = entries.items;
-          })
-          .catch(error => {
-            console.log(error);
-          });
-      });
+    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops');
+    for (let i = 0; i < data.shops.length; i++) {
+      if (data.shops[i].id === id) {
+        data.shop = data.shops[i];
+        // console.log(data.shop);
+        data.currentIndex = i;
+        data.sales = data.shop.sales;
+      }
+    }
+    // console.log(data.shop);
     return data;
   },
   head() {
     return {
-      title: this.shop.fields.title,
+      title: this.shop.title,
       meta: [
         {
           hid: 'description',
           description:
             'Акции магазина ' +
-            this.shop.fields.title +
+            this.shop.title +
             ', Адрес: ' +
-            this.shop.fields.address
+            this.shop.address
         }
       ]
     };

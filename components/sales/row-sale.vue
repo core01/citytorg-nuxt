@@ -1,30 +1,30 @@
 <template>
   <tr>
     <td>
-      <nuxt-link :to="{ path: '/sales/' + sale.fields.alias }">
+      <nuxt-link :to="{ path: path }">
         <img
-          v-if="sale.fields.photos"
-          :src="sale.fields.photos[0].fields.file.url"
-          :alt="sale.fields.title"
-          class="row-sale__img imageFade" >
+          v-if="sale.images"
+          :src="UPLOADS_URL + sale.images[0]['450x320']"
+          :alt="sale.title"
+          class="row-sale__img imageFade">
         <img
           v-else
-          :alt="sale.fields.title"
+          :alt="sale.title"
           src="http://via.placeholder.com/350x250"
-          class="row-sale__img imageFade" >
+          class="row-sale__img imageFade">
       </nuxt-link>
     </td>
     <td>
       <div class="row-sale-head">
         <nuxt-link
-          :to="{ path: '/sales/' + sale.fields.alias }"
+          :to="{ path: path }"
           class="row-sale-head__title">
-          {{ sale.fields.title }}
+          {{ sale.title }}
         </nuxt-link>
-        <sale-type :types="sale.fields.type"/>
+        <sale-type :sale="sale" />
       </div>
       <p class="row-sale__description is-hidden-mobile">
-        {{ sale.fields.description | truncate(205) }}
+        {{ sale.description | truncate(205) }}
       </p>
     </td>
     <td class="prices-td">
@@ -58,13 +58,19 @@ export default {
   },
   computed: {
     price() {
-      return this.sale.fields.price + ' ₸';
+      return this.sale.price + ' ₸';
     },
     oldPrice() {
-      if (this.sale.fields.old_price) {
-        return this.sale.fields.old_price + ' ₸';
+      if (this.sale.old_price) {
+        return this.sale.old_price + ' ₸';
       }
       return false;
+    },
+    UPLOADS_URL(){
+      return process.env.UPLOADS_URL;
+    },
+    path(){
+      return '/sales/' + this.sale.id + '-' + this.sale.alias;
     }
   },
   mounted() {},

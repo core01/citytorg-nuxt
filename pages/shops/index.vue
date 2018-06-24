@@ -36,9 +36,9 @@ import shopListGrids from '../../components/shops/list/grids.vue';
 
 import shopsTabs from '../../components/tabs/shops.vue';
 
-import { createClient } from '~/plugins/contentful.js';
+// import { createClient } from '~/plugins/contentful.js';
 
-const client = createClient();
+// const client = createClient();
 export default {
   head: {
     title: 'Все магазины',
@@ -50,18 +50,21 @@ export default {
       }
     ]
   },
-  async asyncData({ env, params }) {
-    return await client
-      .getEntries({
-        content_type: 'shops',
-        order: '-sys.createdAt',
-        'fields.active': true
-      })
-      .then(entries => {
-        return {
-          shops: entries.items
-        };
-      });
+  async asyncData({ app, params }) {
+    let data = {};
+    data.shops =  await app.$axios.$get(process.env.BACKEND_URL + 'shops');
+    // return await client
+    //   .getEntries({
+    //     content_type: 'shops',
+    //     order: '-sys.createdAt',
+    //     'fields.active': true
+    //   })
+    //   .then(entries => {
+    //     return {
+    //       shops: entries.items
+    //     };
+    //   });
+    return data;
   },
   components: {
     navbar,

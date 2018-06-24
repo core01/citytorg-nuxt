@@ -1,16 +1,16 @@
 <template>
 
   <div class="is-shady grid-shop">
-    <nuxt-link :to="{ path: '/shops/' + shop.fields.alias }">
+    <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container shop-image">
         <img
-          v-if="shop.fields.photos"
-          :src="shop.fields.photos[0].fields.file.url"
-          :alt="shop.fields.title"
+          v-if="shop.images"
+          :src="shop.images[0]['450x320']"
+          :alt="shop.title"
           class="grid-shop__img imageFade">
         <img
           v-else
-          :alt="shop.fields.title"
+          :alt="shop.title"
           src="http://via.placeholder.com/350x250"
           class="grid-shop__img imageFade">
         <div class="shop-image__text">
@@ -19,16 +19,16 @@
       </div>
     </nuxt-link>
     <nuxt-link
-      :to="{ path: '/shops/' + shop.fields.alias }"
+      :to="{ path: path }"
       class="grid-shop__title">
-      {{ shop.fields.title }}
+      {{ shop.title }}
     </nuxt-link>
 
     <div class="grid-shop__description">
-      {{ shop.fields.description }}
+      {{ shop.description }}
     </div>
     <div class="grid-shop__address">
-      {{ shop.fields.address }}
+      {{ shop.address }}
     </div>
   </div>
 
@@ -44,6 +44,11 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    path(){
+      return '/shops/' + this.shop.id + '-' + this.shop.alias;
+    }
   },
   mounted() {},
   methods: {}

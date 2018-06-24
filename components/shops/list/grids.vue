@@ -2,7 +2,7 @@
   <div class="columns is-multiline is-gapless">
     <div
       v-for="shop in shops"
-      :key="shop.sys.id"
+      :key="shop.id"
       class="column is-3">
       <grid-shop :shop="shop"/>
     </div>

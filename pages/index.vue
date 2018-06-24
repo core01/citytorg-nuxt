@@ -52,7 +52,7 @@
 
 <script>
 import navbar from '../components/navbar/navbar.vue';
-import { createClient } from '~/plugins/contentful.js';
+// import { createClient } from '~/plugins/contentful.js';
 import salesListGrids from '../components/sales/list/grids.vue';
 import salesListRows from '../components/sales/list/rows.vue';
 
@@ -62,31 +62,33 @@ import shopsTabs from '../components/tabs/shops.vue';
 
 import shopsListGrids from '../components/shops/list/grids.vue';
 import shopsListMap from '../components/shops/list/map.vue';
-const client = createClient();
+// const client = createClient();
 export default {
   head: {
     title: 'Главная страница'
   },
-  async asyncData({ env, params }) {
+  async asyncData({ app }) {
     let data = {
       sales: [],
       shops: []
     };
-    await client
-      .getEntries({
-        'sys.contentType.sys.id[in]': 'sales,shops',
-        order: '-sys.updatedAt'
-      })
-      .then(entries => {
-        let items = entries.items;
-        for (let i = 0; i < items.length; i++) {
-          if (items[i].sys.contentType.sys.id === 'shops') {
-            data.shops.push(items[i]);
-          } else {
-            data.sales.push(items[i]);
-          }
-        }
-      });
+    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales');
+    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops');
+    // await client
+    //   .getEntries({
+    //     'sys.contentType.sys.id[in]': 'sales,shops',
+    //     order: '-sys.updatedAt'
+    //   })
+    //   .then(entries => {
+    //     let items = entries.items;
+    //     for (let i = 0; i < items.length; i++) {
+    //       if (items[i].sys.contentType.sys.id === 'shops') {
+    //         data.shops.push(items[i]);
+    //       } else {
+    //         data.sales.push(items[i]);
+    //       }
+    //     }
+    //   });
     return data;
   },
   components: {

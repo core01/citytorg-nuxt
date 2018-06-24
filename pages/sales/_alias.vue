@@ -9,47 +9,47 @@
     <section class="hero  sale-card">
       <div class="container has-text-centered">
         <div class="content">
-          <h2 class="has-text-centered content_h2">{{ sale.fields.title }}</h2>
+          <h2 class="has-text-centered content_h2">{{ sale.title }}</h2>
         </div>
         <div class="columns">
           <div class="column is-4">
             <figure class="image is-4by3 sale-card__figure">
               <img
-                v-if="sale.fields.photos"
-                :src="sale.fields.photos[0].fields.file.url"
-                :alt="sale.fields.title"
+                v-if="sale.images"
+                :src="UPLOADS_URL + sale.images[0]['450x320']"
+                :alt="sale.title"
                 class="sale-card__image">
               <img
                 v-else
-                :alt="shop.fields.title"
+                :alt="sale.title"
                 src="http://via.placeholder.com/350x250"
                 class="sale-card__image">
             </figure>
 
           </div>
           <div class="column is-8">
-            <sale-type :types="sale.fields.type"/>
+            <sale-type :sale="sale"/>
             <div
               class="has-text-left sale-card__description"
-              v-html="sale.fields.description"/>
+              v-html="sale.description"/>
             <div class="sale-card-prices">
               <div class="sale-card__price-title">
                 Цена:
               </div>
               <div
-                v-if="sale.fields.old_price"
+                v-if="sale.old_price"
                 class="sale-card__old-price">
-                {{ sale.fields.old_price }} ₸
+                {{ sale.old_price }} ₸
               </div>
               <div class="sale-card__price">
-                {{ sale.fields.price }} ₸
+                {{ sale.price }} ₸
               </div>
             </div>
             <div
-              v-if="sale.fields.date_end"
+              v-if="sale.date_end"
               class="sale-card__date">
               Окончание акции:
-              <b>{{ sale.fields.date_end | dateFormat }}</b>
+              <b>{{ sale.date_end | dateFormat }}</b>
             </div>
             <div class="buttons is-centered sale-card-buttons">
               <a
@@ -61,8 +61,8 @@
                 </span>
               </a>
               <a
-                v-if="sale.fields.blog_link"
-                :href="sale.fields.blog_link"
+                v-if="sale.link"
+                :href="sale.link"
                 target="_blank"
                 class="button is-link is-outlined"
               >
@@ -101,12 +101,12 @@
         </div>
         <shopListGrids
           v-if="mode === 'list'"
-          :shops="sale.fields.shops"/>
+          :shops="sale.shops"/>
         <div
           v-else
           class="container">
           <shop-list-map
-            :shops="sale.fields.shops"/>
+            :shops="sale.shops"/>
         </div>
       </div>
     </section>
@@ -117,10 +117,10 @@ import navbar from '../../components/navbar/navbar.vue';
 import shopListGrids from '../../components/shops/list/grids.vue';
 import shopListMap from '../../components/shops/list/map.vue';
 import saleType from '../../components/sales/type.vue';
-import { createClient } from '~/plugins/contentful.js';
+// import { createClient } from '~/plugins/contentful.js';
 import marked from 'marked';
 
-const client = createClient();
+// const client = createClient();
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -129,39 +129,42 @@ marked.setOptions({
   smartypants: true
 });
 export default {
-  async asyncData({ env, params }) {
-    let saleData = {};
-    await client
-      .getEntries({
-        content_type: 'sales',
-        order: '-sys.createdAt',
-        'fields.alias': params.alias
-      })
-      .then(async entries => {
-        saleData.sale = entries.items[0];
-        saleData.sale.fields.description = marked(
-          saleData.sale.fields.description
-        );
-        // salesData.shop = entries.items[0];
-        // await client.getEntries({
-        //   'links_to_entry': shopData.shop.sys.id
-        // }).then(entries => {
-        //   shopData['sales'] = entries.items
-        // }).catch(error => {
-        //   console.log(error)
-        // })
-      });
-    return saleData;
+  async asyncData({ app, params }) {
+    let [id]  = params.alias.split('-');
+    let data = {};
+    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id);
+    // let saleData = {};
+    // await client
+    //   .getEntries({
+    //     content_type: 'sales',
+    //     order: '-sys.createdAt',
+    //     'fields.alias': params.alias
+    //   })
+    //   .then(async entries => {
+    //     saleData.sale = entries.items[0];
+    //     saleData.sale.description = marked(
+    //       saleData.sale.description
+    //     );
+    //     // salesData.shop = entries.items[0];
+    //     // await client.getEntries({
+    //     //   'links_to_entry': shopData.shop.sys.id
+    //     // }).then(entries => {
+    //     //   shopData['sales'] = entries.items
+    //     // }).catch(error => {
+    //     //   console.log(error)
+    //     // })
+    //   });
+    return data;
   },
   head() {
     return {
-      title: this.sale.fields.title,
+      title: this.sale.title,
       meta: [
         {
           hid: 'description',
           description:
             'Условия акции' +
-            this.sale.fields.title +
+            this.sale.title +
             ', срок действия, магазины'
         }
       ]
@@ -177,6 +180,11 @@ export default {
     return {
       mode: 'list'
     };
+  },
+  computed: {
+    UPLOADS_URL(){
+      return process.env.UPLOADS_URL;
+    },
   },
   mounted() {},
   methods: {
