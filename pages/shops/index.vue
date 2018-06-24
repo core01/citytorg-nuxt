@@ -53,17 +53,7 @@ export default {
   async asyncData({ app, params }) {
     let data = {};
     data.shops =  await app.$axios.$get(process.env.BACKEND_URL + 'shops');
-    // return await client
-    //   .getEntries({
-    //     content_type: 'shops',
-    //     order: '-sys.createdAt',
-    //     'fields.active': true
-    //   })
-    //   .then(entries => {
-    //     return {
-    //       shops: entries.items
-    //     };
-    //   });
+
     return data;
   },
   components: {

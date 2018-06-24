@@ -74,21 +74,7 @@ export default {
     };
     data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales');
     data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops');
-    // await client
-    //   .getEntries({
-    //     'sys.contentType.sys.id[in]': 'sales,shops',
-    //     order: '-sys.updatedAt'
-    //   })
-    //   .then(entries => {
-    //     let items = entries.items;
-    //     for (let i = 0; i < items.length; i++) {
-    //       if (items[i].sys.contentType.sys.id === 'shops') {
-    //         data.shops.push(items[i]);
-    //       } else {
-    //         data.sales.push(items[i]);
-    //       }
-    //     }
-    //   });
+
     return data;
   },
   components: {

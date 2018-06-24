@@ -12,7 +12,7 @@
     </div>
     <div v-else>
       <div class="content">
-        <h3 class="has-text-centered">{{ absence_text }} </h3>
+        <h3 class="has-text-centered">{{ absence_text }}</h3>
       </div>
     </div>
   </div>

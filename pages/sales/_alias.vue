@@ -117,10 +117,7 @@ import navbar from '../../components/navbar/navbar.vue';
 import shopListGrids from '../../components/shops/list/grids.vue';
 import shopListMap from '../../components/shops/list/map.vue';
 import saleType from '../../components/sales/type.vue';
-// import { createClient } from '~/plugins/contentful.js';
 import marked from 'marked';
-
-// const client = createClient();
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -133,27 +130,7 @@ export default {
     let [id]  = params.alias.split('-');
     let data = {};
     data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id);
-    // let saleData = {};
-    // await client
-    //   .getEntries({
-    //     content_type: 'sales',
-    //     order: '-sys.createdAt',
-    //     'fields.alias': params.alias
-    //   })
-    //   .then(async entries => {
-    //     saleData.sale = entries.items[0];
-    //     saleData.sale.description = marked(
-    //       saleData.sale.description
-    //     );
-    //     // salesData.shop = entries.items[0];
-    //     // await client.getEntries({
-    //     //   'links_to_entry': shopData.shop.sys.id
-    //     // }).then(entries => {
-    //     //   shopData['sales'] = entries.items
-    //     // }).catch(error => {
-    //     //   console.log(error)
-    //     // })
-    //   });
+
     return data;
   },
   head() {

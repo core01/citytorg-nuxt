@@ -5,7 +5,7 @@
       <div class="grid-shop__img-container shop-image">
         <img
           v-if="shop.images"
-          :src="shop.images[0]['450x320']"
+          :src="UPLOADS_URL + shop.images[0]['450x320']"
           :alt="shop.title"
           class="grid-shop__img imageFade">
         <img
@@ -46,6 +46,9 @@ export default {
     return {};
   },
   computed: {
+    UPLOADS_URL() {
+      return process.env.UPLOADS_URL;
+    },
     path(){
       return '/shops/' + this.shop.id + '-' + this.shop.alias;
     }
