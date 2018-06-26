@@ -72,7 +72,7 @@
       class="hero is-fullheight sales">
       <grid-sales
         :sales="sales"
-        absence_text="absence_text"/>
+        absence-text="absenceText"/>
     </section>
   </div>
 </template>
@@ -124,7 +124,7 @@ export default {
   },
   data() {
     return {
-      absence_text: 'Информации о действующих акциях на данный момент нет'
+      absenceText: 'Информации о действующих акциях на данный момент нет'
     };
   },
   computed: {

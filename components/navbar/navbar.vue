@@ -9,7 +9,7 @@
           to="/"
           class="navbar-item">
           <img
-            src="~assets/images/logo.png"
+            src="~assets/images/logo_beta.png"
             alt="Citytorg">
         </nuxt-link>
         <span
@@ -60,14 +60,6 @@
                 active-class="is-active"
                 class="navbar-item">
                 <a>Магазины</a>
-              </nuxt-link>
-              <nuxt-link
-                :exact="true"
-                tag="li"
-                to="/about"
-                active-class="is-active"
-                class="navbar-item">
-                <a>О проекте</a>
               </nuxt-link>
               <nuxt-link
                 :exact="true"
