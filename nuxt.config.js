@@ -157,5 +157,14 @@ module.exports = {
     },
     vendor: ['vue-scrollto']
   },
-  env: {}
+  env: {
+    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
+    SMTP_HOST: process.env.SMTP_HOST,
+    SMTP_USER: process.env.SMTP_USER,
+    SMTP_PASS: process.env.SMTP_PASS,
+    SMTP_PORT: process.env.SMTP_PORT,
+    BASE_URL: process.env.BASE_URL,
+    BACKEND_URL: process.env.BACKEND_URL,
+    UPLOADS_URL: process.env.UPLOADS_URL,
+  }
 };

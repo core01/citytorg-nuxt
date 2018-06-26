@@ -31,7 +31,7 @@
           <div class="navbar-item">
             <span class="icon">
               <i class="fas fa-phone-volume"/>
-            </span> Call-center:&nbsp;<a href="tel:+77232405727">+7-7232-40-57-27</a>
+            </span> Call-center:&nbsp;<a href="tel:+77776461355">+7-777-646-13-55</a>
           </div>
 
         </div>
