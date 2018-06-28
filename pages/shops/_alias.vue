@@ -91,7 +91,7 @@ export default {
       shops: [],
       currentIndex: -1
     };
-    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops');
+    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=sales');
     for (let i = 0; i < data.shops.length; i++) {
       if (data.shops[i].id === id) {
         data.shop = data.shops[i];

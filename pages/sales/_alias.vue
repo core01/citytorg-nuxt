@@ -129,7 +129,7 @@ export default {
   async asyncData({ app, params }) {
     let [id]  = params.alias.split('-');
     let data = {};
-    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id);
+    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id + '?expand=shops');
 
     return data;
   },

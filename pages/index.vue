@@ -72,8 +72,8 @@ export default {
       sales: [],
       shops: []
     };
-    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales');
-    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops');
+    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales?sort=id');
+    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops/priority');
 
     return data;
   },
