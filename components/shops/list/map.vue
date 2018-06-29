@@ -57,7 +57,7 @@ export default {
       center: [49.9553, 82.6134],
       url: '/osm/?z={z}&x={x}&y={y}&s={s}',
       attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       // marker: L.latLng(49.9553, 82.6134),
       maxZoom: 18,
       minZoom: 11,

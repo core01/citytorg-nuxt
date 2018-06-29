@@ -21,7 +21,7 @@
               <img
                 v-else
                 :alt="shop.title"
-                src="http://via.placeholder.com/350x250" >
+                src="https://via.placeholder.com/350x250" >
               <div class="shop-image__text">Образец</div>
             </figure>
 
