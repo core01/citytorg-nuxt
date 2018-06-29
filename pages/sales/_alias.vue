@@ -22,7 +22,7 @@
               <img
                 v-else
                 :alt="sale.title"
-                src="https://via.placeholder.com/350x250"
+                :src="'https://placehold.jp/350x250.png?text=' + sale.title"
                 class="sale-card__image">
             </figure>
 

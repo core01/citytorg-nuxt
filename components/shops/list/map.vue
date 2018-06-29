@@ -17,6 +17,7 @@
         :is-current="currentIndex === index"
         :default-icon="defaultIcon"
         :selected-icon="selectedIcon"
+        :inactive-icon="inactiveIcon"
       />
     </l-map>
   </no-ssr>
@@ -72,6 +73,12 @@ export default {
         shadowUrl: require('~/assets/markers/marker-shadow.png'),
         // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
         iconUrl: require('~/assets/markers/marker-icon.png'),
+        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+        popupAnchor: [0, -41]
+      }),
+      inactiveIcon: L.icon({
+        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
+        iconUrl: require('~/assets/markers/marker-dot-grey.png'),
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -41]
       })

@@ -41,7 +41,11 @@ export default {
     selectedIcon: {
       type: Object,
       required: true
-    }
+    },
+    inactiveIcon: {
+      type: Object,
+      required: true
+    },
   },
   data() {
     return {};
@@ -50,6 +54,9 @@ export default {
     icon() {
       if (this.isCurrent) {
         return this.selectedIcon;
+      }
+      if(this.shop.shopType.priority === 0){
+        return this.inactiveIcon;
       }
       return this.defaultIcon;
     }

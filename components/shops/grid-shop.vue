@@ -11,7 +11,7 @@
         <img
           v-else
           :alt="shop.title"
-          src="https://via.placeholder.com/350x250"
+          :src="'https://placehold.jp/350x250.png?text=' + shop.title"
           class="grid-shop__img imageFade">
         <div class="shop-image__text">
           Образец
