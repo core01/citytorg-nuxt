@@ -63,14 +63,14 @@ export default {
       maxZoom: 18,
       minZoom: 11,
       selectedIcon: L.icon({
-        shadowUrl: require('~/assets/markers/marker-shadow.png'),
+        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
         // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
         iconUrl: require('~/assets/markers/marker-icon-red.png'),
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
         popupAnchor: [0, -41]
       }),
       defaultIcon: L.icon({
-        shadowUrl: require('~/assets/markers/marker-shadow.png'),
+        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
         // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
         iconUrl: require('~/assets/markers/marker-icon.png'),
         iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
