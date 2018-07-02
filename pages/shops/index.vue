@@ -52,7 +52,7 @@ export default {
   },
   async asyncData({ app, params }) {
     let data = {};
-    data.shops =  await app.$axios.$get(process.env.BACKEND_URL + 'shops/priority');
+    data.shops =  await app.$axios.$get(process.env.BACKEND_URL + 'shops?sort=-priority,-id');
 
     return data;
   },
