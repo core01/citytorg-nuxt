@@ -23,6 +23,12 @@
         v-if="sale.new"
         class="tag is-info tooltip is-tooltip-info"
         data-tooltip="Новинка">Новинка</span>
+      <span
+        v-if="sale.social"
+        class="tag is-social tooltip is-tooltip-social"
+        data-tooltip="Товар по социальной цене">
+        Социальный
+      </span>
     </span>
   </div>
 </template>
