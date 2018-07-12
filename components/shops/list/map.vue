@@ -1,26 +1,25 @@
 <template>
-  <no-ssr>
-    <l-map
-      ref="map"
-      :zoom="zoom"
-      :center="center"
-      :max-zoom="maxZoom"
-      :min-zoom="minZoom"
-      class="map_shop-map">
-      <l-tile-layer
-        :url="url"
-        :attribution="attribution"/>
-      <map-shop
-        v-for="(shop,index) in shops"
-        :shop="shop"
-        :key="shop.id"
-        :is-current="currentIndex === index"
-        :default-icon="defaultIcon"
-        :selected-icon="selectedIcon"
-        :inactive-icon="inactiveIcon"
-      />
-    </l-map>
-  </no-ssr>
+  <l-map
+    ref="map"
+    :zoom="zoom"
+    :center="center"
+    :max-zoom="maxZoom"
+    :min-zoom="minZoom"
+    class="map_shop-map">
+    <l-tile-layer
+      :url="url"
+      :attribution="attribution"/>
+    <map-shop
+      v-for="(shop,index) in shops"
+      v-if="shop.shopType.alias !== 'network'"
+      :shop="shop"
+      :key="shop.id"
+      :is-current="currentIndex === index"
+      :default-icon="defaultIcon"
+      :selected-icon="selectedIcon"
+      :inactive-icon="inactiveIcon"
+    />
+  </l-map>
 </template>
 <script>
 let Vue2Leaflet = {};
@@ -55,13 +54,12 @@ export default {
   },
   data() {
     return {
-      center: [49.9553, 82.6134],
       url: '/osm/?z={z}&x={x}&y={y}&s={s}',
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       // marker: L.latLng(49.9553, 82.6134),
       maxZoom: 18,
-      minZoom: 11,
+      minZoom: 8,
       selectedIcon: L.icon({
         // shadowUrl: require('~/assets/markers/marker-shadow.png'),
         // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
@@ -88,20 +86,36 @@ export default {
     markers() {
       let markers = [];
       for (let i = 0; i < this.shops.length; i++) {
-        markers.push([
-          this.shops[i].lat,
-          this.shops[i].lon
-        ]);
+        if(this.shops[i].shopType.alias !== 'network'){
+          if(this.shops[i].lat && this.shops[i].lon){
+            markers.push([
+              this.shops[i].lat,
+              this.shops[i].lon
+            ]);
+          }
+        }
+
       }
       return markers;
+    },
+    center(){
+      if(this.currentIndex !== -1){
+        let currentShop = this.shops[this.currentIndex];
+        if(currentShop.lat && currentShop.lon){
+          return [currentShop.lat, currentShop.lon];
+        }
+      }
+
+      return [49.9553, 82.6134];
     }
   },
   mounted() {
-    // this.$refs.map.mapObject.fitBounds(this.markers, {
-    //   padding: [50, 50]
-    // })
+    if(this.currentIndex === -1){
+      this.$refs.map.mapObject.fitBounds(this.markers, {
+        padding: [50, 50]
+      });
+    }
   },
-  methods: {}
 };
 </script>
 <style lang="sass" scoped>

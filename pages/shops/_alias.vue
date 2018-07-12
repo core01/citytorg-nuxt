@@ -27,18 +27,12 @@
 
             <table class="table">
               <tbody>
-                <tr v-if="shop.phone">
-                  <th>Телефон:</th>
-                  <td>{{ shop.phone }}</td>
-                </tr>
                 <tr>
                   <th>Адрес:</th>
                   <td>{{ shop.address }}</td>
                 </tr>
                 <tr>
-                  <td
-                    colspan="2"
-                    v-html="shop.description"/>
+                  <td colspan="2">{{ shop.description }}</td>
                 </tr>
               </tbody>
             </table>
@@ -58,10 +52,12 @@
             </p>
           </div>
           <div class="column is-8">
-            <shop-list-map
-              :shops="shops"
-              :zoom="13"
-              :current-index="currentIndex"/>
+            <no-ssr>
+              <shop-list-map
+                :shops="shops"
+                :zoom="13"
+                :current-index="currentIndex"/>
+            </no-ssr>
           </div>
         </div>
       </div>
@@ -84,19 +80,40 @@ import shopListMap from '../../components/shops/list/map.vue';
 export default {
   async asyncData({ app, params }) {
     let [id]  = params.alias.split('-');
-    id = parseInt(id);
     let data = {
+      id: parseInt(id),
       shop: {},
       sales: [],
-      shops: [],
-      currentIndex: -1
     };
-    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=sales');
-    for (let i = 0; i < data.shops.length; i++) {
-      if (data.shops[i].id === id) {
-        data.shop = data.shops[i];
-        data.currentIndex = i;
-        data.sales = data.shop.sales;
+    data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
+    data.sales = data.shop.sales;
+    // Если у нас точка торговой сети
+    if(data.shop.parent !== 0){
+      // Получаем магазины торговой сети по parent id
+      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.shop.parent);
+      data.shops = response.stalls;
+      // Получаем акции в текущей точке
+      response =
+      await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
+      data.sales = response.sales;
+      // если у нас сеть
+    }else if(data.shop.shopType.alias === 'network'){
+      // Получаем магазины торговой сети по id
+      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id);
+      data.shops = response.stalls;
+      // Получаем акции торговой сети
+      data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales/network?id=' + data.id);
+    }else{
+      // Получаем магазины с акциями
+      data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=sales');
+    }
+
+    if(data.shop.shopType.alias !== 'network'){
+      for (let i = 0; i < data.shops.length; i++) {
+        if (data.shops[i].id === data.id) {
+          console.log('ass');
+          data.currentIndex = i;
+        }
       }
     }
 
@@ -124,7 +141,11 @@ export default {
   },
   data() {
     return {
-      absenceText: 'Информации о действующих акциях на данный момент нет'
+      absenceText: 'Информации о действующих акциях на данный момент нет',
+      sales: [],
+      shops: [],
+      currentIndex: -1,
+      shop: {},
     };
   },
   computed: {
@@ -132,7 +153,7 @@ export default {
       return process.env.UPLOADS_URL;
     },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 <style lang="sass" scoped>

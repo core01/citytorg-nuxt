@@ -63,7 +63,7 @@ export default {
 <style lang="sass" scoped>
 @import ~assets/sass/variables
 .grid-sale__img-container
-  min-height: 155px
+  height: 155px
 .grid-sale
   background-color: white
   padding: 10px
@@ -79,6 +79,7 @@ export default {
   height: 45px
   line-height: 1.2
   text-align: center
+  margin-top: 5px
   &:hover
     color: $red
     text-decoration: underline
@@ -100,7 +101,7 @@ export default {
   text-decoration: line-through
 
 .grid-sale__img
-  max-width: 160px
+  height: 100%
   margin: 0 auto
 
 .grid-sale__button
