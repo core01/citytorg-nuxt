@@ -9,7 +9,7 @@
     <l-tile-layer
       :url="url"
       :attribution="attribution"/>
-    <map-shop
+    <map-marker
       v-for="(shop,index) in shops"
       v-if="shop.shopType.alias !== 'network'"
       :shop="shop"
@@ -30,13 +30,12 @@ if (process.browser) {
   Vue2Leaflet = require('vue2-leaflet');
   L = require('leaflet');
 }
-import mapShop from '../map-shop.vue';
+import mapMarker from '../../map/marker.vue';
 export default {
   components: {
     'l-map': Vue2Leaflet.LMap,
     'l-tile-layer': Vue2Leaflet.LTileLayer,
-    'l-marker': Vue2Leaflet.LMarker,
-    mapShop
+    mapMarker
   },
   props: {
     shops: {

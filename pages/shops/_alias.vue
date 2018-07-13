@@ -84,6 +84,7 @@ export default {
       id: parseInt(id),
       shop: {},
       sales: [],
+      shops: [],
     };
     data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
     data.sales = data.shop.sales;
@@ -106,15 +107,6 @@ export default {
     }else{
       // Получаем магазины с акциями
       data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=sales');
-    }
-
-    if(data.shop.shopType.alias !== 'network'){
-      for (let i = 0; i < data.shops.length; i++) {
-        if (data.shops[i].id === data.id) {
-          console.log('ass');
-          data.currentIndex = i;
-        }
-      }
     }
 
     return data;
@@ -153,7 +145,15 @@ export default {
       return process.env.UPLOADS_URL;
     },
   },
-  mounted() {},
+  mounted() {
+    if(this.shop.shopType.alias !== 'network'){
+      for (let i = 0; i < this.shops.length; i++) {
+        if (this.shops[i].id === this.id) {
+          this.currentIndex = i;
+        }
+      }
+    }
+  },
 };
 </script>
 <style lang="sass" scoped>
