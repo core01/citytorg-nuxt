@@ -13,7 +13,9 @@
           :alt="shop.title"
           :src="'https://placehold.jp/350x250.png?text=' + shop.title"
           class="grid-shop__img imageFade">
-        <div class="shop-image__text">
+        <div
+          v-if="shop.sample"
+          class="shop-image__text">
           Образец
         </div>
       </div>
