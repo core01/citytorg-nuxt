@@ -54,6 +54,7 @@
             <div class="buttons is-centered sale-card-buttons">
               <a
                 v-scroll-to="'#shops'"
+                v-if="sale.shops.length > 0"
                 class="button is-info is-outlined">
                 <span>Посмотреть магазины</span>
                 <span class="icon">
@@ -79,6 +80,7 @@
     </section>
 
     <section
+      v-if="sale.shops.length > 0"
       id="shops"
       class="hero is-fullheight shops">
       <div class="container">
@@ -179,8 +181,6 @@ export default {
   font-size: 1.5rem
   font-weight: normal
   margin-bottom: 1.4rem
-// .shops
-//   background-color: #eff3f4
 .sale-card-buttons
   margin-top: 10px
 
