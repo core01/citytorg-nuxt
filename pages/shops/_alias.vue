@@ -65,12 +65,35 @@
       </div>
     </section>
     <section
-      v-if="sales.length > 0"
-      id="sales"
-      class="hero is-fullheight sales">
-      <grid-sales
-        :sales="sales"
-        absence-text="absenceText"/>
+      v-if="shop.stalls.length > 0 || sales.length > 0"
+      class="hero is-fullheight">
+      <div class="container">
+        <div
+          v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
+          class="tabs is-toggle">
+          <ul>
+            <li
+              :class="{'is-active': mode === 'sales'}"
+              @click.prevent="switchMode('sales')">
+              <a>Список акций</a>
+            </li>
+            <li
+              :class="{'is-active': mode === 'shops'}"
+              @click.prevent="switchMode('shops')">
+              <a>Список магазинов</a>
+            </li>
+          </ul>
+        </div>
+        <div class="content">
+          <grid-sales
+            v-if="mode === 'sales'"
+            :sales="sales"
+            :absence-text="absenceText"/>
+          <shopListGrids
+            v-else
+            :shops="shops"/>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -78,6 +101,7 @@
 import navbar from '../../components/navbar/navbar.vue';
 import gridSales from '../../components/sales/list/grids.vue';
 import shopListMap from '../../components/shops/list/map.vue';
+import shopListGrids from '../../components/shops/list/grids.vue';
 
 export default {
   async asyncData({ app, params }) {
@@ -131,7 +155,8 @@ export default {
   components: {
     navbar,
     gridSales,
-    shopListMap
+    shopListMap,
+    shopListGrids,
   },
   data() {
     return {
@@ -140,6 +165,7 @@ export default {
       shops: [],
       currentIndex: -1,
       shop: {},
+      mode: 'sales',
     };
   },
   computed: {
@@ -154,7 +180,18 @@ export default {
           this.currentIndex = i;
         }
       }
+    }else{
+      if(this.sales.length > 0 ){
+        this.switchMode('sales');
+      }else{
+        this.switchMode('shops');
+      }
     }
+  },
+  methods: {
+    switchMode(mode){
+      this.mode = mode;
+    },
   },
 };
 </script>
@@ -162,7 +199,7 @@ export default {
 @import ~assets/sass/variables
 
 .sales
-  background-color: #eff3f4
+//  background-color: #eff3f4
   padding: 5rem 0
 
 .sale-card_content
