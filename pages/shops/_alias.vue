@@ -42,7 +42,7 @@
               v-if="sales.length >0"
               class="buttons is-centered">
               <a
-                v-scroll-to="'#sales'"
+                v-scroll-to="'#items'"
                 class="button is-info is-outlined">
                 <span>Посмотреть акции в магазине</span>
                 <span class="icon">
@@ -66,6 +66,7 @@
     </section>
     <section
       v-if="shop.stalls.length > 0 || sales.length > 0"
+      id="items"
       class="hero is-fullheight">
       <div class="container">
         <div
