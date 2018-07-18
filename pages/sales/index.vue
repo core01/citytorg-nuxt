@@ -47,7 +47,7 @@ export default {
   },
   async asyncData({ app, params }) {
     let data = {};
-    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales?sort=-id');
+    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales?sort=-created_at');
 
     return data;
   },
