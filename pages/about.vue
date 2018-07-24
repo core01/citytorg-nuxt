@@ -12,9 +12,11 @@
           <p>
             <b>Citytorg</b> - Торговая сеть акционных продаж
           </p>
-          <p>Скачать презентацию о проекте - <a
-            href="https://drive.google.com/open?id=1790q0rHlpHMOp7RoEl0bATOaORUgAAYw"
-            target="_blank">Interagent-Citytorg.ppsx</a></p>
+          <p>Скачать презентацию о проекте -  <a
+            href="https://drive.google.com/open?id=1yYpBjYPMPaa4XXF-HwTUvhT69XNW6fZz"
+            target="_blank">pdf</a>, <a
+              href="https://drive.google.com/open?id=1mNPQtGaO2O8DfiXiOUfiD_Ajyqk43A1L"
+              target="_blank">ppsx</a></p>
         </div>
         <div class="columns">
           <div class="column is-6">
