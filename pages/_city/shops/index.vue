@@ -48,7 +48,7 @@ export default {
     ]
   },
   async asyncData({ store }) {
-    let shops = await store.dispatch('getSales');
+    let shops = await store.dispatch('getShops');
 
     return { shops: shops };
   },
