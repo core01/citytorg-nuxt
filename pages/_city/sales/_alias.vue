@@ -115,23 +115,17 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue';
-import shopListGrids from '../../components/shops/list/grids.vue';
-import shopListMap from '../../components/shops/list/map.vue';
-import saleType from '../../components/sales/type.vue';
-import marked from 'marked';
+import navbar from '../../../components/navbar/navbar.vue';
+import shopListGrids from '../../../components/shops/list/grids.vue';
+import shopListMap from '../../../components/shops/list/map.vue';
+import saleType from '../../../components/sales/type.vue';
 
-marked.setOptions({
-  renderer: new marked.Renderer(),
-  sanitize: true,
-  smartLists: true,
-  smartypants: true
-});
 export default {
+  middleware: 'saleCityCheck',
   async asyncData({ app, params }) {
     let [id]  = params.alias.split('-');
     let data = {};
-    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id + '?expand=shops');
+    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id + '?expand=shops,city');
 
     return data;
   },
@@ -165,7 +159,8 @@ export default {
       return process.env.UPLOADS_URL;
     },
   },
-  mounted() {},
+  mounted() {
+  },
   methods: {
     switchMode(mode) {
       this.mode = mode;

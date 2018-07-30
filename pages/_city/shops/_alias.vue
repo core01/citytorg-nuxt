@@ -99,10 +99,10 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue';
-import gridSales from '../../components/sales/list/grids.vue';
-import shopListMap from '../../components/shops/list/map.vue';
-import shopListGrids from '../../components/shops/list/grids.vue';
+import navbar from '../../../components/navbar/navbar.vue';
+import gridSales from '../../../components/sales/list/grids.vue';
+import shopListMap from '../../../components/shops/list/map.vue';
+import shopListGrids from '../../../components/shops/list/grids.vue';
 
 export default {
   async asyncData({ app, params }) {

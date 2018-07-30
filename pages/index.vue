@@ -52,7 +52,6 @@
 
 <script>
 import navbar from '../components/navbar/navbar.vue';
-// import { createClient } from '~/plugins/contentful.js';
 import salesListGrids from '../components/sales/list/grids.vue';
 import salesListRows from '../components/sales/list/rows.vue';
 
@@ -62,21 +61,16 @@ import shopsTabs from '../components/tabs/shops.vue';
 
 import shopsListGrids from '../components/shops/list/grids.vue';
 import shopsListMap from '../components/shops/list/map.vue';
+import { mapGetters } from 'vuex';
 // const client = createClient();
 export default {
   head: {
     title: 'Главная страница'
   },
-  async asyncData({ app }) {
-    let data = {
-      sales: [],
-      shops: []
-    };
-    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales?sort=-created_at');
-    data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?sort=-priority,-id');
+  // async asyncData({ app }) {
 
-    return data;
-  },
+  //   return data;
+  // },
   components: {
     navbar,
     salesListGrids,
@@ -92,6 +86,12 @@ export default {
       mode: 'sales',
       type: 'grids'
     };
+  },
+  computed: {
+    ...mapGetters({
+      shops: 'shops',
+      sales: 'sales',
+    })
   },
   mounted() {
     // let vm = this;

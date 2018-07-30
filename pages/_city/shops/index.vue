@@ -30,15 +30,12 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue';
-import shopListMap from '../../components/shops/list/map.vue';
-import shopListGrids from '../../components/shops/list/grids.vue';
+import navbar from '../../../components/navbar/navbar.vue';
+import shopListMap from '../../../components/shops/list/map.vue';
+import shopListGrids from '../../../components/shops/list/grids.vue';
 
-import shopsTabs from '../../components/tabs/shops.vue';
+import shopsTabs from '../../../components/tabs/shops.vue';
 
-// import { createClient } from '~/plugins/contentful.js';
-
-// const client = createClient();
 export default {
   head: {
     title: 'Все магазины',
@@ -50,11 +47,10 @@ export default {
       }
     ]
   },
-  async asyncData({ app, params }) {
-    let data = {};
-    data.shops =  await app.$axios.$get(process.env.BACKEND_URL + 'shops?sort=-priority,-id');
+  async asyncData({ store }) {
+    let shops = await store.dispatch('getSales');
 
-    return data;
+    return { shops: shops };
   },
   components: {
     navbar,

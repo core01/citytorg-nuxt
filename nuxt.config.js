@@ -4,7 +4,9 @@ process.env.DEBUG = 'nuxt:*';
 module.exports = {
   debug: true,
   mode: 'universal',
-
+  router: {
+    middleware: 'cityCheck'
+  },
   /*
    ** Headers of the page
    */
@@ -109,7 +111,6 @@ module.exports = {
     src: '~plugins/veevalidate'
   }
   ],
-
   /*
    ** Nuxt.js modules
    */

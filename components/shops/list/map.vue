@@ -109,7 +109,7 @@ export default {
     }
   },
   mounted() {
-    if(this.currentIndex === -1){
+    if(this.currentIndex === -1 && this.markers.length > 0){
       this.$refs.map.mapObject.fitBounds(this.markers, {
         padding: [50, 50]
       });

@@ -25,9 +25,7 @@
         :class="{'is-active': show}"
         class="navbar-menu">
         <div class="navbar-start">
-          <div class="navbar-item  has-dropdown  is-hoverable">
-            <a class="navbar-link">г. Усть-Каменогорск</a>
-          </div>
+          <navbar-cities/>
           <div class="navbar-item">
             <span class="icon">
               <i class="fas fa-phone-volume"/>
@@ -47,16 +45,16 @@
               </nuxt-link>
               <nuxt-link
                 :exact="false"
+                :to="{ name: 'city-sales', params: { city: city.alias }}"
                 tag="li"
-                to="/sales"
                 active-class="is-active"
                 class="navbar-item">
                 <a>Акции</a>
               </nuxt-link>
               <nuxt-link
                 :exact="false"
+                :to="{ name: 'city-shops', params: { city: city.alias }}"
                 tag="li"
-                to="/shops"
                 active-class="is-active"
                 class="navbar-item">
                 <a>Магазины</a>
@@ -77,17 +75,27 @@
   </nav>
 </template>
 <script>
+import navbarCities from './cities.vue';
+import { mapGetters } from 'vuex';
 export default {
+  components: {
+    navbarCities
+  },
   data() {
     return {
       show: false
     };
   },
+  computed: {
+    ...mapGetters({
+      city: 'city',
+    })
+  },
   methods: {
     showMenu() {
       this.show = !this.show;
     }
-  }
+  },
 };
 </script>
 <style scoped>

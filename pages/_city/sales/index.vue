@@ -29,10 +29,10 @@
   </div>
 </template>
 <script>
-import navbar from '../../components/navbar/navbar.vue';
-import salesGridsList from '../../components/sales/list/grids.vue';
-import salesRowsList from '../../components/sales/list/rows.vue';
-import salesTabs from '../../components/tabs/sales.vue';
+import navbar from '../../../components/navbar/navbar.vue';
+import salesGridsList from '../../../components/sales/list/grids.vue';
+import salesRowsList from '../../../components/sales/list/rows.vue';
+import salesTabs from '../../../components/tabs/sales.vue';
 
 export default {
   head: {
@@ -45,11 +45,9 @@ export default {
       }
     ]
   },
-  async asyncData({ app, params }) {
-    let data = {};
-    data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales?sort=-created_at');
-
-    return data;
+  async asyncData({ store }) {
+    let sales = await store.dispatch('getSales');
+    return { sales: sales };
   },
   components: {
     navbar,
@@ -62,6 +60,8 @@ export default {
       type: 'grids',
       absence_text: 'Информации о действующих акциях на данный момент нет'
     };
+  },
+  computed: {
   },
   mounted() {
     // let vm = this

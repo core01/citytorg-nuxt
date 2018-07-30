@@ -36,6 +36,7 @@
 
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   components: {},
   props: {
@@ -48,11 +49,14 @@ export default {
     return {};
   },
   computed: {
+    ...mapGetters({
+      city: 'city'
+    }),
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
     path(){
-      return '/shops/' + this.shop.id + '-' + this.shop.alias;
+      return '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias;
     }
   },
   mounted() {},
