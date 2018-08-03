@@ -33,49 +33,53 @@ module.exports = {
       content: '#00a300'
     }
     ],
-    link: [{
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicon.ico'
-    },
-    {
-      rel: 'apple-touch-icon',
-      sizes: '180x180',
-      href: '/apple-touch-icon.png'
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      href: '/favicon-32x32.png'
-    },
-    {
-      rel: 'icon',
-      type: 'image/png',
-      sizes: '16x16',
-      href: '/favicon-16x16.png'
-    },
-
-    {
-      rel: 'mask-icon',
-      href: '/safari-pinned-tab.svg',
-      color: '#5bbad5'
-    },
-
-    {
-      rel: 'manifest',
-      href: '/site.webmanifest'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
-    },
-    {
-      rel: 'stylesheet',
-      href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
-      integrity: 'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
-      crossorigin: 'anonymous'
-    }
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
+      {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/apple-touch-icon.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '32x32',
+        href: '/favicon-32x32.png'
+      },
+      {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '16x16',
+        href: '/favicon-16x16.png'
+      },
+      {
+        rel: 'mask-icon',
+        href: '/safari-pinned-tab.svg',
+        color: '#5bbad5'
+      },
+      {
+        rel: 'manifest',
+        href: '/site.webmanifest'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
+        integrity: 'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
+        crossorigin: 'anonymous'
+      },
+    ],
+    script: [
+      {
+        src: 'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver'
+      },
     ]
   },
 
