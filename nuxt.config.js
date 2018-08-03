@@ -97,19 +97,24 @@ module.exports = {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{
-    src: '~plugins/vue-scrollto',
-    ssr: false
-  },
-  {
-    src: '~plugins/date-format'
-  },
-  {
-    src: '~plugins/truncate'
-  },
-  {
-    src: '~plugins/veevalidate'
-  }
+  plugins: [
+    {
+      src: '~plugins/vue-scrollto',
+      ssr: false
+    },
+    {
+      src: '~plugins/date-format'
+    },
+    {
+      src: '~plugins/truncate'
+    },
+    {
+      src: '~plugins/veevalidate'
+    },
+    {
+      src: '~plugins/lazy-img',
+      ssr: false
+    },
   ],
   /*
    ** Nuxt.js modules
