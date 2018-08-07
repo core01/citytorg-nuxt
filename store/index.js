@@ -51,8 +51,10 @@ const createStore = () => {
     actions: {
       async nuxtServerInit({ dispatch, state }, { req }) {
         let currentCity = state.city;
-        if (req.session.city) {
-          currentCity = req.session.city;
+        if(req.session){
+          if (req.session.city) {
+            currentCity = req.session.city;
+          }
         }
         let routeCity = this.$router.currentRoute.params.city;
         if (routeCity) {
