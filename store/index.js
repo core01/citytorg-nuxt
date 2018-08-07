@@ -49,7 +49,7 @@ const createStore = () => {
       },
     },
     actions: {
-      async nuxtServerInit({ dispatch, commit, state }, { req }) {
+      async nuxtServerInit({ dispatch, state }, { req }) {
         let currentCity = state.city;
         if (req.session.city) {
           currentCity = req.session.city;
@@ -63,7 +63,7 @@ const createStore = () => {
             }
           }
         }
-        await this.dispatch('setCity', currentCity);
+        await dispatch('setCity', currentCity);
       },
       async getCities() {
         let data = await this.$axios.$get(process.env.BACKEND_URL +
