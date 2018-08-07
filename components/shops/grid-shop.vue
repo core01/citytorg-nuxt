@@ -4,14 +4,18 @@
     <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container shop-image">
         <img
+          v-lazyload
           v-if="shop.images"
-          :src="UPLOADS_URL + shop.images[0]['450x320']"
+          :data-src="UPLOADS_URL + shop.images[0]['450x320']"
           :alt="shop.title"
+          src="~assets/images/placeholder.png"
           class="grid-shop__img imageFade">
         <img
+          v-lazyload
           v-else
           :alt="shop.title"
-          :src="'https://placehold.jp/350x250.png?text=' + shop.title"
+          :data-src="'https://placehold.jp/350x250.png?text=' + shop.title"
+          src="~assets/images/placeholder.png"
           class="grid-shop__img imageFade">
         <div
           v-if="shop.sample"

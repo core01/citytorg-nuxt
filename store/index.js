@@ -4,16 +4,18 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       city: {
-        id: 1,
-        alias: 'ust-kamenogorsk',
-        title: 'Усть-Каменогорск',
+        'id': 1,
+        'title': 'Усть-Каменогорск',
+        'alias': 'ust-kamenogorsk',
+        'lat': '49.96427057155009',
+        'lon': '82.59572865600605'
       },
       cities: [],
       shops: [],
       sales: [],
       spinner: {
         show: false,
-      }
+      },
     },
     mutations: {
       SET_CITY(state, city) {
@@ -30,7 +32,7 @@ const createStore = () => {
       },
       SHOW_SPINNER(state, value) {
         state.spinner.show = value;
-      }
+      },
     },
     getters: {
       city: state => {
@@ -47,50 +49,49 @@ const createStore = () => {
       },
     },
     actions: {
+      async nuxtServerInit({ dispatch, commit, state }, { req }) {
+        let currentCity = state.city;
+        if (req.session.city) {
+          currentCity = req.session.city;
+        }
+        let routeCity = this.$router.currentRoute.params.city;
+        if (routeCity) {
+          let cities = await dispatch('getCities');
+          for (let city in cities) {
+            if (cities[city].alias === routeCity) {
+              currentCity = cities[city];
+            }
+          }
+        }
+        await this.dispatch('setCity', currentCity);
+      },
       async getCities() {
-        let { data } = await this.$axios.get(process.env.BACKEND_URL + 'cities');
+        let data = await this.$axios.$get(process.env.BACKEND_URL +
+          'cities');
         this.commit('SET_CITIES', data);
-        let currentRouter = this.$router.currentRoute.params.city;
-        let currentCity = localStorage.getItem('city');
-        if (currentRouter){
-          for(let city in data){
-            if(data[city].alias === currentRouter){
-              this.dispatch('setCity', data[city]);
-
-              return data;
-            }
-          }
-        }
-        if(currentCity){
-          for(let city in data){
-            if(JSON.stringify(data[city]) === currentCity){
-              this.dispatch('setCity', data[city]);
-
-              return data;
-            }
-          }
-        }
-        this.commit('SET_CITY', data[0]);
-
         return data;
       },
-      setCity(context, city) {
-        context.commit('SET_CITY', city);
-        localStorage.setItem('city', JSON.stringify(city));
-        context.dispatch('getShops');
-        context.dispatch('getSales');
+      async setCity(context, city) {
+        let data = await this.$axios.$post('/city/set', {
+          city: city
+        });
+        context.commit('SET_CITY', data.city);
+        await context.dispatch('getShops');
+        await context.dispatch('getSales');
       },
       async getShops(context) {
-        let { data } = await this.$axios.get(process.env.BACKEND_URL +
-          'shops?sort=-priority,-id&filter[city_id]=' + context.getters.city.id
+        let data = await this.$axios.$get(process.env.BACKEND_URL +
+          'shops?sort=-priority,-id&filter[city_id]=' + context.getters
+          .city.id
         );
         this.commit('SET_SHOPS', data);
 
         return data;
       },
       async getSales(context) {
-        let { data } = await this.$axios.get(process.env.BACKEND_URL +
-          'sales?sort=-created_at&filter[city_id]=' + context.getters.city.id
+        let data = await this.$axios.$get(process.env.BACKEND_URL +
+          'sales?sort=-created_at&filter[city_id]=' + context.getters.city
+          .id
         );
         this.commit('SET_SALES', data);
 

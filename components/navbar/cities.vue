@@ -1,8 +1,7 @@
 <template>
   <div class="navbar-item  has-dropdown is-hoverable">
     <a class="navbar-link">{{ city.title }}</a>
-    <div
-      class="navbar-dropdown">
+    <div class="navbar-dropdown">
       <a
         v-for="(city, index) in cities"
         :key="index"
@@ -33,7 +32,7 @@ export default {
     showMenu() {
       this.show = !this.show;
     },
-    setCity(city){
+    async setCity(city){
       this.$store.dispatch('setCity', city);
       this.$router.push('/');
     }
