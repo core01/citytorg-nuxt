@@ -3,14 +3,18 @@
     <td>
       <nuxt-link :to="{ path: path }">
         <img
+          v-lazyload
           v-if="sale.images"
-          :src="UPLOADS_URL + sale.images[0]['450x320']"
+          :data-src="UPLOADS_URL + sale.images[0]['450x320']"
           :alt="sale.title"
+          src="~assets/images/placeholder.png"
           class="row-sale__img imageFade">
         <img
+          v-lazyload
           v-else
           :alt="sale.title"
-          :src="'https://placehold.jp/350x250.png?text=' + sale.title"
+          :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
+          src="~assets/images/placeholder.png"
           class="row-sale__img imageFade">
       </nuxt-link>
     </td>

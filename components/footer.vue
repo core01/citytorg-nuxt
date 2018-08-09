@@ -5,14 +5,14 @@
         <p class="footer-links">
           <nuxt-link
             :exact="false"
-            to="/sales"
+            :to="{ name: 'city-sales', params: { city: city.alias }}"
             class="footer-links__link"
             active-class="is-active">
             Акции
           </nuxt-link>
           <nuxt-link
             :exact="false"
-            to="/shops"
+            :to="{ name: 'city-shops', params: { city: city.alias }}"
             class="footer-links__link"
             active-class="is-active">
             Магазины
@@ -64,12 +64,17 @@
   </footer>
 </template>
 <script>
+import { mapGetters } from 'vuex';
 export default {
   components: {},
   data() {
     return {};
   },
-  computed: {}
+  computed: {
+    ...mapGetters({
+      city: 'city',
+    })
+  }
 };
 </script>
 <style lang="sass" scoped>

@@ -4,14 +4,18 @@
     <nuxt-link :to="{ path: path }">
       <div class="grid-sale__img-container">
         <img
+          v-lazyload
           v-if="sale.images"
-          :src="UPLOADS_URL + sale.images[0]['450x320']"
+          :data-src="UPLOADS_URL + sale.images[0]['450x320']"
           :alt="sale.title"
+          src="~assets/images/placeholder.png"
           class="grid-sale__img imageFade">
         <img
+          v-lazyload
           v-else
           :alt="sale.title"
-          :src="'https://placehold.jp/350x250.png?text=' + sale.title"
+          :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
+          src="~assets/images/placeholder.png"
           class="grid-sale__img imageFade">
       </div>
     </nuxt-link>
@@ -34,6 +38,7 @@
 </template>
 <script>
 import saleType from '../sales/type.vue';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     saleType
@@ -48,12 +53,15 @@ export default {
     return {};
   },
   computed: {
+    ...mapGetters({
+      city: 'city',
+    }),
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
     path(){
-      return '/sales/' + this.sale.id + '-' + this.sale.alias;
-    }
+      return '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias;
+    },
   },
   mounted() {},
   methods: {}

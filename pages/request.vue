@@ -215,9 +215,9 @@ export default {
       vm.success = false;
       this.$validator.validateAll('request-form').then(result => {
         if (result) {
-          vm.$store.commit('spinner/show', true);
+          vm.$store.commit('SHOW_SPINNER', true);
           vm.$axios.$post('/application', vm.$data).then(response => {
-            vm.$store.commit('spinner/show', false);
+            vm.$store.commit('SHOW_SPINNER', false);
             vm.pending = false;
             if (response.status) {
               vm.success = true;
