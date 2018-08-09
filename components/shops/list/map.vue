@@ -105,7 +105,7 @@ export default {
         }
       }
 
-      return [49.9553, 82.6134];
+      return [this.$store.getters.city.lat, this.$store.getters.city.lon];
     }
   },
   mounted() {
@@ -120,5 +120,6 @@ export default {
 <style lang="sass" scoped>
 @import "../../../node_modules/leaflet/dist/leaflet.css";
 .map_shop-map
+  z-index: 10
   height: 70vh
 </style>
