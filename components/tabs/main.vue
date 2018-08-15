@@ -3,12 +3,14 @@
     <ul>
       <li
         :class="{'is-active': mode === 'sales'}"
-        @click.prevent="switchMode('sales')">
+        @click.prevent="switchMode('sales')"
+      >
         <a>Акции</a>
       </li>
       <li
         :class="{'is-active': mode === 'shops'}"
-        @click.prevent="switchMode('shops')">
+        @click.prevent="switchMode('shops')"
+      >
         <a>Магазины</a>
       </li>
     </ul>

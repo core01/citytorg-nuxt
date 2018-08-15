@@ -3,8 +3,9 @@
     <div
       v-for="shop in shops"
       :key="shop.id"
-      class="column is-3">
-      <grid-shop :shop="shop"/>
+      class="column is-3"
+    >
+      <grid-shop :shop="shop" />
     </div>
   </div>
 </template>

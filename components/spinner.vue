@@ -1,7 +1,8 @@
 <template>
   <div
     v-if="show"
-    class="spinner-container">
+    class="spinner-container"
+  >
     <div class="spinner">
       <div class="rect1" />
       <div class="rect2" />

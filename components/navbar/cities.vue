@@ -6,7 +6,8 @@
         v-for="(city, index) in cities"
         :key="index"
         class="navbar-item"
-        @click="setCity(city)">
+        @click="setCity(city)"
+      >
         {{ city.title }}
       </a>
     </div>

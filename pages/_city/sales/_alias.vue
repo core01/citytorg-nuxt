@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar/>
+        <navbar />
       </div>
 
     </section>
@@ -18,27 +18,31 @@
                 v-if="sale.images"
                 :src="UPLOADS_URL + sale.images[0]['450x320']"
                 :alt="sale.title"
-                class="sale-card__image">
+                class="sale-card__image"
+              >
               <img
                 v-else
                 :alt="sale.title"
                 :src="'https://placehold.jp/350x250.png?text=' + sale.title"
-                class="sale-card__image">
+                class="sale-card__image"
+              >
             </figure>
 
           </div>
           <div class="column is-8">
-            <sale-type :sale="sale"/>
+            <sale-type :sale="sale" />
             <div
               class="has-text-left sale-card__description"
-              v-html="sale.description"/>
+              v-html="sale.description"
+            />
             <div class="sale-card-prices">
               <div class="sale-card__price-title">
                 Цена:
               </div>
               <div
                 v-if="sale.old_price"
-                class="sale-card__old-price">
+                class="sale-card__old-price"
+              >
                 {{ sale.old_price }} ₸
               </div>
               <div class="sale-card__price">
@@ -47,18 +51,20 @@
             </div>
             <div
               v-if="sale.date_end"
-              class="sale-card__date">
+              class="sale-card__date"
+            >
               Окончание акции:
               <b>{{ sale.date_end | dateFormat }}</b>
             </div>
             <div class="buttons is-centered sale-card-buttons">
               <a
-                v-scroll-to="'#shops'"
                 v-if="sale.shops.length > 0"
-                class="button is-info is-outlined">
+                v-scroll-to="'#shops'"
+                class="button is-info is-outlined"
+              >
                 <span>Посмотреть магазины</span>
                 <span class="icon">
-                  <i class="fa fa-angle-double-down"/>
+                  <i class="fa fa-angle-double-down" />
                 </span>
               </a>
               <a
@@ -69,7 +75,7 @@
               >
                 <span>Прочитать в блоге</span>
                 <span class="icon">
-                  <i class="fa fa-book"/>
+                  <i class="fa fa-book" />
                 </span>
               </a>
             </div>
@@ -82,7 +88,8 @@
     <section
       v-if="sale.shops.length > 0"
       id="shops"
-      class="hero is-fullheight shops">
+      class="hero is-fullheight shops"
+    >
       <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">Магазины</h2>
@@ -91,24 +98,27 @@
           <ul>
             <li
               :class="{'is-active': mode === 'list'}"
-              @click.prevent="switchMode('list')">
+              @click.prevent="switchMode('list')"
+            >
               <a>Список магазинов</a>
             </li>
             <li
               :class="{'is-active': mode === 'map'}"
-              @click.prevent="switchMode('map')">
+              @click.prevent="switchMode('map')"
+            >
               <a>Магазины на карте</a>
             </li>
           </ul>
         </div>
         <shopListGrids
           v-if="mode === 'list'"
-          :shops="sale.shops"/>
+          :shops="sale.shops"
+        />
         <div
           v-else
-          class="container">
-          <shop-list-map
-            :shops="sale.shops"/>
+          class="container"
+        >
+          <shop-list-map :shops="sale.shops" />
         </div>
       </div>
     </section>

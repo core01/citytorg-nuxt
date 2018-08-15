@@ -4,24 +4,27 @@
     <nuxt-link :to="{ path: path }">
       <div class="grid-sale__img-container">
         <img
-          v-lazyload
           v-if="sale.images"
+          v-lazyload
           :data-src="UPLOADS_URL + sale.images[0]['450x320']"
           :alt="sale.title"
           src="~assets/images/placeholder.png"
-          class="grid-sale__img imageFade">
+          class="grid-sale__img imageFade"
+        >
         <img
-          v-lazyload
           v-else
+          v-lazyload
           :alt="sale.title"
           :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
-          class="grid-sale__img imageFade">
+          class="grid-sale__img imageFade"
+        >
       </div>
     </nuxt-link>
     <nuxt-link
       :to="{ path: path }"
-      class="grid-sale__title">
+      class="grid-sale__title"
+    >
       {{ sale.title | truncate(45) }}
     </nuxt-link>
     <div class="grid-sale-prices">
@@ -30,7 +33,8 @@
       </div>
       <div
         v-if="sale.old_price"
-        class="grid-sale__old-price">
+        class="grid-sale__old-price"
+      >
         {{ sale.old_price }} ₸
       </div>
     </div>

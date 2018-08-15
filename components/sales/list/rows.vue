@@ -2,12 +2,14 @@
   <div class="overflow-x">
     <table
       v-if="sales.length > 0"
-      class="table is-narrow is-fullwidth is-hoverable sales-table">
+      class="table is-narrow is-fullwidth is-hoverable sales-table"
+    >
       <tbody>
         <sale
           v-for="sale in sales"
+          :key="sale.id"
           :sale="sale"
-          :key="sale.id"/>
+        />
       </tbody>
     </table>
     <div v-else>
@@ -28,7 +30,7 @@ export default {
       type: Array,
       required: true
     },
-    'absence_text': {
+    'absenceText': {
       type: String,
       required: false,
       default: 'Нет действующих акций на данный момент'

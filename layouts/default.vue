@@ -1,8 +1,8 @@
 <template>
   <div>
-    <nuxt/>
-    <spinner/>
-    <footerComponent/>
+    <nuxt />
+    <spinner />
+    <footerComponent />
   </div>
 </template>
 <style>

@@ -5,15 +5,16 @@
     :center="center"
     :max-zoom="maxZoom"
     :min-zoom="minZoom"
-    class="map_shop-map">
+    class="map_shop-map"
+  >
     <l-tile-layer
       :url="url"
-      :attribution="attribution"/>
+      :attribution="attribution"
+    />
     <map-marker
-      v-for="(shop,index) in shops"
-      v-if="shop.shopType.alias !== 'network'"
-      :shop="shop"
+      v-for="(shop,index) in filteredShops"
       :key="shop.id"
+      :shop="shop"
       :is-current="currentIndex === index"
       :default-icon="defaultIcon"
       :selected-icon="selectedIcon"
@@ -84,17 +85,15 @@ export default {
   computed: {
     markers() {
       let markers = [];
-      for (let i = 0; i < this.shops.length; i++) {
-        if(this.shops[i].shopType.alias !== 'network'){
-          if(this.shops[i].lat && this.shops[i].lon){
-            markers.push([
-              this.shops[i].lat,
-              this.shops[i].lon
-            ]);
-          }
+      for (let i = 0; i < this.filteredShops.length; i++) {
+        if(this.shops[i].lat && this.shops[i].lon){
+          markers.push([
+            this.shops[i].lat,
+            this.shops[i].lon
+          ]);
         }
-
       }
+
       return markers;
     },
     center(){
@@ -106,7 +105,10 @@ export default {
       }
 
       return [this.$store.getters.city.lat, this.$store.getters.city.lon];
-    }
+    },
+    filteredShops(){
+      return this.shops.filter(shop => shop.shopType.alias !== 'network');
+    },
   },
   mounted() {
     if(this.currentIndex === -1 && this.markers.length > 0){

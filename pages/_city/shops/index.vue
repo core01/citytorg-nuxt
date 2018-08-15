@@ -2,12 +2,13 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar/>
+        <navbar />
       </div>
     </section>
     <section
       id="shops"
-      class="hero is-fullheight shops">
+      class="hero is-fullheight shops"
+    >
       <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">Магазины</h2>
@@ -15,15 +16,17 @@
         <shops-tabs
           :div-class="' is-toggle'"
           :type="type"
-          @switch-type="switchType"/>
+          @switch-type="switchType"
+        />
         <shopListGrids
           v-if="type === 'grids'"
-          :shops="shops"/>
+          :shops="shops"
+        />
         <div
           v-else
-          class="container">
-          <shop-list-map
-            :shops="shops"/>
+          class="container"
+        >
+          <shop-list-map :shops="shops" />
         </div>
       </div>
     </section>
@@ -33,8 +36,8 @@
 import navbar from '../../../components/navbar/navbar.vue';
 import shopListMap from '../../../components/shops/list/map.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
-
 import shopsTabs from '../../../components/tabs/shops.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   head: {
@@ -48,9 +51,7 @@ export default {
     ]
   },
   async asyncData({ store }) {
-    let shops = await store.dispatch('getShops');
-
-    return { shops: shops };
+    await store.dispatch('getShops');
   },
   components: {
     navbar,
@@ -65,6 +66,11 @@ export default {
       tileLayer: null,
       layers: []
     };
+  },
+  computed:{
+    ...mapGetters({
+      shops: 'shops',
+    }),
   },
   mounted() {},
   methods: {

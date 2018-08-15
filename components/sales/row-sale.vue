@@ -1,41 +1,42 @@
 <template>
   <tr>
-    <td>
+    <td class="v-middle">
       <nuxt-link :to="{ path: path }">
         <img
-          v-lazyload
           v-if="sale.images"
-          :data-src="UPLOADS_URL + sale.images[0]['450x320']"
-          :alt="sale.title"
-          src="~assets/images/placeholder.png"
-          class="row-sale__img imageFade">
-        <img
           v-lazyload
-          v-else
+          :data-src="UPLOADS_URL + sale.images[0]['140x160']"
           :alt="sale.title"
-          :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
-          class="row-sale__img imageFade">
+          class="row-sale__img imageFade"
+        >
+        <img
+          v-else
+          v-lazyload
+          :alt="sale.title"
+          :data-src="'https://placehold.jp/140x160.png?text=' + sale.title"
+          src="~assets/images/placeholder.png"
+          class="row-sale__img imageFade"
+        >
       </nuxt-link>
     </td>
-    <td>
+    <td class="v-middle">
       <div class="row-sale-head">
         <nuxt-link
           :to="{ path: path }"
-          class="row-sale-head__title">
+          class="row-sale-head__title"
+        >
           {{ sale.title }}
         </nuxt-link>
         <sale-type :sale="sale" />
       </div>
-      <p class="row-sale__description is-hidden-mobile">
-        {{ sale.description | truncate(205) }}
-      </p>
     </td>
-    <td class="prices-td">
+    <td class="prices-td v-middle">
       <div class="row-sale__prices">
         <span
           v-if="oldPrice"
-          class="row-sale__old-price">
+          class="row-sale__old-price"
+        >
           {{ oldPrice }}
         </span>
         <span class="row-sale__price">
@@ -84,7 +85,7 @@ export default {
 <style lang="sass" scoped>
 @import ~assets/sass/variables
 .row-sale__img
-  max-width: 100px
+  max-height: 4em
 
 .row-sale__price
   color: $blue
@@ -121,6 +122,9 @@ export default {
   margin-right: 10px
 
 .prices-td
+  min-width: 20%
+.v-middle
   vertical-align: middle
-  min-width: 15%
+.table.is-narrow td
+  padding: 0
 </style>

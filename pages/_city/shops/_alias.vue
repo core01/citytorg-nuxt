@@ -2,11 +2,10 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar/>
+        <navbar />
       </div>
     </section>
-    <section
-      class="hero is-fullheight shop">
+    <section class="hero is-fullheight shop">
       <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">{{ shop.title }}</h2>
@@ -17,14 +16,17 @@
               <img
                 v-if="shop.images"
                 :src="UPLOADS_URL + shop.images[0]['450x320']"
-                :alt="shop.title">
+                :alt="shop.title"
+              >
               <img
                 v-else
                 :alt="shop.title"
-                :src="'https://placehold.jp/350x250.png?text=' + shop.title">
+                :src="'https://placehold.jp/350x250.png?text=' + shop.title"
+              >
               <div
                 v-if="shop.sample"
-                class="shop-image__text">Образец</div>
+                class="shop-image__text"
+              >Образец</div>
             </figure>
 
             <table class="table">
@@ -40,14 +42,17 @@
             </table>
             <div
               v-if="sales.length >0"
-              class="buttons is-centered">
+              class="buttons is-centered"
+            >
               <a
                 v-scroll-to="'#items'"
-                class="button is-info is-outlined">
+                class="button is-info is-outlined"
+              >
                 <span>Посмотреть акции в магазине</span>
                 <span class="icon">
-                  <i class="fas fa-angle-double-down"/>
-              </span></a>
+                  <i class="fas fa-angle-double-down" />
+                </span>
+              </a>
             </div>
             <p v-else>
               В данном магазине в настоящее время нет акций
@@ -58,7 +63,8 @@
               <shop-list-map
                 :shops="shops"
                 :zoom="13"
-                :current-index="currentIndex"/>
+                :current-index="currentIndex"
+              />
             </no-ssr>
           </div>
         </div>
@@ -67,20 +73,25 @@
     <section
       v-if="shop.stalls.length > 0 || sales.length > 0"
       id="items"
-      class="hero is-fullheight">
+      class="hero is-fullheight"
+    >
       <div class="container">
         <div
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
-          class="tabs is-toggle">
+
+          class="tabs is-toggle"
+        >
           <ul>
             <li
               :class="{'is-active': mode === 'sales'}"
-              @click.prevent="switchMode('sales')">
+              @click.prevent="switchMode('sales')"
+            >
               <a>Список акций</a>
             </li>
             <li
               :class="{'is-active': mode === 'shops'}"
-              @click.prevent="switchMode('shops')">
+              @click.prevent="switchMode('shops')"
+            >
               <a>Список магазинов</a>
             </li>
           </ul>
@@ -89,10 +100,12 @@
           <grid-sales
             v-if="mode === 'sales'"
             :sales="sales"
-            :absence-text="absenceText"/>
+            :absence-text="absenceText"
+          />
           <shopListGrids
             v-else
-            :shops="shops"/>
+            :shops="shops"
+          />
         </div>
       </div>
     </section>

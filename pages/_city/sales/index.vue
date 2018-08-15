@@ -2,12 +2,13 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar/>
+        <navbar />
       </div>
     </section>
     <section
       id="sales"
-      class="hero is-fullheight sales">
+      class="hero is-fullheight sales"
+    >
       <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">Акции</h2>
@@ -15,15 +16,18 @@
         <sales-tabs
           :div-class="' is-toggle'"
           :type="type"
-          @switch-type="switchType"/>
+          @switch-type="switchType"
+        />
         <sales-grids-list
           v-if="type === 'grids'"
           :sales="sales"
-          :absence_text="absence_text"/>
+          :absence_text="absence_text"
+        />
         <sales-rows-list
           v-else
           :sales="sales"
-          :absence_text="absence_text"/>
+          :absence_text="absence_text"
+        />
       </div>
     </section>
   </div>
@@ -33,7 +37,7 @@ import navbar from '../../../components/navbar/navbar.vue';
 import salesGridsList from '../../../components/sales/list/grids.vue';
 import salesRowsList from '../../../components/sales/list/rows.vue';
 import salesTabs from '../../../components/tabs/sales.vue';
-
+import {mapGetters} from 'vuex';
 export default {
   head: {
     title: 'Все акции',
@@ -46,8 +50,9 @@ export default {
     ]
   },
   async asyncData({ store }) {
-    let sales = await store.dispatch('getSales');
-    return { sales: sales };
+    if(process.browser && store.state.meta.pages.previous !== 'city-sales-alias'){
+      await store.dispatch('getSales');
+    }
   },
   components: {
     navbar,
@@ -62,6 +67,9 @@ export default {
     };
   },
   computed: {
+    ...mapGetters({
+      sales: 'sales',
+    })
   },
   mounted() {
     // let vm = this

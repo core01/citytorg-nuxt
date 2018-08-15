@@ -2,7 +2,8 @@
   <l-marker
     :lat-lng="[shop.lat, shop.lon]"
     :icon="icon"
-    @add="openPopup">
+    @add="openPopup"
+  >
     <l-popup :options="{ autoClose: false }">
       <p>
         <b>{{ shop.title }}</b>
@@ -11,7 +12,8 @@
       <b>Адрес:</b> {{ shop.address }}</p>
       <nuxt-link
         v-if="!isCurrent"
-        :to="{ path: '/' + city.alias + '/shops/' + shop.id + '-' + shop.alias }">
+        :to="{ path: '/' + city.alias + '/shops/' + shop.id + '-' + shop.alias }"
+      >
         Перейти в магазин</nuxt-link>
     </l-popup>
   </l-marker>

@@ -2,13 +2,21 @@
   <div class="container sales-container">
     <div
       v-if="sales.length > 0"
-      class="columns is-multiline is-gapless">
+      class="columns is-multiline is-gapless"
+    >
       <div
         v-for="sale in sales"
         :key="sale.id"
-        class="column is-12-mobile is-4-tablet is-one-fifth-desktop">
-        <sale :sale="sale"/>
+        class="column is-12-mobile is-4-tablet is-one-fifth-desktop"
+      >
+        <sale :sale="sale" />
       </div>
+      <no-ssr>
+        <mugen-scroll
+          :handler="loadMoreSales"
+          :should-handle="!loading"
+        />
+      </no-ssr>
     </div>
     <div v-else>
       <div class="content">
@@ -19,9 +27,11 @@
 </template>
 <script>
 import sale from '../grid-sale.vue';
+import MugenScroll from 'vue-mugen-scroll';
 export default {
   components: {
-    sale
+    sale,
+    MugenScroll,
   },
   props: {
     sales: {
@@ -35,9 +45,19 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      loading: false,
+    };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    async loadMoreSales(){
+      this.loading = true;
+      this.$store.commit('SHOW_SPINNER', true);
+      await this.$store.dispatch('getMoreSales');
+      this.loading = false;
+      this.$store.commit('SHOW_SPINNER', false);
+    }
+  }
 };
 </script>
