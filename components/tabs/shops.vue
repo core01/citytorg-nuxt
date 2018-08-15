@@ -1,16 +1,19 @@
 <template>
   <div
     :class="divClass"
-    class="tabs">
+    class="tabs"
+  >
     <ul>
       <li
         :class="{'is-active': type === 'grids'}"
-        @click.prevent="switchType('grids')">
+        @click.prevent="switchType('grids')"
+      >
         <a>Список магазинов</a>
       </li>
       <li
         :class="{'is-active': type === 'map'}"
-        @click.prevent="switchType('map')">
+        @click.prevent="switchType('map')"
+      >
         <a>Магазины на карте</a>
       </li>
     </ul>

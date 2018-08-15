@@ -7,46 +7,52 @@
             :exact="false"
             :to="{ name: 'city-sales', params: { city: city.alias }}"
             class="footer-links__link"
-            active-class="is-active">
+            active-class="is-active"
+          >
             Акции
           </nuxt-link>
           <nuxt-link
             :exact="false"
             :to="{ name: 'city-shops', params: { city: city.alias }}"
             class="footer-links__link"
-            active-class="is-active">
+            active-class="is-active"
+          >
             Магазины
           </nuxt-link>
           <nuxt-link
             :exact="true"
             to="/about"
             class="footer-links__link"
-            active-class="is-active">
+            active-class="is-active"
+          >
             О проекте
           </nuxt-link>
           <nuxt-link
             :exact="true"
             to="/request"
             class="footer-links__link"
-            active-class="is-active">
+            active-class="is-active"
+          >
             Обратная связь
           </nuxt-link>
           <a
             href="https://my.citytorg.kz"
             target="_blank"
-            rel="noopener noreferrer">Личный кабинет</a>
+            rel="noopener noreferrer"
+          >Личный кабинет</a>
         </p>
         <p class="footer-phones">
           <a
             href="tel:+77776461355"
-            class="footer-phones__phone">
+            class="footer-phones__phone"
+          >
             <span class="icon has-text-link">
-              <i class="fas fa-mobile-alt"/>
+              <i class="fas fa-mobile-alt" />
             </span>
           +77776461355</a> (по Казахстану)
           <a class="footer-phones__phone">
             <span class="icon has-text-link">
-              <i class="fas fa-phone"/>
+              <i class="fas fa-phone" />
             </span>
           1355</a> (г. Усть-Каменогорск)
         </p>
@@ -57,7 +63,8 @@
         <p>Разработано по заказу
           <a
             href="https://www.cityinfo.kz"
-            target="_blank">Cityinfo.kz</a>
+            target="_blank"
+          >Cityinfo.kz</a>
         </p>
       </div>
     </div>

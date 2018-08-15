@@ -5,7 +5,7 @@ module.exports = {
   debug: true,
   mode: 'universal',
   router: {
-    middleware: 'cityCheck'
+    middleware: ['cityCheck', 'pageHistory'],
   },
   /*
    ** Headers of the page

@@ -2,33 +2,38 @@
   <nav
     class="navbar"
     role="navigation"
-    aria-label="main navigation">
+    aria-label="main navigation"
+  >
     <div class="container">
       <div class="navbar-brand">
         <nuxt-link
           to="/"
-          class="navbar-item">
+          class="navbar-item"
+        >
           <img
             src="~assets/images/logo_beta.png"
-            alt="Citytorg">
+            alt="Citytorg"
+          >
         </nuxt-link>
         <span
           :class="{'is-active': show}"
           class="navbar-burger burger"
-          @click.prevent="showMenu">
-          <span/>
-          <span/>
-          <span/>
+          @click.prevent="showMenu"
+        >
+          <span />
+          <span />
+          <span />
         </span>
       </div>
       <div
         :class="{'is-active': show}"
-        class="navbar-menu">
+        class="navbar-menu"
+      >
         <div class="navbar-start">
-          <navbar-cities/>
+          <navbar-cities />
           <div class="navbar-item">
             <span class="icon">
-              <i class="fas fa-phone-volume"/>
+              <i class="fas fa-phone-volume" />
             </span> Call-center:&nbsp;<a href="tel:+77776461355">+7-777-646-13-55</a>
           </div>
 
@@ -41,14 +46,16 @@
                 tag="li"
                 to="/"
                 active-class="is-active"
-                class="navbar-item"><a>Главная</a>
+                class="navbar-item"
+              ><a>Главная</a>
               </nuxt-link>
               <nuxt-link
                 :exact="false"
                 :to="{ name: 'city-sales', params: { city: city.alias }}"
                 tag="li"
                 active-class="is-active"
-                class="navbar-item">
+                class="navbar-item"
+              >
                 <a>Акции</a>
               </nuxt-link>
               <nuxt-link
@@ -56,7 +63,8 @@
                 :to="{ name: 'city-shops', params: { city: city.alias }}"
                 tag="li"
                 active-class="is-active"
-                class="navbar-item">
+                class="navbar-item"
+              >
                 <a>Магазины</a>
               </nuxt-link>
               <nuxt-link
@@ -64,7 +72,8 @@
                 tag="li"
                 to="/request"
                 active-class="is-active"
-                class="navbar-item">
+                class="navbar-item"
+              >
                 <a>Обратная связь</a>
               </nuxt-link>
             </ul>

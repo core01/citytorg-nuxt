@@ -2,48 +2,56 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar/>
+        <navbar />
       </div>
     </section>
     <section
       id="main"
-      class="hero is-fullheight">
+      class="hero is-fullheight"
+    >
       <div class="container">
         <div class="columns">
           <div class="column is-6-desktop">
             <main-tabs
               :mode="mode"
-              @switch-mode="switchMode"/>
+              @switch-mode="switchMode"
+            />
           </div>
           <div class="column is-6-desktop">
             <sales-tabs
               v-if="mode === 'sales'"
               :div-class="'is-toggle is-right-desktop'"
               :type="type"
-              @switch-type="switchType"/>
+              @switch-type="switchType"
+            />
             <shops-tabs
               v-else
               :div-class="'is-toggle is-right-desktop'"
               :type="type"
-              @switch-type="switchType"/>
+              @switch-type="switchType"
+            />
           </div>
         </div>
         <template v-if="mode === 'sales'">
           <sales-list-grids
             v-if="type === 'grids'"
-            :sales="sales"/>
+            :sales="sales"
+          />
           <sales-list-rows
             v-else
-            :sales="sales"/>
+            :sales="sales"
+          />
         </template>
         <template v-else>
           <shops-list-grids
             v-if="type === 'grids'"
-            :shops="shops"/>
+            :shops="shops"
+          />
           <shops-list-map
             v-else
             :shops="shops"
-            :zoom="13" />
+            :zoom="13"
+          />
         </template>
       </div>
     </section>
@@ -61,16 +69,17 @@ import shopsTabs from '../components/tabs/shops.vue';
 
 import shopsListGrids from '../components/shops/list/grids.vue';
 import shopsListMap from '../components/shops/list/map.vue';
-import { mapGetters } from 'vuex';
-// const client = createClient();
+import {mapGetters} from 'vuex';
+
 export default {
   head: {
-    title: 'Главная страница'
+    title: 'Главная страница',
   },
-  // async asyncData({ app }) {
-
-  //   return data;
-  // },
+  async asyncData({app, store, route}) {
+    if(process.browser && store.state.meta.pages.previous !== 'city-sales-alias'){
+      await store.dispatch('getSales');
+    }
+  },
   components: {
     navbar,
     salesListGrids,
@@ -79,22 +88,26 @@ export default {
     shopsListMap,
     mainTabs,
     salesTabs,
-    shopsTabs
+    shopsTabs,
   },
   data() {
     return {
       mode: 'sales',
-      type: 'grids'
+      type: 'grids',
+      meta: {
+        scroll: {
+          y: 0,
+        }
+      }
     };
   },
   computed: {
     ...mapGetters({
       shops: 'shops',
       sales: 'sales',
-    })
+    }),
   },
   mounted() {
-    // let vm = this;
   },
   methods: {
     switchMode(mode) {
@@ -103,8 +116,8 @@ export default {
     },
     switchType(type) {
       this.type = type;
-    }
-  }
+    },
+  },
 };
 </script>
 
