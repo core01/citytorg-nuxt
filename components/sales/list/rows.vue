@@ -1,9 +1,9 @@
 <template>
-  <div class="overflow-x">
-    <table
-      v-if="sales.length > 0"
-      class="table is-narrow is-fullwidth is-hoverable sales-table"
-    >
+  <div
+    v-if="sales.length > 0"
+    class="overflow-x"
+  >
+    <table class="table is-narrow is-fullwidth is-hoverable sales-table">
       <tbody>
         <sale
           v-for="sale in sales"
@@ -12,10 +12,16 @@
         />
       </tbody>
     </table>
-    <div v-else>
-      <div class="content">
-        <h3 class="has-text-centered">{{ absence_text }}</h3>
-      </div>
+    <no-ssr>
+      <mugen-scroll
+        :handler="loadMoreSales"
+        :should-handle="!loading"
+      />
+    </no-ssr>
+  </div>
+  <div v-else>
+    <div class="content">
+      <h3 class="has-text-centered">{{ absence_text }}</h3>
     </div>
   </div>
 </template>
