@@ -21,9 +21,11 @@
 </template>
 <script>
 import sale from '../row-sale.vue';
+import MugenScroll from 'vue-mugen-scroll';
 export default {
   components: {
-    sale
+    sale,
+    MugenScroll,
   },
   props: {
     sales: {
@@ -37,10 +39,20 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      loading: false,
+    };
   },
   mounted() {},
-  methods: {}
+  methods: {
+    async loadMoreSales(){
+      this.loading = true;
+      this.$store.commit('SHOW_SPINNER', true);
+      await this.$store.dispatch('getMoreSales');
+      this.loading = false;
+      this.$store.commit('SHOW_SPINNER', false);
+    }
+  }
 };
 </script>
 <style lang="sass" scoped>
