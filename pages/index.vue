@@ -76,8 +76,8 @@ export default {
     title: 'Главная страница',
   },
   async asyncData({app, store, route}) {
-    if(process.browser && store.state.meta.pages.previous !== 'city-sales-alias'){
-      await store.dispatch('getSales');
+    if(process.browser && store.state.pages.previous !== 'city-sales-alias'){
+      await store.dispatch('sales/getSales');
     }
   },
   components: {
@@ -92,30 +92,26 @@ export default {
   },
   data() {
     return {
-      mode: 'sales',
-      type: 'grids',
-      meta: {
-        scroll: {
-          y: 0,
-        }
-      }
+
     };
   },
   computed: {
     ...mapGetters({
-      shops: 'shops',
-      sales: 'sales',
+      shops: 'shops/shops',
+      sales: 'sales/sales',
+      mode: 'pages/indexMode',
+      type: 'pages/indexType',
     }),
   },
   mounted() {
   },
   methods: {
     switchMode(mode) {
-      this.mode = mode;
-      this.type = 'grids';
+      this.$store.commit('pages/SET_INDEX_MODE', mode);
+      this.switchType('grids');
     },
     switchType(type) {
-      this.type = type;
+      this.$store.commit('pages/SET_INDEX_TYPE', type);
     },
   },
 };

@@ -61,7 +61,6 @@ export default {
   },
   data() {
     return {
-      type: 'grids',
       map: null,
       tileLayer: null,
       layers: []
@@ -69,13 +68,14 @@ export default {
   },
   computed:{
     ...mapGetters({
-      shops: 'shops',
+      shops: 'shops/shops',
+      type: 'pages/shopsType',
     }),
   },
   mounted() {},
   methods: {
     switchType(type) {
-      this.type = type;
+      this.$store.commit('pages/SET_SHOPS_TYPE', type);
     }
   }
 };

@@ -50,7 +50,7 @@ export default {
     ]
   },
   async asyncData({ store }) {
-    if(process.browser && store.state.meta.pages.previous !== 'city-sales-alias'){
+    if(process.browser && store.state.pages.previous !== 'city-sales-alias'){
       await store.dispatch('getSales');
     }
   },
@@ -62,13 +62,13 @@ export default {
   },
   data() {
     return {
-      type: 'grids',
       absence_text: 'Информации о действующих акциях на данный момент нет'
     };
   },
   computed: {
     ...mapGetters({
-      sales: 'sales',
+      sales: 'sales/sales',
+      type: 'pages/salesType',
     })
   },
   mounted() {
@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     switchType(type) {
-      this.type = type;
+      this.$store.commit('pages/SET_SALES_TYPE', type);
     }
   }
 };

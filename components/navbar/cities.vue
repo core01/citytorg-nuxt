@@ -22,19 +22,19 @@ export default {
   },
   computed: {
     ...mapGetters({
-      cities: 'cities',
-      city: 'city'
+      cities: 'cities/cities',
+      city: 'cities/city'
     })
   },
   mounted(){
-    this.$store.dispatch('getCities');
+    this.$store.dispatch('cities/getCities');
   },
   methods: {
     showMenu() {
       this.show = !this.show;
     },
     async setCity(city){
-      this.$store.dispatch('setCity', city);
+      this.$store.dispatch('cities/setCity', city);
       this.$router.push('/');
     }
   },

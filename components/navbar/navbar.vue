@@ -97,7 +97,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      city: 'city',
+      city: 'cities/city',
     })
   },
   methods: {

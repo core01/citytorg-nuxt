@@ -104,7 +104,7 @@ export default {
         }
       }
 
-      return [this.$store.getters.city.lat, this.$store.getters.city.lon];
+      return [this.$store.getters['cities/city'].lat, this.$store.getters['cities/city'].lon];
     },
     filteredShops(){
       return this.shops.filter(shop => shop.shopType.alias !== 'network');
