@@ -4,6 +4,6 @@ export const state = () => ({
 
 export const mutations = {
   SHOW_SPINNER(state, value) {
-    state.spinner.show = value;
+    state.show = value;
   },
 };

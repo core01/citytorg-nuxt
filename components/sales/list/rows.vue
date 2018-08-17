@@ -53,10 +53,10 @@ export default {
   methods: {
     async loadMoreSales(){
       this.loading = true;
-      this.$store.commit('SHOW_SPINNER', true);
-      await this.$store.dispatch('getMoreSales');
+      this.$store.commit('spinner/SHOW_SPINNER', true);
+      await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
-      this.$store.commit('SHOW_SPINNER', false);
+      this.$store.commit('spinner/SHOW_SPINNER', false);
     }
   }
 };

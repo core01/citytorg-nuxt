@@ -26,7 +26,7 @@ export const actions = {
       let page = response.headers['x-pagination-current-page'];
       let maxPage = response.headers['x-pagination-page-count'];
       if (page && maxPage) {
-        context.commit('meta/SET_SALES_PAGES', {
+        this.commit('meta/SET_SALES_PAGES', {
           'page': page,
           'maxPage': maxPage
         });
@@ -35,16 +35,14 @@ export const actions = {
     context.commit('SET_SALES', response.data);
   },
   async getMoreSales(context) {
-    if (context.getters.salesPages.page !== context.getters.salesPages
-      .maxPage) {
-      let page = context.getters.salesPages.page + 1;
-      context.commit('meta/SET_SALES_PAGES', {
+    if (this.getters['meta/salesPages'].page !== this.getters['meta/salesPages'].maxPage) {
+      let page = this.getters['meta/salesPages'].page + 1;
+      this.commit('meta/SET_SALES_PAGES', {
         'page': page,
       });
       let response = await this.$axios.get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&filter[city_id]=' + context.getters
-        .city.id +
-        '&page=' + context.getters.salesPages.page);
+        'sales?sort=-created_at&filter[city_id]=' + this.getters['cities/city'].id +
+        '&page=' + this.getters['meta/salesPages'].page);
       context.commit('ADD_SALES', response.data);
     }
   },
