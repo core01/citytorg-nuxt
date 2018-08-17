@@ -1,4 +1,4 @@
 export default async ({ app, route, store }) => {
-  store.commit('SET_PREVIOUS_PAGE', store.state.meta.pages.current);
-  store.commit('SET_CURRENT_PAGE', route.name);
+  store.commit('pages/SET_PREVIOUS', store.state.pages.current);
+  store.commit('pages/SET_CURRENT', route.name);
 };

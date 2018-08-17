@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      city: 'city'
+      city: 'cities/city'
     }),
     icon() {
       if (this.isCurrent) {

@@ -48,6 +48,7 @@
 </template>
 <script>
 import saleType from '../sales/type.vue';
+import { mapGetters } from 'vuex';
 export default {
   components: {
     saleType
@@ -62,6 +63,9 @@ export default {
     return {};
   },
   computed: {
+    ...mapGetters({
+      city: 'cities/city',
+    }),
     price() {
       return this.sale.price + ' ₸';
     },
@@ -75,7 +79,7 @@ export default {
       return process.env.UPLOADS_URL;
     },
     path(){
-      return '/sales/' + this.sale.id + '-' + this.sale.alias;
+      return '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias;
     }
   },
   mounted() {},

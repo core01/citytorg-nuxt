@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      city: 'city',
+      city: 'cities/city',
     }),
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
