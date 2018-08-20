@@ -7,7 +7,7 @@
     </section>
     <section
       id="main"
-      class="hero is-fullheight"
+      class="is-fullheight"
     >
       <div class="container">
         <div class="columns zero-side-margin">
@@ -32,6 +32,8 @@
             />
           </div>
         </div>
+      </div>
+      <div class="container">
         <template v-if="mode === 'sales'">
           <sales-list-grids
             v-if="type === 'grids'"
@@ -120,7 +122,4 @@ export default {
 <style lang="sass" scoped>
 .container
   margin-top: 25px
-.zero-side-margin
-  margin-left: 0
-  margin-right: 0
 </style>
