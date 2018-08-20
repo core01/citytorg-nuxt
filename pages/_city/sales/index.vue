@@ -13,11 +13,15 @@
         <div class="content">
           <h2 class="has-text-centered content_h2">Акции</h2>
         </div>
-        <sales-tabs
-          :div-class="' is-toggle'"
-          :type="type"
-          @switch-type="switchType"
-        />
+        <div class="columns zero-side-margin">
+          <div class="column is-6-desktop">
+            <sales-tabs
+              :div-class="' is-toggle'"
+              :type="type"
+              @switch-type="switchType"
+            />
+          </div>
+        </div>
         <sales-grids-list
           v-if="type === 'grids'"
           :sales="sales"

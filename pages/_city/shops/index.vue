@@ -7,17 +7,22 @@
     </section>
     <section
       id="shops"
-      class="hero is-fullheight shops"
+      class="is-fullheight shops"
     >
       <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">Магазины</h2>
         </div>
-        <shops-tabs
-          :div-class="' is-toggle'"
-          :type="type"
-          @switch-type="switchType"
-        />
+        <div class="columns zero-side-margin">
+          <div class="column is-6">
+            <shops-tabs
+              :div-class="' is-toggle'"
+              :type="type"
+              @switch-type="switchType"
+            />
+          </div>
+        </div>
+
         <shopListGrids
           v-if="type === 'grids'"
           :shops="shops"
