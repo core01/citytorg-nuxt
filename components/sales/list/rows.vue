@@ -1,7 +1,6 @@
 <template>
   <div
     v-if="sales.length > 0"
-    class="overflow-x"
   >
     <table class="table is-narrow is-fullwidth is-hoverable sales-table">
       <tbody>

@@ -7,7 +7,7 @@
 
     </section>
     <section class="hero  sale-card">
-      <div class="container has-text-centered">
+      <div class="container">
         <div class="content">
           <h2 class="has-text-centered content_h2">{{ sale.title }}</h2>
         </div>
