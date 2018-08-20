@@ -31,12 +31,8 @@
       :to="{ path: path }"
       class="grid-shop__title"
     >
-      {{ shop.title }}
+      {{ shop.title | truncate(45) }}
     </nuxt-link>
-
-    <div class="grid-shop__description">
-      {{ shop.description }}
-    </div>
     <div class="grid-shop__address">
       {{ shop.address }}
     </div>
@@ -83,7 +79,7 @@ export default {
   text-align: center
   display: flex
   flex-direction: column
-  height: 360px
+  height: 320px
   margin-bottom: 20px
 
 .grid-shop__title
@@ -98,14 +94,9 @@ export default {
 
 .grid-shop__address
   display: flex
-  align-items: flex-end
+  align-items: center
   flex-grow: 1
   align-self: center
-
-.grid-shop__description
-  color: #949494
-  line-height: 1.25
-  font-size: 1rem
 
 .grid-shop__img
   width: 100%

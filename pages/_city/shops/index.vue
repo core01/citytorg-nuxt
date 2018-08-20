@@ -51,7 +51,7 @@ export default {
     ]
   },
   async asyncData({ store }) {
-    await store.dispatch('getShops');
+    await store.dispatch('shops/getShops');
   },
   components: {
     navbar,
