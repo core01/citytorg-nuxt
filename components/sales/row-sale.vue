@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="v-middle">
+    <td class="v-middle is-hidden-mobile">
       <nuxt-link :to="{ path: path }">
         <img
           v-if="sale.images"
@@ -20,7 +20,7 @@
         >
       </nuxt-link>
     </td>
-    <td class="v-middle">
+    <td class="v-middle title-td">
       <div class="row-sale-head">
         <nuxt-link
           :to="{ path: path }"
@@ -28,7 +28,10 @@
         >
           {{ sale.title }}
         </nuxt-link>
-        <sale-type :sale="sale" />
+        <sale-type
+          :sale="sale"
+          class-name="tags-center is-hidden-mobile"
+        />
       </div>
     </td>
     <td class="prices-td v-middle">
@@ -129,6 +132,19 @@ export default {
   min-width: 20%
 .v-middle
   vertical-align: middle
-.table.is-narrow td
+td
   padding: 0
++mobile
+  .row-sale-head__title
+    font-size: 16px
+    margin-right: 0
+  .row-sale-head
+    padding-bottom: 0
+  .row-sale__price
+    font-size: 18px
+  .row-sale__old-price
+    font-size: 16px
+  .title-td
+    width: 65%
+    padding-left: 5px
 </style>

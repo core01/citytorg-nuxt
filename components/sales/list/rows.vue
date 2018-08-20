@@ -2,7 +2,7 @@
   <div
     v-if="sales.length > 0"
   >
-    <table class="table is-narrow is-fullwidth is-hoverable sales-table">
+    <table class="table is-fullwidth is-hoverable sales-table">
       <tbody>
         <sale
           v-for="sale in sales"
