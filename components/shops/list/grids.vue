@@ -3,7 +3,7 @@
     <div
       v-for="shop in shops"
       :key="shop.id"
-      class="column is-3"
+      class="column is-12-mobile is-4-tablet is-3-desktop"
     >
       <grid-shop :shop="shop" />
     </div>
