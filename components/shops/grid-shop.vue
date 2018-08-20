@@ -72,7 +72,6 @@ export default {
 @import ~assets/sass/variables
 
 .grid-shop
-  max-width: 360px
   background-color: white
   overflow: hidden
   padding: 5px
