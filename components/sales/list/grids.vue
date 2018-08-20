@@ -1,24 +1,19 @@
 <template>
-  <div class="container sales-container">
+  <div class="columns is-multiline is-gapless">
     <div
-      v-if="sales.length > 0"
-      class="columns is-multiline is-gapless"
+      v-for="sale in sales"
+      :key="sale.id"
+      class="column is-12-mobile is-4-tablet is-one-fifth-desktop"
     >
-      <div
-        v-for="sale in sales"
-        :key="sale.id"
-        class="column is-12-mobile is-4-tablet is-one-fifth-desktop"
-      >
-        <sale :sale="sale" />
-      </div>
-      <no-ssr>
-        <mugen-scroll
-          :handler="loadMoreSales"
-          :should-handle="!loading"
-        />
-      </no-ssr>
+      <sale :sale="sale" />
     </div>
-    <div v-else>
+    <no-ssr>
+      <mugen-scroll
+        :handler="loadMoreSales"
+        :should-handle="!loading"
+      />
+    </no-ssr>
+    <div v-if="sales.length === 0">
       <div class="content">
         <h3 class="has-text-centered">{{ absenceText }}</h3>
       </div>

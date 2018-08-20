@@ -5,8 +5,6 @@
     <footerComponent />
   </div>
 </template>
-<style>
-</style>
 <script>
 import spinner from '../components/spinner.vue';
 import footerComponent from '../components/footer.vue';

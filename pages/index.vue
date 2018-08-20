@@ -10,7 +10,7 @@
       class="hero is-fullheight"
     >
       <div class="container">
-        <div class="columns">
+        <div class="columns zero-side-margin">
           <div class="column is-6-desktop">
             <main-tabs
               :mode="mode"
@@ -120,4 +120,7 @@ export default {
 <style lang="sass" scoped>
 .container
   margin-top: 25px
+.zero-side-margin
+  margin-left: 0
+  margin-right: 0
 </style>

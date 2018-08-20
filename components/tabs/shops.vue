@@ -8,13 +8,13 @@
         :class="{'is-active': type === 'grids'}"
         @click.prevent="switchType('grids')"
       >
-        <a>Список магазинов</a>
+        <a>Список</a>
       </li>
       <li
         :class="{'is-active': type === 'map'}"
         @click.prevent="switchType('map')"
       >
-        <a>Магазины на карте</a>
+        <a>На карте</a>
       </li>
     </ul>
   </div>
