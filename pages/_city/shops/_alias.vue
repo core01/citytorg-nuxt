@@ -10,7 +10,7 @@
         <div class="content">
           <h2 class="has-text-centered content_h2">{{ shop.title }}</h2>
         </div>
-        <div class="columns">
+        <div class="columns zero-side-margin">
           <div class="column is-4">
             <figure class="image is-4by3 shop-image">
               <img
