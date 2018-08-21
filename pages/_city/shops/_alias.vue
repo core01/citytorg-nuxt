@@ -78,23 +78,26 @@
       <div class="container">
         <div
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
-
-          class="tabs is-toggle"
+          class="columns zero-side-margin"
         >
-          <ul>
-            <li
-              :class="{'is-active': mode === 'sales'}"
-              @click.prevent="switchMode('sales')"
-            >
-              <a>Список акций</a>
-            </li>
-            <li
-              :class="{'is-active': mode === 'shops'}"
-              @click.prevent="switchMode('shops')"
-            >
-              <a>Список магазинов</a>
-            </li>
-          </ul>
+          <div class="column is-6">
+            <div class="tabs is-toggle">
+              <ul>
+                <li
+                  :class="{'is-active': mode === 'sales'}"
+                  @click.prevent="switchMode('sales')"
+                >
+                  <a>Список акций</a>
+                </li>
+                <li
+                  :class="{'is-active': mode === 'shops'}"
+                  @click.prevent="switchMode('shops')"
+                >
+                  <a>Список магазинов</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="content">
           <grid-sales

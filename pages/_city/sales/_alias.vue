@@ -94,21 +94,25 @@
         <div class="content">
           <h2 class="has-text-centered content_h2">Магазины</h2>
         </div>
-        <div class="tabs is-toggle">
-          <ul>
-            <li
-              :class="{'is-active': mode === 'list'}"
-              @click.prevent="switchMode('list')"
-            >
-              <a>Список магазинов</a>
-            </li>
-            <li
-              :class="{'is-active': mode === 'map'}"
-              @click.prevent="switchMode('map')"
-            >
-              <a>Магазины на карте</a>
-            </li>
-          </ul>
+        <div class="columns zero-side-margin">
+          <div class="column is-6">
+            <div class="tabs is-toggle">
+              <ul>
+                <li
+                  :class="{'is-active': mode === 'list'}"
+                  @click.prevent="switchMode('list')"
+                >
+                  <a>Список магазинов</a>
+                </li>
+                <li
+                  :class="{'is-active': mode === 'map'}"
+                  @click.prevent="switchMode('map')"
+                >
+                  <a>Магазины на карте</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <shopListGrids
           v-if="mode === 'list'"
