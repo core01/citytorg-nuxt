@@ -5,7 +5,7 @@
       :key="sale.id"
       class="column is-12-mobile is-4-tablet is-one-fifth-desktop"
     >
-      <sale :sale="sale" />
+      <sale :sale="sale"/>
     </div>
     <no-ssr>
       <mugen-scroll
@@ -23,6 +23,7 @@
 <script>
 import sale from '../grid-sale.vue';
 import MugenScroll from 'vue-mugen-scroll';
+
 export default {
   components: {
     sale,
@@ -31,13 +32,13 @@ export default {
   props: {
     sales: {
       type: Array,
-      required: true
+      required: true,
     },
     absenceText: {
       type: String,
       required: false,
-      default: 'Нет действующих акций на данный момент'
-    }
+      default: 'Нет действующих акций на данный момент',
+    },
   },
   data() {
     return {
@@ -46,13 +47,13 @@ export default {
   },
   mounted() {},
   methods: {
-    async loadMoreSales(){
+    async loadMoreSales() {
       this.loading = true;
       this.$store.commit('spinner/SHOW_SPINNER', true);
       await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
       this.$store.commit('spinner/SHOW_SPINNER', false);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section
@@ -42,6 +42,7 @@ import salesGridsList from '../../../components/sales/list/grids.vue';
 import salesRowsList from '../../../components/sales/list/rows.vue';
 import salesTabs from '../../../components/tabs/sales.vue';
 import {mapGetters} from 'vuex';
+
 export default {
   head: {
     title: 'Все акции',
@@ -49,31 +50,31 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Полный перечень всех действующих акций в городе'
-      }
-    ]
+        content: 'Полный перечень всех действующих акций в городе',
+      },
+    ],
   },
-  async asyncData({ store }) {
-    if(process.browser && store.state.pages.previous !== 'city-sales-alias'){
-      await store.dispatch('getSales');
+  async asyncData({store}) {
+    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
+      await store.dispatch('sales/getSales');
     }
   },
   components: {
     navbar,
     salesGridsList,
     salesRowsList,
-    salesTabs
+    salesTabs,
   },
   data() {
     return {
-      absence_text: 'Информации о действующих акциях на данный момент нет'
+      absence_text: 'Информации о действующих акциях на данный момент нет',
     };
   },
   computed: {
     ...mapGetters({
       sales: 'sales/sales',
       type: 'pages/salesType',
-    })
+    }),
   },
   mounted() {
     // let vm = this
@@ -81,8 +82,8 @@ export default {
   methods: {
     switchType(type) {
       this.$store.commit('pages/SET_SALES_TYPE', type);
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

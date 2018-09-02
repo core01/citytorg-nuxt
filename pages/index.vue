@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section
@@ -78,7 +78,7 @@ export default {
     title: 'Главная страница',
   },
   async asyncData({app, store, route}) {
-    if(process.browser && store.state.pages.previous !== 'city-sales-alias'){
+    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
       await store.dispatch('sales/getSales');
     }
   },
@@ -93,9 +93,7 @@ export default {
     shopsTabs,
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   computed: {
     ...mapGetters({

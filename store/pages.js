@@ -10,7 +10,7 @@ export const state = () => ({
   },
   shops: {
     type: 'grids',
-  }
+  },
 });
 
 export const getters = {
@@ -25,26 +25,26 @@ export const getters = {
   },
   salesType: state => {
     return state.sales.type;
-  }
+  },
 };
 
 export const mutations = {
-  SET_CURRENT(state, page){
+  SET_CURRENT(state, page) {
     state.current = page;
   },
-  SET_PREVIOUS(state, page){
+  SET_PREVIOUS(state, page) {
     state.previous = page;
   },
-  SET_INDEX_TYPE(state, type){
+  SET_INDEX_TYPE(state, type) {
     state.index.type = type;
   },
-  SET_INDEX_MODE(state, mode){
+  SET_INDEX_MODE(state, mode) {
     state.index.mode = mode;
   },
-  SET_SHOPS_TYPE(state, type){
+  SET_SHOPS_TYPE(state, type) {
     state.shops.type = type;
   },
-  SET_SALES_TYPE(state, type){
+  SET_SALES_TYPE(state, type) {
     state.sales.type = type;
-  }
+  },
 };

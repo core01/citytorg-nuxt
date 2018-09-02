@@ -4,7 +4,7 @@ export const state = () => ({
     'title': 'Усть-Каменогорск',
     'alias': 'ust-kamenogorsk',
     'lat': '49.96427057155009',
-    'lon': '82.59572865600605'
+    'lon': '82.59572865600605',
   },
   cities: [],
 });
@@ -29,12 +29,12 @@ export const mutations = {
 export const actions = {
   async getCities(context) {
     let data = await this.$axios.$get(process.env.BACKEND_URL +
-      'cities');
+        'cities');
     context.commit('SET_CITIES', data);
   },
   async setCity(context, city) {
     let data = await this.$axios.$post('/city/set', {
-      city: city
+      city: city,
     });
     context.commit('SET_CITY', data.city);
     await this.dispatch('shops/getShops');

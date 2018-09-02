@@ -1,10 +1,5 @@
 export const actions = {
-  async nuxtServerInit( {
-    dispatch,
-    state
-  }, {
-    req
-  }) {
+  async nuxtServerInit({dispatch, state}, {req}) {
     let currentCity = state.cities.city;
     if (req.session) {
       if (req.session.city) {

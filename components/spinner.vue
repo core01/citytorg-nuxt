@@ -4,11 +4,11 @@
     class="spinner-container"
   >
     <div class="spinner">
-      <div class="rect1" />
-      <div class="rect2" />
-      <div class="rect3" />
-      <div class="rect4" />
-      <div class="rect5" />
+      <div class="rect1"/>
+      <div class="rect2"/>
+      <div class="rect3"/>
+      <div class="rect4"/>
+      <div class="rect5"/>
     </div>
   </div>
 
@@ -16,13 +16,12 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
-    show(){
+    show() {
       return this.$store.state.spinner.show;
-    }
+    },
   },
 };
 </script>
@@ -36,6 +35,7 @@ export default {
   height: 100%
   background: rgba(255, 255, 255, 0.8)
   z-index: 100
+
 .spinner
   margin: 49vh auto
   width: 50px
@@ -62,7 +62,6 @@ export default {
     -webkit-animation-delay: -1.0s
     animation-delay: -1.0s
 
-
 .spinner
   .rect4
     -webkit-animation-delay: -0.9s
@@ -72,7 +71,6 @@ export default {
   .rect5
     -webkit-animation-delay: -0.8s;
     animation-delay: -0.8s;
-
 
 @-webkit-keyframes sk-stretchdelay
   0%, 40%, 100%

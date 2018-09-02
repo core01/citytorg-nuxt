@@ -44,26 +44,27 @@ export default {
   props: {
     sale: {
       default() {
-        return {'sale':true};
+        return {'sale': true};
       },
-      type: Object
+      type: Object,
     },
     className: {
       default() {
         return 'tags-center';
       },
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {};
-  }
+  },
 };
 </script>
 <style lang="sass" scoped>
 .tags-center
   justify-content: center
   text-align: center
+
 .tag-helper
   &:not(:last-child)
     margin-right: 0.5rem
