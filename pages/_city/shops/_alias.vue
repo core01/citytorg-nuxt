@@ -13,35 +13,38 @@
         <div class="columns zero-side-margin">
           <div class="column is-5">
             <no-ssr>
-              <div
-                v-if="images.length > 0">
-                <gallery
-                  :images="images"
-                  :index="imageIndex"
-                  :options="{
-                    closeOnEscape: true,
-                    closeOnSlideClick: true,
-                    closeOnSwipeUpOrDown: true,
-                    continuous: true,
-                  }"
-                  @close="imageIndex = null"
-                />
+              <figure class="shop-image">
+                <div
+                  v-if="images.length > 0">
+                  <gallery
+                    :images="images"
+                    :index="imageIndex"
+                    :options="{
+                      closeOnEscape: true,
+                      closeOnSlideClick: true,
+                      closeOnSwipeUpOrDown: true,
+                      continuous: true,
+                    }"
+                    @close="imageIndex = null"
+                  />
+                  <img
+                    :src="previews[0]"
+                    class="preview-image"
+                    @click="imageIndex = 0">
+                </div>
                 <img
-                  :src="previews[0]"
-                  class="preview-image"
-                  @click="imageIndex = 0">
-              </div>
-              <img
-                v-else
-                :alt="shop.title"
-                :src="'https://placehold.jp/350x250.png?text=' + shop.title"
-              >
+                  v-else
+                  :alt="shop.title"
+                  :src="'https://placehold.jp/350x250.png?text=' + shop.title"
+                >
+
+                <div
+                  v-if="shop.sample"
+                  class="shop-image__text"
+                >Образец
+                </div>
+              </figure>
             </no-ssr>
-            <div
-              v-if="shop.sample"
-              class="shop-image__text"
-            >Образец
-            </div>
             <table class="table">
               <tbody>
                 <tr>

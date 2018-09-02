@@ -14,29 +14,31 @@
         <div class="columns zero-side-margin">
           <div class="column is-5">
             <no-ssr>
-              <div v-if="images.length > 0">
-                <gallery
-                  :images="images"
-                  :index="imageIndex"
-                  :options="{
-                    closeOnEscape: true,
-                    closeOnSlideClick: true,
-                    closeOnSwipeUpOrDown: true,
-                    continuous: true,
-                  }"
-                  @close="imageIndex = null"
-                />
+              <figure class="sale-card__figure">
+                <div v-if="images.length > 0">
+                  <gallery
+                    :images="images"
+                    :index="imageIndex"
+                    :options="{
+                      closeOnEscape: true,
+                      closeOnSlideClick: true,
+                      closeOnSwipeUpOrDown: true,
+                      continuous: true,
+                    }"
+                    @close="imageIndex = null"
+                  />
+                  <img
+                    :src="previews[0]"
+                    class="preview-image"
+                    @click="imageIndex = 0">
+                </div>
                 <img
-                  :src="previews[0]"
-                  class="preview-image"
-                  @click="imageIndex = 0">
-              </div>
-              <img
-                v-else
-                :alt="sale.title"
-                :src="'https://placehold.jp/350x250.png?text=' + sale.title"
-                class="sale-card__image"
-              >
+                  v-else
+                  :alt="sale.title"
+                  :src="'https://placehold.jp/350x250.png?text=' + sale.title"
+                  class="sale-card__image"
+                >
+              </figure>
             </no-ssr>
           </div>
           <div class="column is-7">
