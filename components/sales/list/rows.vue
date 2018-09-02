@@ -27,6 +27,7 @@
 <script>
 import sale from '../row-sale.vue';
 import MugenScroll from 'vue-mugen-scroll';
+
 export default {
   components: {
     sale,
@@ -35,13 +36,13 @@ export default {
   props: {
     sales: {
       type: Array,
-      required: true
+      required: true,
     },
     'absenceText': {
       type: String,
       required: false,
-      default: 'Нет действующих акций на данный момент'
-    }
+      default: 'Нет действующих акций на данный момент',
+    },
   },
   data() {
     return {
@@ -50,18 +51,18 @@ export default {
   },
   mounted() {},
   methods: {
-    async loadMoreSales(){
+    async loadMoreSales() {
       this.loading = true;
       this.$store.commit('spinner/SHOW_SPINNER', true);
       await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
       this.$store.commit('spinner/SHOW_SPINNER', false);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="sass" scoped>
-  .sales-table
-    max-width: 1152px
-    margin: 0 auto
+.sales-table
+  max-width: 1152px
+  margin: 0 auto
 </style>

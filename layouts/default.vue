@@ -1,23 +1,22 @@
 <template>
   <div>
-    <nuxt />
-    <spinner />
-    <footerComponent />
+    <nuxt/>
+    <spinner/>
+    <footerComponent/>
   </div>
 </template>
 <script>
 import spinner from '../components/spinner.vue';
 import footerComponent from '../components/footer.vue';
+
 export default {
   components: {
     spinner,
-    footerComponent
+    footerComponent,
   },
-  data(){
+  data() {
     return {};
   },
-  computed: {
-
-  }
+  computed: {},
 };
 </script>

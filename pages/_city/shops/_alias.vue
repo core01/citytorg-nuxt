@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section class="hero is-fullheight shop">
@@ -11,24 +11,37 @@
           <h2 class="has-text-centered content_h2">{{ shop.title }}</h2>
         </div>
         <div class="columns zero-side-margin">
-          <div class="column is-4">
-            <figure class="image is-4by3 shop-image">
-              <img
-                v-if="shop.images"
-                :src="UPLOADS_URL + shop.images[0]['450x320']"
-                :alt="shop.title"
-              >
+          <div class="column is-5">
+            <no-ssr>
+              <div
+                v-if="images.length > 0">
+                <gallery
+                  :images="images"
+                  :index="imageIndex"
+                  :options="{
+                    closeOnEscape: true,
+                    closeOnSlideClick: true,
+                    closeOnSwipeUpOrDown: true,
+                    continuous: true,
+                  }"
+                  @close="imageIndex = null"
+                />
+                <img
+                  :src="previews[0]"
+                  class="preview-image"
+                  @click="imageIndex = 0">
+              </div>
               <img
                 v-else
                 :alt="shop.title"
                 :src="'https://placehold.jp/350x250.png?text=' + shop.title"
               >
-              <div
-                v-if="shop.sample"
-                class="shop-image__text"
-              >Образец</div>
-            </figure>
-
+            </no-ssr>
+            <div
+              v-if="shop.sample"
+              class="shop-image__text"
+            >Образец
+            </div>
             <table class="table">
               <tbody>
                 <tr>
@@ -50,7 +63,7 @@
               >
                 <span>Посмотреть акции в магазине</span>
                 <span class="icon">
-                  <i class="fas fa-angle-double-down" />
+                  <i class="fas fa-angle-double-down"/>
                 </span>
               </a>
             </div>
@@ -58,7 +71,7 @@
               В данном магазине в настоящее время нет акций
             </p>
           </div>
-          <div class="column is-8">
+          <div class="column is-7">
             <no-ssr>
               <shop-list-map
                 :shops="shops"
@@ -78,23 +91,26 @@
       <div class="container">
         <div
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
-
-          class="tabs is-toggle"
+          class="columns zero-side-margin"
         >
-          <ul>
-            <li
-              :class="{'is-active': mode === 'sales'}"
-              @click.prevent="switchMode('sales')"
-            >
-              <a>Список акций</a>
-            </li>
-            <li
-              :class="{'is-active': mode === 'shops'}"
-              @click.prevent="switchMode('shops')"
-            >
-              <a>Список магазинов</a>
-            </li>
-          </ul>
+          <div class="column is-6">
+            <div class="tabs is-toggle">
+              <ul>
+                <li
+                  :class="{'is-active': mode === 'sales'}"
+                  @click.prevent="switchMode('sales')"
+                >
+                  <a>Список акций</a>
+                </li>
+                <li
+                  :class="{'is-active': mode === 'shops'}"
+                  @click.prevent="switchMode('shops')"
+                >
+                  <a>Список магазинов</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="content">
           <grid-sales
@@ -118,8 +134,8 @@ import shopListMap from '../../../components/shops/list/map.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
 
 export default {
-  async asyncData({ app, params }) {
-    let [id]  = params.alias.split('-');
+  async asyncData({app, params}) {
+    let [id] = params.alias.split('-');
     let data = {
       id: parseInt(id),
       shop: {},
@@ -129,22 +145,22 @@ export default {
     data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
     data.sales = data.shop.sales;
     // Если у нас точка торговой сети
-    if(data.shop.parent !== 0){
+    if (data.shop.parent !== 0) {
       // Получаем магазины торговой сети по parent id
       let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.shop.parent);
       data.shops = response.stalls;
       // Получаем акции в текущей точке
       response =
-      await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
+          await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
       data.sales = response.sales;
       // если у нас сеть
-    }else if(data.shop.shopType.alias === 'network'){
+    } else if (data.shop.shopType.alias === 'network') {
       // Получаем магазины торговой сети по id
       let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id);
       data.shops = response.stalls;
       // Получаем акции торговой сети
       data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales/network?id=' + data.id);
-    }else{
+    } else {
       // Получаем магазины с акциями
       data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=sales');
     }
@@ -157,13 +173,9 @@ export default {
       meta: [
         {
           hid: 'description',
-          description:
-            'Акции магазина ' +
-            this.shop.title +
-            ', Адрес: ' +
-            this.shop.address
-        }
-      ]
+          description: 'Акции магазина ' + this.shop.title + ', Адрес: ' + this.shop.address,
+        },
+      ],
     };
   },
   components: {
@@ -180,30 +192,34 @@ export default {
       currentIndex: -1,
       shop: {},
       mode: 'sales',
+      UPLOADS_URL: process.env.UPLOADS_URL,
+      images: [],
+      imageIndex: null,
+      previews: [],
     };
   },
-  computed: {
-    UPLOADS_URL(){
-      return process.env.UPLOADS_URL;
-    },
-  },
+  computed: {},
   mounted() {
-    if(this.shop.shopType.alias !== 'network'){
+    if (this.shop.shopType.alias !== 'network') {
       for (let i = 0; i < this.shops.length; i++) {
         if (this.shops[i].id === this.id) {
           this.currentIndex = i;
         }
       }
-    }else{
-      if(this.sales.length > 0 ){
+    } else {
+      if (this.sales.length > 0) {
         this.switchMode('sales');
-      }else{
+      } else {
         this.switchMode('shops');
       }
     }
+    for (let image of this.shop.images) {
+      this.images.push(this.UPLOADS_URL + image.regular);
+      this.previews.push(this.UPLOADS_URL + image.small);
+    }
   },
   methods: {
-    switchMode(mode){
+    switchMode(mode) {
       this.mode = mode;
     },
   },
@@ -235,10 +251,9 @@ export default {
       font-size: 16px
       font-weight: 700
 
-
 .card
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-  margin-bottom: 2rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18)
+  margin-bottom: 2rem
 
 .tile.notification
   display: flex

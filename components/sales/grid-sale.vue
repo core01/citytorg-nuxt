@@ -1,23 +1,23 @@
 <template>
   <div class="grid-sale is-shady is-scale">
-    <sale-type :sale="sale" />
+    <sale-type :sale="sale"/>
     <nuxt-link :to="{ path: path }">
       <div class="grid-sale__img-container">
         <img
-          v-if="sale.images"
           v-lazyload
-          :data-src="UPLOADS_URL + sale.images[0]['450x320']"
+          v-if="sale.images"
+          :data-src="UPLOADS_URL + sale.images[0].small"
           :alt="sale.title"
           src="~assets/images/placeholder.png"
-          class="grid-sale__img imageFade"
+          class="grid-sale__img"
         >
         <img
-          v-else
           v-lazyload
+          v-else
           :alt="sale.title"
           :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
-          class="grid-sale__img imageFade"
+          class="grid-sale__img"
         >
       </div>
     </nuxt-link>
@@ -42,16 +42,17 @@
 </template>
 <script>
 import saleType from '../sales/type.vue';
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   components: {
-    saleType
+    saleType,
   },
   props: {
     sale: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
@@ -63,12 +64,12 @@ export default {
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
-    path(){
+    path() {
       return '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias;
     },
   },
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
 
@@ -76,6 +77,7 @@ export default {
 @import ~assets/sass/variables
 .grid-sale__img-container
   height: 155px
+
 .grid-sale
   background-color: white
   padding: 10px

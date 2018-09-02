@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section class="hero is-fullheight">
@@ -17,8 +17,8 @@
               <label class="label">Как вас зовут?</label>
               <div class="control has-icons-left">
                 <input
-                  v-model="name"
                   v-validate="'required'"
+                  v-model="name"
                   :class="{'is-danger': errors.first('request-form.name')}"
                   name="name"
                   class="input"
@@ -26,7 +26,7 @@
                   placeholder="Например: Роман Андреевич"
                 >
                 <span class="icon is-small is-left">
-                  <i class="fas fa-user" />
+                  <i class="fas fa-user"/>
                 </span>
                 <span
                   v-show="errors.has('request-form.name')"
@@ -40,8 +40,8 @@
               <label class="label">Email</label>
               <div class="control has-icons-left">
                 <input
-                  v-model="email"
                   v-validate="'required|email'"
+                  v-model="email"
                   :class="{'is-danger': errors.first('request-form.email')}"
                   name="email"
                   class="input"
@@ -49,7 +49,7 @@
                   placeholder="Например: info@citytorg.kz"
                 >
                 <span class="icon is-small is-left">
-                  <i class="fas fa-envelope" />
+                  <i class="fas fa-envelope"/>
                 </span>
                 <span
                   v-show="errors.has('request-form.email')"
@@ -63,8 +63,8 @@
               <label class="label">Телефон</label>
               <div class="control has-icons-left">
                 <input
-                  v-model="phone"
                   v-validate="'required'"
+                  v-model="phone"
                   :class="{'is-danger': errors.first('request-form.phone')}"
                   name="phone"
                   class="input"
@@ -72,7 +72,7 @@
                   placeholder="+77012345678"
                 >
                 <span class="icon is-small is-left">
-                  <i class="fas fa-mobile-alt" />
+                  <i class="fas fa-mobile-alt"/>
                 </span>
                 <span
                   v-show="errors.has('request-form.phone')"
@@ -87,8 +87,8 @@
               <div class="control">
                 <label class="radio">
                   <input
-                    v-model="type"
                     v-validate="'required'"
+                    v-model="type"
                     type="radio"
                     name="type"
                     value="Поставщик/Производитель"
@@ -96,8 +96,8 @@
                 </label>
                 <label class="radio">
                   <input
-                    v-model="type"
                     v-validate="'required'"
+                    v-model="type"
                     type="radio"
                     name="type"
                     value="Магазин"
@@ -105,8 +105,8 @@
                 </label>
                 <label class="radio">
                   <input
-                    v-model="type"
                     v-validate="'required'"
+                    v-model="type"
                     type="radio"
                     name="type"
                     value="Частное лицо"
@@ -128,11 +128,12 @@
                   class="select"
                 >
                   <select
-                    v-model="subject"
                     v-validate="'required'"
+                    v-model="subject"
                     name="subject"
                   >
-                    <option value="Заявка на участие в проекте Citytorg.kz">Заявка на участие в проекте Citytorg.kz</option>
+                    <option value="Заявка на участие в проекте Citytorg.kz">Заявка на участие в проекте Citytorg.kz
+                    </option>
                     <option value="Прочие вопросы">Прочие вопросы</option>
                   </select>
                 </div>
@@ -148,8 +149,8 @@
               <label class="label">Сообщение</label>
               <div class="control">
                 <textarea
-                  v-model="message"
                   v-validate="'required'"
+                  v-model="message"
                   :class="{'is-danger': errors.first('request-form.message')}"
                   name="message"
                   class="textarea"
@@ -167,19 +168,22 @@
               v-if="error || success"
               :class="{'is-danger': error, 'is-primary': success }"
               class="notification"
-            >{{ statusText }}</div>
+            >{{ statusText }}
+            </div>
             <div class="field is-grouped">
               <div class="control">
                 <button
                   class="button is-link"
                   @click.prevent="sendMessage"
-                >Отправить</button>
+                >Отправить
+                </button>
               </div>
               <div class="control">
                 <button
                   class="button is-text"
                   @click="reset"
-                >Сбросить</button>
+                >Сбросить
+                </button>
               </div>
             </div>
           </form>
@@ -190,6 +194,7 @@
 </template>
 <script>
 import navbar from '../components/navbar/navbar.vue';
+
 export default {
   head: {
     title: 'Обратная связь',
@@ -197,12 +202,12 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Форма обратной связи'
-      }
-    ]
+        content: 'Форма обратной связи',
+      },
+    ],
   },
   components: {
-    navbar
+    navbar,
   },
   data() {
     return {
@@ -214,7 +219,7 @@ export default {
       phone: '',
       error: false,
       success: false,
-      statusText: ''
+      statusText: '',
     };
   },
   methods: {
@@ -249,8 +254,8 @@ export default {
         }
       });
 
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="sass" scoped>
@@ -258,12 +263,15 @@ export default {
 @import ~bulma/sass/utilities/_all
 .request-form
   margin-bottom: 2em
+
 +mobile
   .request-form
     width: 100%
+
 +tablet
   .request-form
     width: 700px
+
 +desktop
   .request-form
     width: 60%

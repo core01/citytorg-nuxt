@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
 
     </section>
@@ -12,25 +12,35 @@
           <h2 class="has-text-centered content_h2">{{ sale.title }}</h2>
         </div>
         <div class="columns zero-side-margin">
-          <div class="column is-4">
-            <figure class="image is-4by3 sale-card__figure">
-              <img
-                v-if="sale.images"
-                :src="UPLOADS_URL + sale.images[0]['450x320']"
-                :alt="sale.title"
-                class="sale-card__image"
-              >
+          <div class="column is-5">
+            <no-ssr>
+              <div v-if="images.length > 0">
+                <gallery
+                  :images="images"
+                  :index="imageIndex"
+                  :options="{
+                    closeOnEscape: true,
+                    closeOnSlideClick: true,
+                    closeOnSwipeUpOrDown: true,
+                    continuous: true,
+                  }"
+                  @close="imageIndex = null"
+                />
+                <img
+                  :src="previews[0]"
+                  class="preview-image"
+                  @click="imageIndex = 0">
+              </div>
               <img
                 v-else
                 :alt="sale.title"
                 :src="'https://placehold.jp/350x250.png?text=' + sale.title"
                 class="sale-card__image"
               >
-            </figure>
-
+            </no-ssr>
           </div>
-          <div class="column is-8">
-            <sale-type :sale="sale" />
+          <div class="column is-7">
+            <sale-type :sale="sale"/>
             <div
               class="has-text-left sale-card__description"
               v-html="sale.description"
@@ -58,13 +68,13 @@
             </div>
             <div class="buttons is-centered sale-card-buttons">
               <a
-                v-if="sale.shops.length > 0"
                 v-scroll-to="'#shops'"
+                v-if="sale.shops.length > 0"
                 class="button is-info is-outlined"
               >
                 <span>Посмотреть магазины</span>
                 <span class="icon">
-                  <i class="fa fa-angle-double-down" />
+                  <i class="fa fa-angle-double-down"/>
                 </span>
               </a>
               <a
@@ -75,7 +85,7 @@
               >
                 <span>Прочитать в блоге</span>
                 <span class="icon">
-                  <i class="fa fa-book" />
+                  <i class="fa fa-book"/>
                 </span>
               </a>
             </div>
@@ -94,21 +104,25 @@
         <div class="content">
           <h2 class="has-text-centered content_h2">Магазины</h2>
         </div>
-        <div class="tabs is-toggle">
-          <ul>
-            <li
-              :class="{'is-active': mode === 'list'}"
-              @click.prevent="switchMode('list')"
-            >
-              <a>Список магазинов</a>
-            </li>
-            <li
-              :class="{'is-active': mode === 'map'}"
-              @click.prevent="switchMode('map')"
-            >
-              <a>Магазины на карте</a>
-            </li>
-          </ul>
+        <div class="columns zero-side-margin">
+          <div class="column is-6">
+            <div class="tabs is-toggle">
+              <ul>
+                <li
+                  :class="{'is-active': mode === 'list'}"
+                  @click.prevent="switchMode('list')"
+                >
+                  <a>Список магазинов</a>
+                </li>
+                <li
+                  :class="{'is-active': mode === 'map'}"
+                  @click.prevent="switchMode('map')"
+                >
+                  <a>Магазины на карте</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <shopListGrids
           v-if="mode === 'list'"
@@ -118,7 +132,7 @@
           v-else
           class="container"
         >
-          <shop-list-map :shops="sale.shops" />
+          <shop-list-map :shops="sale.shops"/>
         </div>
       </div>
     </section>
@@ -132,8 +146,8 @@ import saleType from '../../../components/sales/type.vue';
 
 export default {
   middleware: 'saleCityCheck',
-  async asyncData({ app, params }) {
-    let [id]  = params.alias.split('-');
+  async asyncData({app, params}) {
+    let [id] = params.alias.split('-');
     let data = {};
     data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id + '?expand=shops,city');
 
@@ -146,36 +160,40 @@ export default {
         {
           hid: 'description',
           description:
-            'Условия акции' +
-            this.sale.title +
-            ', срок действия, магазины'
-        }
-      ]
+              'Условия акции' +
+              this.sale.title +
+              ', срок действия, магазины',
+        },
+      ],
     };
   },
   components: {
     navbar,
     shopListGrids,
     shopListMap,
-    saleType
+    saleType,
   },
   data() {
     return {
-      mode: 'list'
+      mode: 'list',
+      UPLOADS_URL: process.env.UPLOADS_URL,
+      imageIndex: null,
+      images: [],
+      previews: [],
     };
   },
-  computed: {
-    UPLOADS_URL(){
-      return process.env.UPLOADS_URL;
-    },
-  },
+  computed: {},
   mounted() {
+    for (let image of this.sale.images) {
+      this.images.push(this.UPLOADS_URL + image.regular);
+      this.previews.push(this.UPLOADS_URL + image.small);
+    }
   },
   methods: {
     switchMode(mode) {
       this.mode = mode;
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="sass" scoped>
@@ -186,6 +204,7 @@ export default {
   font-size: 1.5rem
   font-weight: normal
   margin-bottom: 1.4rem
+
 .sale-card-buttons
   margin-top: 10px
 
@@ -194,21 +213,23 @@ export default {
   font-size: 28px
   font-weight: bold
   padding: 0 5px
+
 .sale-card__old-price
   color: #f60
   font-weight: bold
   font-size: 22px
   text-decoration: line-through
   padding: 0 5px
+
 .sale-card__price-title
   padding: 0 5px 0 0
   font-size: 22px
+
 .sale-card-prices
   display: flex
   justify-content: flex-start
   align-items: flex-end
   flex-grow: 1
-
 
 .sale-card__date
   text-align: left

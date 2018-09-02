@@ -24,12 +24,12 @@ export default {
   props: {
     divClass: {
       type: String,
-      default: ''
+      default: '',
     },
     type: {
       type: String,
-      default: 'grids'
-    }
+      default: 'grids',
+    },
   },
   data() {
     return {};
@@ -37,7 +37,7 @@ export default {
   methods: {
     switchType(type) {
       this.$emit('switch-type', type);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -47,14 +47,16 @@
             class="footer-phones__phone"
           >
             <span class="icon has-text-link">
-              <i class="fas fa-mobile-alt" />
+              <i class="fas fa-mobile-alt"/>
             </span>
-          +77776461355</a> (по Казахстану)
+            +77776461355
+          </a> (по Казахстану)
           <a class="footer-phones__phone">
             <span class="icon has-text-link">
-              <i class="fas fa-phone" />
+              <i class="fas fa-phone"/>
             </span>
-          1355</a> (г. Усть-Каменогорск)
+            1355
+          </a> (г. Усть-Каменогорск)
         </p>
         <p>
           ©
@@ -71,7 +73,8 @@
   </footer>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   components: {},
   data() {
@@ -80,15 +83,17 @@ export default {
   computed: {
     ...mapGetters({
       city: 'cities/city',
-    })
-  }
+    }),
+  },
 };
 </script>
 <style lang="sass" scoped>
 .footer-links
   margin: 0 auto
+
 .footer-links__link
   padding: 5px
+
 .footer-phones__phone
   padding: 5px
 </style>

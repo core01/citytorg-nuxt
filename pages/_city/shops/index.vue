@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section
@@ -31,7 +31,7 @@
           v-else
           class="container"
         >
-          <shop-list-map :shops="shops" />
+          <shop-list-map :shops="shops"/>
         </div>
       </div>
     </section>
@@ -42,7 +42,7 @@ import navbar from '../../../components/navbar/navbar.vue';
 import shopListMap from '../../../components/shops/list/map.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
 import shopsTabs from '../../../components/tabs/shops.vue';
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   head: {
@@ -51,27 +51,27 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Полный перечень всех магазинов в городе'
-      }
-    ]
+        content: 'Полный перечень всех магазинов в городе',
+      },
+    ],
   },
-  async asyncData({ store }) {
+  async asyncData({store}) {
     await store.dispatch('shops/getShops');
   },
   components: {
     navbar,
     shopListMap,
     shopListGrids,
-    shopsTabs
+    shopsTabs,
   },
   data() {
     return {
       map: null,
       tileLayer: null,
-      layers: []
+      layers: [],
     };
   },
-  computed:{
+  computed: {
     ...mapGetters({
       shops: 'shops/shops',
       type: 'pages/shopsType',
@@ -81,8 +81,8 @@ export default {
   methods: {
     switchType(type) {
       this.$store.commit('pages/SET_SHOPS_TYPE', type);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

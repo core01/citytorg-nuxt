@@ -3,20 +3,20 @@
     <td class="v-middle is-hidden-mobile">
       <nuxt-link :to="{ path: path }">
         <img
-          v-if="sale.images"
           v-lazyload
-          :data-src="UPLOADS_URL + sale.images[0]['140x160']"
+          v-if="sale.images"
+          :data-src="UPLOADS_URL + sale.images[0].small"
           :alt="sale.title"
           src="~assets/images/placeholder.png"
-          class="row-sale__img imageFade"
+          class="row-sale__img"
         >
         <img
-          v-else
           v-lazyload
+          v-else
           :alt="sale.title"
           :data-src="'https://placehold.jp/140x160.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
-          class="row-sale__img imageFade"
+          class="row-sale__img"
         >
       </nuxt-link>
     </td>
@@ -51,16 +51,17 @@
 </template>
 <script>
 import saleType from '../sales/type.vue';
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   components: {
-    saleType
+    saleType,
   },
   props: {
     sale: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
@@ -78,15 +79,15 @@ export default {
       }
       return false;
     },
-    UPLOADS_URL(){
+    UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
-    path(){
+    path() {
       return '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias;
-    }
+    },
   },
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
 <style lang="sass" scoped>
@@ -124,16 +125,20 @@ export default {
 
 .row-sale-head__tags
   margin-left: 20px
+
 .row-sale-head__title
   font-size: 18px
   margin-right: 10px
 
 .prices-td
   min-width: 20%
+
 .v-middle
   vertical-align: middle
+
 td
   padding: 0
+
 +mobile
   .row-sale-head__title
     font-size: 16px

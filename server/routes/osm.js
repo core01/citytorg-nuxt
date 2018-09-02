@@ -23,11 +23,10 @@ const myMkdirSync = function(dir) {
   }
 };
 
-
 router.get('/', function(req, res, next) {
   if (!req.query.x || !req.query.y || !req.query.z || !req.query.s) {
     return res.status(400).json({
-      status: false
+      status: false,
     });
   }
   let x = parseInt(req.query.x, 10);
@@ -35,17 +34,16 @@ router.get('/', function(req, res, next) {
   let z = parseInt(req.query.z, 10);
   let s = req.query.s;
 
-
   let filepath = 'assets/tiles/' + z + '/' + x + '/' + y + '.png';
 
   fs.stat(filepath, function(err, stat) {
     let date = new Date();
 
     if ((err === null && stat.mtime < new Date(date - ttl)) ||
-      (err !== null && err.code === 'ENOENT')) {
+        (err !== null && err.code === 'ENOENT')) {
       myMkdirSync(path.dirname(filepath));
       let url = 'https://' + s + '.tile.openstreetmap.org/' + z + '/' +
-        x + '/' + y + '.png';
+          x + '/' + y + '.png';
       needle.get(url, function(error, response) {
         if (!error && response.statusCode === 200) {
           fs.writeFile(filepath, response.body, (err) => {
@@ -53,26 +51,25 @@ router.get('/', function(req, res, next) {
             if (err) throw err;
             // success case, the file was saved
             res.sendFile(filepath, {
-              root: path.join(__dirname, '../..')
+              root: path.join(__dirname, '../..'),
             });
           });
         } else {
           console.log('remote server error');
           res.send(503).json({
             succes: false,
-            message: 'OSM server error'
+            message: 'OSM server error',
           });
         }
       });
-    }else if(err === null) {
+    } else if (err === null) {
       res.sendFile(filepath, {
-        root: path.join(__dirname, '../..')
+        root: path.join(__dirname, '../..'),
       });
     } else {
       console.log('Some other error: ', err.code);
     }
   });
-
 
 });
 

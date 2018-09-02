@@ -4,20 +4,20 @@
     <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container shop-image">
         <img
-          v-if="shop.images"
           v-lazyload
-          :data-src="UPLOADS_URL + shop.images[0]['450x320']"
+          v-if="shop.images"
+          :data-src="UPLOADS_URL + shop.images[0].small"
           :alt="shop.title"
           src="~assets/images/placeholder.png"
-          class="grid-shop__img imageFade"
+          class="grid-shop__img"
         >
         <img
-          v-else
           v-lazyload
+          v-else
           :alt="shop.title"
           :data-src="'https://placehold.jp/350x250.png?text=' + shop.title"
           src="~assets/images/placeholder.png"
-          class="grid-shop__img imageFade"
+          class="grid-shop__img"
         >
         <div
           v-if="shop.sample"
@@ -40,31 +40,32 @@
 
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   components: {},
   props: {
     shop: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
   },
   computed: {
     ...mapGetters({
-      city: 'cities/city'
+      city: 'cities/city',
     }),
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
-    path(){
+    path() {
       return '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias;
-    }
+    },
   },
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
 

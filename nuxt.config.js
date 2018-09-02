@@ -1,5 +1,7 @@
-// const pkg = require('./package')
 require('dotenv').config();
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
+const path = require('path');
 process.env.DEBUG = 'nuxt:*';
 module.exports = {
   debug: true,
@@ -12,91 +14,92 @@ module.exports = {
    */
   head: {
     titleTemplate: '%s - Citytorg.kz',
-    meta: [{
-      charset: 'utf-8'
-    },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
-    },
-    {
-      hid: 'description',
-      name: 'description',
-      content: 'Citytorg.kz'
-    },
-    {
-      name: 'theme-color',
-      content: '#ffffff'
-    },
-    {
-      name: 'msapplication-TileColor',
-      content: '#00a300'
-    }
+    meta: [
+      {
+        charset: 'utf-8',
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Citytorg.kz',
+      },
+      {
+        name: 'theme-color',
+        content: '#ffffff',
+      },
+      {
+        name: 'msapplication-TileColor',
+        content: '#00a300',
+      },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico'
+        href: '/favicon.ico',
       },
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/apple-touch-icon.png'
+        href: '/apple-touch-icon.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/favicon-32x32.png'
+        href: '/favicon-32x32.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/favicon-16x16.png'
+        href: '/favicon-16x16.png',
       },
       {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg',
-        color: '#5bbad5'
+        color: '#5bbad5',
       },
       {
         rel: 'manifest',
-        href: '/site.webmanifest'
+        href: '/site.webmanifest',
       },
       {
         rel: 'stylesheet',
-        href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
+        href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css',
       },
       {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
         integrity: 'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
-        crossorigin: 'anonymous'
+        crossorigin: 'anonymous',
       },
     ],
     script: [
       {
-        src: 'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver'
-      },
-    ]
+        src: 'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver',
+      }],
   },
 
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#204B98'
+    color: '#204B98',
   },
 
   /*
    ** Global CSS
    */
-  css: [{
-    src: '@/assets/sass/app.sass',
-    lang: 'sass'
-  }],
+  css: [
+    {
+      src: '@/assets/sass/app.sass',
+      lang: 'sass',
+    }],
 
   /*
    ** Plugins to load before mounting the App
@@ -104,20 +107,24 @@ module.exports = {
   plugins: [
     {
       src: '~plugins/vue-scrollto',
-      ssr: false
+      ssr: false,
     },
     {
-      src: '~plugins/date-format'
+      src: '~plugins/date-format',
     },
     {
-      src: '~plugins/truncate'
+      src: '~plugins/truncate',
     },
     {
-      src: '~plugins/veevalidate'
+      src: '~plugins/veevalidate',
     },
     {
       src: '~plugins/lazy-img',
-      ssr: false
+      ssr: false,
+    },
+    {
+      src: '~/plugins/gallery.js',
+      ssr: false,
     },
   ],
   /*
@@ -131,12 +138,13 @@ module.exports = {
       {
         id: process.env.YM_ID,
         webvisor: true,
-        clickmap:true,
+        clickmap: true,
         // useCDN:false,
-        trackLinks:true,
-        accurateTrackBounce:true,
-      }
+        trackLinks: true,
+        accurateTrackBounce: true,
+      },
     ],
+    ['@nuxtjs/moment', ['ru']],
   ],
 
   /*
@@ -144,21 +152,23 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
   },
 
   /*
    ** Build configuration
    */
   build: {
+    extractCSS: true,
+    analyze: false,
     postcss: {
       plugins: {
         'postcss-cssnext': {
           features: {
-            customProperties: false
-          }
-        }
-      }
+            customProperties: false,
+          },
+        },
+      },
     },
     /*
      ** You can extend webpack config here
@@ -170,11 +180,22 @@ module.exports = {
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
         });
       }
+      if (!ctx.isDev) {
+        // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
+        // for more information about purgecss.
+        config.plugins.push(new PurgecssPlugin({
+          paths: glob.sync([
+            path.join(__dirname, './pages/**/*.vue'),
+            path.join(__dirname, './layouts/**/*.vue'),
+            path.join(__dirname, './components/**/*.vue'),
+          ]),
+          whitelist: ['html', 'body'],
+        }));
+      }
     },
-    vendor: ['vue-scrollto']
   },
   env: {
     ADMIN_EMAIL: process.env.ADMIN_EMAIL,
@@ -185,5 +206,5 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
     BACKEND_URL: process.env.BACKEND_URL,
     UPLOADS_URL: process.env.UPLOADS_URL,
-  }
+  },
 };

@@ -17,7 +17,8 @@ export const mutations = {
 export const actions = {
   async getShops(context) {
     let data = await this.$axios.$get(process.env.BACKEND_URL +
-      'shops?sort=-priority,-id&filter[city_id]=' + this.getters['cities/city'].id);
+        'shops?sort=-priority,-id&filter[city_id]=' +
+        this.getters['cities/city'].id);
     context.commit('SET_SHOPS', data);
   },
 };

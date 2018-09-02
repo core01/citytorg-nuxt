@@ -1,4 +1,4 @@
-import VeeValidate, { Validator } from 'vee-validate';
+import VeeValidate, {Validator} from 'vee-validate';
 import Vue from 'vue';
 import config from '../validator/config';
 

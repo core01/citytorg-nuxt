@@ -20,9 +20,9 @@
           class="navbar-burger burger"
           @click.prevent="showMenu"
         >
-          <span />
-          <span />
-          <span />
+          <span/>
+          <span/>
+          <span/>
         </span>
       </div>
       <div
@@ -30,10 +30,10 @@
         class="navbar-menu"
       >
         <div class="navbar-start">
-          <navbar-cities />
+          <navbar-cities/>
           <div class="navbar-item">
             <span class="icon">
-              <i class="fas fa-phone-volume" />
+              <i class="fas fa-phone-volume"/>
             </span> Call-center:&nbsp;<a href="tel:+77776461355">+7-777-646-13-55</a>
           </div>
 
@@ -85,25 +85,26 @@
 </template>
 <script>
 import navbarCities from './cities.vue';
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   components: {
-    navbarCities
+    navbarCities,
   },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
   computed: {
     ...mapGetters({
       city: 'cities/city',
-    })
+    }),
   },
   methods: {
     showMenu() {
       this.show = !this.show;
-    }
+    },
   },
 };
 </script>

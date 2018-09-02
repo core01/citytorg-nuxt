@@ -1,16 +1,17 @@
 <template>
-  <navbar />
+  <navbar/>
 </template>
 
 <script>
 import navbar from '../components/navbar/navbar.vue';
+
 export default {
   head: {
-    title: 'Контакты'
+    title: 'Контакты',
   },
   components: {
-    navbar
-  }
+    navbar,
+  },
 };
 </script>
 

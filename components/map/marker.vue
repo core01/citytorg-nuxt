@@ -9,17 +9,20 @@
         <b>{{ shop.title }}</b>
       </p>
       <p>
-      <b>Адрес:</b> {{ shop.address }}</p>
+        <b>Адрес:</b> {{ shop.address }}
+      </p>
       <nuxt-link
         v-if="!isCurrent"
         :to="{ path: '/' + city.alias + '/shops/' + shop.id + '-' + shop.alias }"
       >
-        Перейти в магазин</nuxt-link>
+        Перейти в магазин
+      </nuxt-link>
     </l-popup>
   </l-marker>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 let Vue2Leaflet = {};
 
 if (process.browser) {
@@ -28,36 +31,36 @@ if (process.browser) {
 export default {
   components: {
     'l-popup': Vue2Leaflet.LPopup,
-    'l-marker': Vue2Leaflet.LMarker
+    'l-marker': Vue2Leaflet.LMarker,
   },
   props: {
     shop: {
       type: Object,
-      required: true
+      required: true,
     },
     isCurrent: {
       type: Boolean,
-      default: false
+      default: false,
     },
     defaultIcon: {
       type: Object,
-      required: true
+      required: true,
     },
     selectedIcon: {
       type: Object,
-      required: true
+      required: true,
     },
     inactiveIcon: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
   },
   computed: {
     ...mapGetters({
-      city: 'cities/city'
+      city: 'cities/city',
     }),
     icon() {
       if (this.isCurrent) {
@@ -67,7 +70,7 @@ export default {
         return this.inactiveIcon;
       }
       return this.defaultIcon;
-    }
+    },
   },
   mounted() {},
   methods: {
@@ -78,7 +81,7 @@ export default {
           event.target.openPopup();
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>

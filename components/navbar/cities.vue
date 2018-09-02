@@ -14,29 +14,29 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
+
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     ...mapGetters({
       cities: 'cities/cities',
-      city: 'cities/city'
-    })
+      city: 'cities/city',
+    }),
   },
-  mounted(){
+  mounted() {
     this.$store.dispatch('cities/getCities');
   },
   methods: {
     showMenu() {
       this.show = !this.show;
     },
-    async setCity(city){
+    async setCity(city) {
       this.$store.dispatch('cities/setCity', city);
       this.$router.push('/');
-    }
+    },
   },
 };
 </script>

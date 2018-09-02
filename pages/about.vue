@@ -2,7 +2,7 @@
   <div>
     <section class="hero is-default is-bold">
       <div class="hero-head">
-        <navbar />
+        <navbar/>
       </div>
     </section>
     <section class="hero is-fullheight">
@@ -20,7 +20,8 @@
             <a
               href="https://drive.google.com/open?id=1mNPQtGaO2O8DfiXiOUfiD_Ajyqk43A1L"
               target="_blank"
-          >ppsx</a></p>
+            >ppsx</a>
+          </p>
         </div>
         <div class="columns">
           <div class="column is-6">

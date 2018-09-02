@@ -21,8 +21,8 @@ export default {
   props: {
     mode: {
       type: String,
-      default: 'sales'
-    }
+      default: 'sales',
+    },
   },
   data() {
     return {};
@@ -30,7 +30,7 @@ export default {
   methods: {
     switchMode(mode) {
       this.$emit('switch-mode', mode);
-    }
-  }
+    },
+  },
 };
 </script>

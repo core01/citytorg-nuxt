@@ -5,7 +5,7 @@
       :key="shop.id"
       class="column is-12-mobile is-3"
     >
-      <grid-shop :shop="shop" />
+      <grid-shop :shop="shop"/>
     </div>
   </div>
 </template>
@@ -14,18 +14,18 @@ import gridShop from '../grid-shop.vue';
 
 export default {
   components: {
-    gridShop
+    gridShop,
   },
   props: {
     shops: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
   },
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>
