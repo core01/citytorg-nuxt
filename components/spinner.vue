@@ -25,64 +25,119 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped>
-@import ~assets/sass/variables
-.spinner-container
-  position: fixed
-  top: 0
-  left: 0
-  width: 100%
-  height: 100%
-  background: rgba(255, 255, 255, 0.8)
-  z-index: 100
+<style lang="postcss" scoped>
+.spinner-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 100;
+}
 
-.spinner
-  margin: 49vh auto
-  width: 50px
-  height: 40px
-  text-align: center
-  font-size: 10px
+.spinner {
+  margin: 49vh auto;
+  width: 50px;
+  height: 40px;
+  text-align: center;
+  font-size: 10px;
+}
 
-.spinner > div
-  background-color: $red
-  height: 100%
-  width: 6px
-  display: inline-block
+.spinner > div {
+  background-color: #f00;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
 
-  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out
-  animation: sk-stretchdelay 1.2s infinite ease-in-out
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
 
-.spinner
-  .rect2
-    -webkit-animation-delay: -1.1s
-    animation-delay: -1.1s
+.spinner .rect3 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
 
-.spinner
-  .rect3
-    -webkit-animation-delay: -1.0s
-    animation-delay: -1.0s
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
 
-.spinner
-  .rect4
-    -webkit-animation-delay: -0.9s
-    animation-delay: -0.9s
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
 
-.spinner
-  .rect5
-    -webkit-animation-delay: -0.8s;
-    animation-delay: -0.8s;
+@-webkit-keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    -webkit-transform: scaleY(0.4);
+  }
 
-@-webkit-keyframes sk-stretchdelay
-  0%, 40%, 100%
-    -webkit-transform: scaleY(0.4)
-  20%
-    -webkit-transform: scaleY(1.0)
+  20% {
+    -webkit-transform: scaleY(1);
+  }
+}
 
-@keyframes sk-stretchdelay
-  0%, 40%, 100%
-    transform: scaleY(0.4)
-    -webkit-transform: scaleY(0.4)
-  20%
-    transform: scaleY(1.0)
-    -webkit-transform: scaleY(1.0)
+@-moz-keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+
+@-o-keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+
+@keyframes sk-stretchdelay {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
 </style>

@@ -12,10 +12,10 @@
       :attribution="attribution"
     />
     <map-marker
-      v-for="(shop,index) in filteredShops"
+      v-for="shop in filteredShops"
       :key="shop.id"
       :shop="shop"
-      :is-current="currentIndex === index"
+      :is-current="currentId === shop.id"
       :default-icon="defaultIcon"
       :selected-icon="selectedIcon"
       :inactive-icon="inactiveIcon"
@@ -48,7 +48,7 @@ export default {
       type: Number,
       default: 13,
     },
-    currentIndex: {
+    currentId: {
       type: Number,
       default: -1,
     },
@@ -98,10 +98,14 @@ export default {
       return markers;
     },
     center() {
-      if (this.currentIndex !== -1) {
-        let currentShop = this.shops[this.currentIndex];
-        if (currentShop.lat && currentShop.lon) {
-          return [currentShop.lat, currentShop.lon];
+      if (this.currentId !== -1) {
+        for(let i =0; i<this.shops.length; i++){
+          if(this.shops[i].id === this.currentId){
+            let currentShop = this.shops[i];
+            if (currentShop.lat && currentShop.lon) {
+              return [currentShop.lat, currentShop.lon];
+            }
+          }
         }
       }
 
@@ -112,7 +116,7 @@ export default {
     },
   },
   mounted() {
-    if (this.currentIndex === -1 && this.markers.length > 0) {
+    if (this.currentId === -1 && this.markers.length > 0) {
       this.$refs.map.mapObject.fitBounds(this.markers, {
         padding: [50, 50],
       });
@@ -120,8 +124,9 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped>
-.map_shop-map
-  z-index: 10
-  height: 70vh
+<style lang="postcss" scoped>
+.map_shop-map {
+  z-index: 10;
+  height: 70vh;
+}
 </style>

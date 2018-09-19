@@ -1,63 +1,53 @@
 <template>
-  <div>
-    <section class="hero is-default is-bold">
-      <div class="hero-head">
-        <navbar/>
-      </div>
-    </section>
-    <section
-      id="main"
-      class="is-fullheight"
-    >
-      <div class="container">
-        <div class="columns zero-side-margin">
-          <div class="column is-6-desktop">
-            <main-tabs
-              :mode="mode"
-              @switch-mode="switchMode"
-            />
-          </div>
-          <div class="column is-6-desktop">
-            <sales-tabs
-              v-if="mode === 'sales'"
-              :div-class="'is-toggle is-right-desktop'"
-              :type="type"
-              @switch-type="switchType"
-            />
-            <shops-tabs
-              v-else
-              :div-class="'is-toggle is-right-desktop'"
-              :type="type"
-              @switch-type="switchType"
-            />
-          </div>
+  <section
+    id="main"
+  >
+    <div class="container mx-auto my-6">
+      <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between">
+        <div class="flex mb-3">
+          <main-tabs
+            :mode="mode"
+            @switch-mode="switchMode"
+          />
+        </div>
+        <div class="flex lg:justify-end justify-start mb-3">
+          <sales-tabs
+            v-if="mode === 'sales'"
+            :type="type"
+            @switch-type="switchType"
+          />
+          <shops-tabs
+            v-else
+            :type="type"
+            @switch-type="switchType"
+          />
         </div>
       </div>
-      <div class="container">
-        <template v-if="mode === 'sales'">
-          <sales-list-grids
-            v-if="type === 'grids'"
-            :sales="sales"
-          />
-          <sales-list-rows
-            v-else
-            :sales="sales"
-          />
-        </template>
-        <template v-else>
-          <shops-list-grids
-            v-if="type === 'grids'"
-            :shops="shops"
-          />
-          <shops-list-map
-            v-else
-            :shops="shops"
-            :zoom="13"
-          />
-        </template>
-      </div>
-    </section>
-  </div>
+    </div>
+    <div class="container mx-auto">
+      <template v-if="mode === 'sales'">
+        <sales-list-grids
+          v-if="type === 'grids'"
+          :sales="sales"
+        />
+        <sales-list-rows
+          v-else
+          :sales="sales"
+        />
+      </template>
+      <template v-else>
+        <shops-list-grids
+          v-if="type === 'grids'"
+          :shops="shops"
+        />
+        <shops-list-map
+          v-else
+          :shops="shops"
+          :zoom="13"
+        />
+      </template>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -117,7 +107,5 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.container
-  margin-top: 25px
+<style lang="postcss" scoped>
 </style>

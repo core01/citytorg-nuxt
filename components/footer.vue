@@ -1,12 +1,12 @@
 <template>
-  <footer class="footer">
-    <div class="container">
-      <div class="content has-text-centered">
-        <p class="footer-links">
+  <footer class="footer bg-grey-lighter pt-12 px-6 pb-24 mt-6">
+    <div class="container mx-auto">
+      <div class="content text-center">
+        <p class="footer-links mb-4">
           <nuxt-link
             :exact="false"
             :to="{ name: 'city-sales', params: { city: city.alias }}"
-            class="footer-links__link"
+            class="p-1 no-underline"
             active-class="is-active"
           >
             Акции
@@ -14,7 +14,7 @@
           <nuxt-link
             :exact="false"
             :to="{ name: 'city-shops', params: { city: city.alias }}"
-            class="footer-links__link"
+            class="p-1 no-underline"
             active-class="is-active"
           >
             Магазины
@@ -22,7 +22,7 @@
           <nuxt-link
             :exact="true"
             to="/about"
-            class="footer-links__link"
+            class="p-1 no-underline"
             active-class="is-active"
           >
             О проекте
@@ -30,40 +30,42 @@
           <nuxt-link
             :exact="true"
             to="/request"
-            class="footer-links__link"
+            class="p-1 no-underline"
             active-class="is-active"
           >
             Обратная связь
           </nuxt-link>
           <a
+            class="p-1 no-underline"
             href="https://my.citytorg.kz"
             target="_blank"
             rel="noopener noreferrer"
           >Личный кабинет</a>
         </p>
-        <p class="footer-phones">
+        <p class="footer-phones mb-4">
           <a
             href="tel:+77776461355"
-            class="footer-phones__phone"
+            class="p-1 no-underline"
           >
-            <span class="icon has-text-link">
+            <span class="justify-center items-center inline-flex w-6 h-6">
               <i class="fas fa-mobile-alt"/>
             </span>
             +77776461355
           </a> (по Казахстану)
-          <a class="footer-phones__phone">
-            <span class="icon has-text-link">
+          <a class="p-1 no-underline">
+            <span class="justify-center items-center inline-flex w-6 h-6">
               <i class="fas fa-phone"/>
             </span>
             1355
           </a> (г. Усть-Каменогорск)
         </p>
-        <p>
+        <p class="mb-4">
           ©
           <strong>Citytorg.kz</strong> - Торговая сеть акционных продаж.
         </p>
-        <p>Разработано по заказу
+        <p class="mb-4">Разработано по заказу
           <a
+            class="p-1 no-underline"
             href="https://www.cityinfo.kz"
             target="_blank"
           >Cityinfo.kz</a>
@@ -87,13 +89,5 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped>
-.footer-links
-  margin: 0 auto
-
-.footer-links__link
-  padding: 5px
-
-.footer-phones__phone
-  padding: 5px
+<style>
 </style>

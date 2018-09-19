@@ -23,7 +23,7 @@
             >ppsx</a>
           </p>
         </div>
-        <div class="columns">
+        <div class="flex">
           <div class="column is-6">
             <iframe
               width="560"
@@ -63,10 +63,12 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-.content
-  font-size: 18px
+<style lang="postcss" scoped>
+.content {
+	font-size: 18px;
+}
 
-.about-li
-  list-style: none
+.about-li {
+	list-style: none;
+}
 </style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="columns is-multiline is-gapless">
+  <div class="flex flex-wrap">
     <div
       v-for="shop in shops"
       :key="shop.id"
-      class="column is-12-mobile is-3"
+      class="w-full sm:w-1/3 lg:w-1/4"
     >
       <grid-shop :shop="shop"/>
     </div>
@@ -14,18 +14,18 @@ import gridShop from '../grid-shop.vue';
 
 export default {
   components: {
-    gridShop,
+    gridShop
   },
   props: {
     shops: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {};
   },
   mounted() {},
-  methods: {},
+  methods: {}
 };
 </script>

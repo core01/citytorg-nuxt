@@ -2,7 +2,7 @@
   <div
     v-if="sales.length > 0"
   >
-    <table class="table is-fullwidth is-hoverable sales-table">
+    <table class="table w-full">
       <tbody>
         <sale
           v-for="sale in sales"
@@ -31,22 +31,22 @@ import MugenScroll from 'vue-mugen-scroll';
 export default {
   components: {
     sale,
-    MugenScroll,
+    MugenScroll
   },
   props: {
     sales: {
       type: Array,
-      required: true,
+      required: true
     },
-    'absenceText': {
+    absenceText: {
       type: String,
       required: false,
-      default: 'Нет действующих акций на данный момент',
-    },
+      default: 'Нет действующих акций на данный момент'
+    }
   },
   data() {
     return {
-      loading: false,
+      loading: false
     };
   },
   mounted() {},
@@ -57,12 +57,9 @@ export default {
       await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
       this.$store.commit('spinner/SHOW_SPINNER', false);
-    },
-  },
+    }
+  }
 };
 </script>
-<style lang="sass" scoped>
-.sales-table
-  max-width: 1152px
-  margin: 0 auto
+<style lang="postcss" scoped>
 </style>

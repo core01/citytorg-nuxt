@@ -1,17 +1,12 @@
 <template>
   <div>
-    <section class="hero is-default is-bold">
-      <div class="hero-head">
-        <navbar/>
-      </div>
-    </section>
-    <section class="hero is-fullheight shop">
-      <div class="container">
+    <section class="shop min-h-screen">
+      <div class="container mx-auto">
         <div class="content">
-          <h2 class="has-text-centered content_h2">{{ shop.title }}</h2>
+          <h2 class="text-center content_h2">{{ shop.title }}</h2>
         </div>
-        <div class="columns zero-side-margin">
-          <div class="column is-5">
+        <div class="flex flex-wrap">
+          <div class="w-full lg:w-2/5 text-center">
             <no-ssr>
               <figure class="shop-image">
                 <div
@@ -45,41 +40,42 @@
                 </div>
               </figure>
             </no-ssr>
-            <table class="table">
+            <table class="table mx-auto my-2">
               <tbody>
                 <tr>
-                  <th>Адрес:</th>
-                  <td>{{ shop.address }}</td>
+                  <th class="border-b p-1">Адрес:</th>
+                  <td class="border-b p-1">{{ shop.address }}</td>
                 </tr>
                 <tr>
-                  <td colspan="2">{{ shop.description }}</td>
+                  <td class="border-b p-1"
+                      colspan="2">{{ shop.description }}</td>
                 </tr>
               </tbody>
             </table>
             <div
               v-if="sales.length >0"
-              class="buttons is-centered"
+              class="buttons text-center"
             >
-              <a
+              <button
                 v-scroll-to="'#items'"
-                class="button is-info is-outlined"
+                class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded inline-flex items-center"
               >
                 <span>Посмотреть акции в магазине</span>
-                <span class="icon">
+                <span class="justify-center items-center inline-flex w-6 h-6">
                   <i class="fas fa-angle-double-down"/>
                 </span>
-              </a>
+              </button>
             </div>
             <p v-else>
               В данном магазине в настоящее время нет акций
             </p>
           </div>
-          <div class="column is-7">
+          <div class="w-full lg:w-3/5">
             <no-ssr>
               <shop-list-map
                 :shops="shops"
                 :zoom="13"
-                :current-index="currentIndex"
+                :current-id="id"
               />
             </no-ssr>
           </div>
@@ -89,14 +85,14 @@
     <section
       v-if="shop.stalls.length > 0 || sales.length > 0"
       id="items"
-      class="hero is-fullheight"
+      class="min-h-screen"
     >
-      <div class="container">
+      <div class="container mx-auto">
         <div
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
-          class="columns zero-side-margin"
+          class="flex flex-wrap"
         >
-          <div class="column is-6">
+          <div class="w-full lg:w-1/2">
             <div class="tabs is-toggle">
               <ul>
                 <li
@@ -192,7 +188,6 @@ export default {
       absenceText: 'Информации о действующих акциях на данный момент нет',
       sales: [],
       shops: [],
-      currentIndex: -1,
       shop: {},
       mode: 'sales',
       UPLOADS_URL: process.env.UPLOADS_URL,
@@ -203,13 +198,8 @@ export default {
   },
   computed: {},
   mounted() {
-    if (this.shop.shopType.alias !== 'network') {
-      for (let i = 0; i < this.shops.length; i++) {
-        if (this.shops[i].id === this.id) {
-          this.currentIndex = i;
-        }
-      }
-    } else {
+
+    if (this.shop.shopType.alias === 'network') {
       if (this.sales.length > 0) {
         this.switchMode('sales');
       } else {
@@ -228,52 +218,55 @@ export default {
   },
 };
 </script>
-<style lang="sass" scoped>
-@import ~assets/sass/variables
+<style lang="postcss" scoped>
+.sales {
+  padding: 5rem 0;
+}
 
-.sales
-//  background-color: #eff3f4
-  padding: 5rem 0
+.sale-card_content {
+  margin: 0 !important;
+}
 
-.sale-card_content
-  margin: 0 !important
+.card-image > .fa {
+  font-size: 8rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: #209cee;
+}
 
-.card-image > .fa
-  font-size: 8rem
-  padding-top: 2rem
-  padding-bottom: 2rem
-  color: #209cee
+.card-content .content {
+  font-size: 14px;
+  margin: 1rem 1rem;
+}
 
-.card-content .content
-  font-size: 14px
-  margin: 1rem 1rem
+.card-content .content h4 {
+  font-size: 16px;
+  font-weight: 700;
+}
 
-.card-content
-  .content
-    h4
-      font-size: 16px
-      font-weight: 700
+.card {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+  margin-bottom: 2rem;
+}
 
-.card
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18)
-  margin-bottom: 2rem
+.tile.notification {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 
-.tile.notification
-  display: flex
-  justify-content: center
-  flex-direction: column
+.is-shady {
+  animation: flyintoright 0.4s backwards;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
 
-.is-shady
-  animation: flyintoright 0.4s backwards
-  background: #fff
-  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 0
-  border-radius: 4px
-  display: inline-block
-  margin: 10px
-  position: relative
-  transition: all 0.2s ease-in-out
-
-.is-shady
-  &:hover
-    box-shadow: 0 10px 16px rgba(0, 0, 0, 0.13), 0 6px 6px rgba(0, 0, 0, 0.19)
+.is-shady:hover {
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.13), 0 6px 6px rgba(0, 0, 0, 0.19);
+}
 </style>
