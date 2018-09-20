@@ -47,8 +47,9 @@
                   <td class="border-b p-1">{{ shop.address }}</td>
                 </tr>
                 <tr>
-                  <td class="border-b p-1"
-                      colspan="2">{{ shop.description }}</td>
+                  <td
+                    class="border-b p-1"
+                    colspan="2">{{ shop.description }}</td>
                 </tr>
               </tbody>
             </table>

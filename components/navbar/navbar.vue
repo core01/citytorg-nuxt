@@ -3,11 +3,13 @@
     <header class="container flex items-stretch w-full mx-auto">
       <div class="flex flex-row items-center w-full flex-wrap lg:flex-no-wrap">
         <div class="brand flex items-stretch flex-no-shrink">
-          <nuxt-link to="/"
-                     class="flex flex-no-grow flex-no-shrink items-center py-0 px-0 lg:py-1 lg:px-2">
-            <img class="logo"
-                 src="~assets/images/logo_beta.png"
-                 alt="Citytorg">
+          <nuxt-link
+            to="/"
+            class="flex flex-no-grow flex-no-shrink items-center py-0 px-0 lg:py-1 lg:px-2">
+            <img
+              class="logo"
+              src="~assets/images/logo_beta.png"
+              alt="Citytorg">
           </nuxt-link>
         </div>
         <div class="flex flex-no-shrink">
@@ -18,30 +20,37 @@
             <i class="fas fa-phone-volume" />
           </span>
           Call-center:&nbsp;
-          <a href="tel:+77776461355"
-             class="text-blue-matisse no-underline">+7-777-646-13-55</a>
+          <a
+            href="tel:+77776461355"
+            class="text-blue-matisse no-underline">+7-777-646-13-55</a>
         </div>
         <div class="text-right lg:hidden flex-grow">
-          <button type="button"
-                  class="nav-toggle appearance-none"
-                  @click="showMenu()">
-            <svg class="fill-current text-grey-dark w-6 h-6"
-                 xmlns="http://www.w3.org/2000/svg"
-                 viewBox="0 0 20 20">
-              <path d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"
+          <button
+            type="button"
+            class="nav-toggle appearance-none"
+            @click="showMenu()">
+            <svg
+              class="fill-current text-grey-dark w-6 h-6"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20">
+              <path
+                d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"
               />
             </svg>
           </button>
         </div>
-        <nav :class="{'hidden' : !show}"
-             class="w-full lg:w-auto block flex-no-shrink flex-grow lg:flex lg:flex-wrap lg:justify-end bg-white min-h-100"
-             role="navigation">
+        <nav
+          :class="{'hidden' : !show}"
+          class="w-full lg:w-auto block flex-no-shrink flex-grow lg:flex lg:flex-wrap lg:justify-end bg-white min-h-100"
+
+          role="navigation">
           <ul class="lg:flex lg:flex-grow lg:justify-end lg:flex-no-shrink lg:items-center p-0">
-            <nuxt-link :exact="true"
-                       tag="li"
-                       to="/"
-                       active-class="border-blue-matisse hover:border-blue-matisse active"
-                       class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
+            <nuxt-link
+              :exact="true"
+              tag="li"
+              to="/"
+              active-class="border-blue-matisse hover:border-blue-matisse active"
+              class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
               <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">Главная</a>
             </nuxt-link>
             <nuxt-link
@@ -58,11 +67,12 @@
               class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
               <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">Магазины</a>
             </nuxt-link>
-            <nuxt-link :exact="true"
-                       to="/request"
-                       tag="li"
-                       active-class="border-blue-matisse hover:border-blue-matisse active"
-                       class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
+            <nuxt-link
+              :exact="true"
+              to="/request"
+              tag="li"
+              active-class="border-blue-matisse hover:border-blue-matisse active"
+              class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
               <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">
                 Обратная связь
               </a>

@@ -44,6 +44,7 @@
     "autoprefixer": "^9.1.5",
     "babel-eslint": "^8.2.6",
     "cross-env": "^5.2.0",
+    "cssnano": "^4.1.0",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.10.0",
     "eslint-config-standart": "^0.2.0",
@@ -54,7 +55,6 @@
     "glob-all": "^3.1.0",
     "nodemon": "^1.18.4",
     "postcss-loader": "^3.0.0",
-    "purgecss-webpack-plugin": "^1.2.1",
     "tailwindcss": "^0.6.5"
   }
 }

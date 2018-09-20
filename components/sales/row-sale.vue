@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="align-middle hidden lg:block border-b border-grey">
+    <td class="align-middle hidden lg:block border-b border-grey text-center">
       <nuxt-link :to="{ path: path }">
         <img
           v-lazyload
