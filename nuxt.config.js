@@ -178,6 +178,16 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      config.module.rules.push({
+        test: /\.postcss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader'
+          }
+        ]
+      });
     }
   },
   env: {
