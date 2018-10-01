@@ -1,41 +1,31 @@
 <template>
-  <div>
-    <section class="hero is-default is-bold">
-      <div class="hero-head">
-        <navbar/>
-      </div>
-    </section>
-    <section
-      id="shops"
-      class="is-fullheight shops"
-    >
-      <div class="container">
-        <div class="content">
-          <h2 class="has-text-centered content_h2">Магазины</h2>
-        </div>
-        <div class="columns zero-side-margin">
-          <div class="column is-6">
-            <shops-tabs
-              :div-class="' is-toggle'"
-              :type="type"
-              @switch-type="switchType"
-            />
-          </div>
-        </div>
-
-        <shopListGrids
-          v-if="type === 'grids'"
-          :shops="shops"
-        />
-        <div
-          v-else
-          class="container"
-        >
-          <shop-list-map :shops="shops"/>
+  <section
+    id="shops"
+    class="is-fullheight shops"
+  >
+    <div class="content">
+      <h2 class="text-center content_h2">Магазины</h2>
+    </div>
+    <div class="container mx-auto mb-6">
+      <div class="flex">
+        <div class="w-full lg:w-1/2">
+          <shops-tabs
+            :type="type"
+            @switch-type="switchType"
+          />
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+    <div class="container mx-auto">
+      <shopListGrids
+        v-if="type === 'grids'"
+        :shops="shops"
+      />
+      <shop-list-map
+        v-else
+        :shops="shops"/>
+    </div>
+  </section>
 </template>
 <script>
 import navbar from '../../../components/navbar/navbar.vue';
@@ -85,7 +75,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="css" scoped>
 /* .shops {
     background-color: #eff3f4;
   } */

@@ -1,0 +1,135 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+@tailwind preflight;
+
+/**
+ * This injects any component classes registered by plugins.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/components";
+ */
+@tailwind components;
+
+/**
+ * Here you would add any of your custom component classes; stuff that you'd
+ * want loaded *before* the utilities so that the utilities could still
+ * override them.
+ *
+ * Example:
+ *
+ * .btn { ... }
+ * .form-input { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "components/buttons";
+ * @import "components/forms";
+ */
+
+/**
+ * This injects all of Tailwind's utility classes, generated based on your
+ * config file.
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/utilities";
+ */
+@tailwind utilities;
+
+/**
+ * Here you would add any custom utilities you need that don't come out of the
+ * box with Tailwind.
+ *
+ * Example :
+ *
+ * .bg-pattern-graph-paper { ... }
+ * .skew-45 { ... }
+ *
+ * Or if using a preprocessor or `postcss-import`:
+ *
+ * @import "utilities/background-patterns";
+ * @import "utilities/skew-transforms";
+ */
+
+a {
+  color: config('textColors.blue-matisse');
+}
+button:focus {
+  outline: none;
+}
+
+$blue: #204b98;
+$red: #e31e24;
+$green: #97cd76;
+$orange: #f68b39;
+$purple: #847bb9;
+$social: #65abaa;
+$white: #ffffff;
+
+$turquoise: #1fc8db;
+$yellow: #fce473;
+$font-family: 'Open Sans', Arial, Helvetica, sans-senif;
+
+.is-shady {
+  animation: flyintoright 0.4s backwards;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.27) 0 0 4px;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 0 5px;
+  position: relative;
+  /*transition: all 0.2s ease-in-out*/
+}
+.is-shady:hover {
+  box-shadow: rgba(0, 0, 0, 0.69) 0px 0px 4px;
+  border-radius: 4px;
+}
+.is-scale:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+  z-index: 2;
+}
+
+.sale-card__image {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+}
+.sale-card_content {
+  margin: 0 !important;
+}
+.sale-card__hr {
+  margin: 0.5rem 0;
+}
+.content_h2 {
+  margin: 1em auto;
+}
+
+.shop-image {
+  position: relative;
+}
+
+.shop-image__text {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  background-color: rgba(255, 91, 0, 0.39);
+  color: white;
+  font-weight: bold;
+  padding: 5px 20px;
+  font-size: 18px;
+}
+
+hr {
+  background-color: #f5f5f5;
+  height: 2px;
+}

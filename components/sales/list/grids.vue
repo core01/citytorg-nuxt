@@ -1,9 +1,9 @@
 <template>
-  <div class="columns is-multiline is-gapless">
+  <div class="flex flex-wrap">
     <div
       v-for="sale in sales"
       :key="sale.id"
-      class="column is-12-mobile is-4-tablet is-one-fifth-desktop"
+      class="w-full sm:w-1/3 lg:w-1/5"
     >
       <sale :sale="sale"/>
     </div>

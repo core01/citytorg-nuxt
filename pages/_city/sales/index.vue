@@ -1,40 +1,35 @@
 <template>
-  <div>
-    <section class="hero is-default is-bold">
-      <div class="hero-head">
-        <navbar/>
-      </div>
-    </section>
-    <section
-      id="sales"
-      class="hero is-fullheight sales"
-    >
-      <div class="container">
-        <div class="content">
-          <h2 class="has-text-centered content_h2">Акции</h2>
+  <section
+    id="sales"
+    class="sales"
+  >
+    <div class="content">
+      <h2 class="text-center content_h2">Акции</h2>
+    </div>
+
+    <div class="container mx-auto mb-6">
+      <div class="flex zero-side-margin">
+        <div class="w-full lg:w-1/2">
+          <sales-tabs
+            :type="type"
+            @switch-type="switchType"
+          />
         </div>
-        <div class="columns zero-side-margin">
-          <div class="column is-6-desktop">
-            <sales-tabs
-              :div-class="' is-toggle'"
-              :type="type"
-              @switch-type="switchType"
-            />
-          </div>
-        </div>
-        <sales-grids-list
-          v-if="type === 'grids'"
-          :sales="sales"
-          :absence_text="absence_text"
-        />
-        <sales-rows-list
-          v-else
-          :sales="sales"
-          :absence_text="absence_text"
-        />
       </div>
-    </section>
-  </div>
+    </div>
+    <div class="container mx-auto">
+      <sales-grids-list
+        v-if="type === 'grids'"
+        :sales="sales"
+        :absence_text="absence_text"
+      />
+      <sales-rows-list
+        v-else
+        :sales="sales"
+        :absence_text="absence_text"
+      />
+    </div>
+  </section>
 </template>
 <script>
 import navbar from '../../../components/navbar/navbar.vue';

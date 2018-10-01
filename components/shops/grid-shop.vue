@@ -69,40 +69,48 @@ export default {
 };
 </script>
 
-<style lang="sass" scoped>
-@import ~assets/sass/variables
+<style lang="postcss" scoped>
+$blue: #204b98;
+$red: #e31e24;
 
-.grid-shop
-  background-color: white
-  overflow: hidden
-  padding: 5px
-  text-align: center
-  display: flex
-  flex-direction: column
-  height: 320px
-  margin-bottom: 20px
+.grid-shop {
+	background-color: #fff;
+	overflow: hidden;
+	padding: 5px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	height: 320px;
+	margin-bottom: 20px;
+}
 
-.grid-shop__title
-  color: $blue
-  font-size: 18px
-  height: 45px
-  line-height: 1.2
-  text-align: center
-  &:hover
-    color: $red
-    text-decoration: underline
+.grid-shop__title {
+	color: $blue;
+	font-size: 18px;
+	height: 45px;
+	line-height: 1.2;
+	text-align: center;
+}
 
-.grid-shop__address
-  display: flex
-  align-items: center
-  flex-grow: 1
-  align-self: center
+.grid-shop__title:hover {
+	color: $red;
+	text-decoration: underline;
+}
 
-.grid-shop__img
-  width: 100%
-  max-height: 200px
-  object-fit: contain
+.grid-shop__address {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	align-self: center;
+}
 
-.grid-shop__img-container
-  min-height: 205px
+.grid-shop__img {
+	width: 100%;
+	max-height: 200px;
+	object-fit: contain;
+}
+
+.grid-shop__img-container {
+	min-height: 205px;
+}
 </style>

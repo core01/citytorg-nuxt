@@ -42,92 +42,108 @@
 </template>
 <script>
 import saleType from '../sales/type.vue';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
-    saleType,
+    saleType
   },
   props: {
     sale: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {};
   },
   computed: {
     ...mapGetters({
-      city: 'cities/city',
+      city: 'cities/city'
     }),
     UPLOADS_URL() {
       return process.env.UPLOADS_URL;
     },
     path() {
-      return '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias;
-    },
+      return (
+        '/' + this.city.alias + '/sales/' + this.sale.id + '-' + this.sale.alias
+      );
+    }
   },
   mounted() {},
-  methods: {},
+  methods: {}
 };
 </script>
 
-<style lang="sass" scoped>
-@import ~assets/sass/variables
-.grid-sale__img-container
-  height: 155px
+<style lang="postcss" scoped>
+$blue: #204b98;
+$red: #e31e24;
 
-.grid-sale
-  background-color: white
-  padding: 10px
-  text-align: center
-  display: flex
-  flex-direction: column
-  height: 320px
-  margin-bottom: 20px
+.grid-sale__img-container {
+  height: 155px;
+}
 
-.grid-sale__title
-  color: $blue
-  font-size: 18px
-  height: 45px
-  line-height: 1.2
-  text-align: center
-  margin-top: 5px
-  &:hover
-    color: $red
-    text-decoration: underline
+.grid-sale {
+  background-color: #fff;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 320px;
+  margin-bottom: 20px;
+}
 
-.grid-sale__description
-  color: #949494
-  line-height: 1.25
-  font-size: 1rem
+.grid-sale__title {
+  color: $blue;
+  font-size: 18px;
+  height: 45px;
+  line-height: 1.2;
+  text-align: center;
+  margin-top: 5px;
+}
 
-.grid-sale__price
-  color: $blue
-  font-weight: bold
-  font-size: 28px
+.grid-sale__title:hover {
+  color: $red;
+  text-decoration: underline;
+}
 
-.grid-sale__old-price
-  color: $red
-  font-weight: bold
-  font-size: 22px
-  text-decoration: line-through
+.grid-sale__description {
+  color: #949494;
+  line-height: 1.25;
+  font-size: 1rem;
+}
 
-.grid-sale__img
-  height: 100%
-  margin: 0 auto
+.grid-sale__price {
+  color: $blue;
+  font-weight: bold;
+  font-size: 28px;
+}
 
-.grid-sale__button
-  margin-top: auto
+.grid-sale__old-price {
+  color: $red;
+  font-weight: bold;
+  font-size: 22px;
+  text-decoration: line-through;
+}
 
-.grid-sale-prices
-  display: flex
-  justify-content: space-around
-  align-items: flex-end
-  flex-grow: 1
-  white-space: nowrap
+.grid-sale__img {
+  height: 100%;
+  margin: 0 auto;
+}
 
-.grid-sale-tags
-  margin: 0 auto !important
+.grid-sale__button {
+  margin-top: auto;
+}
+
+.grid-sale-prices {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
+.grid-sale-tags {
+  margin: 0 auto !important;
+}
 </style>

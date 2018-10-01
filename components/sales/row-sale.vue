@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="v-middle is-hidden-mobile">
+    <td class="align-middle hidden lg:block border-b border-grey text-center">
       <nuxt-link :to="{ path: path }">
         <img
           v-lazyload
@@ -20,25 +20,26 @@
         >
       </nuxt-link>
     </td>
-    <td class="v-middle title-td">
-      <div class="row-sale-head">
+    <td class="align-middle title-td border-b border-grey">
+      <div class="row-sale-head text-sm lg:text-base">
         <nuxt-link
           :to="{ path: path }"
-          class="row-sale-head__title"
+          class="row-sale-head__title no-underline"
         >
           {{ sale.title }}
         </nuxt-link>
-        <sale-type
-          :sale="sale"
-          class-name="tags-center is-hidden-mobile"
-        />
+        <div class="hidden lg:block">
+          <sale-type
+            :sale="sale"
+          />
+        </div>
       </div>
     </td>
-    <td class="prices-td v-middle">
+    <td class="prices-td align-middle border-b border-grey">
       <div class="row-sale__prices">
         <span
           v-if="oldPrice"
-          class="row-sale__old-price"
+          class="row-sale__old-price hidden lg:block"
         >
           {{ oldPrice }}
         </span>
@@ -90,66 +91,52 @@ export default {
   methods: {},
 };
 </script>
-<style lang="sass" scoped>
-@import ~assets/sass/variables
-.row-sale__img
-  max-height: 4em
+<style lang="postcss" scoped>
+$blue: #204b98;
+$red: #e31e24;
 
-.row-sale__price
-  color: $blue
-  font-weight: bold
-  font-size: 28px
-  width: 50%
-  word-wrap: normal
-  white-space: nowrap
+.row-sale__img {
+  max-height: 4em;
+}
 
-.row-sale__old-price
-  color: $red
-  font-weight: bold
-  font-size: 22px
-  text-decoration: line-through
-  width: 50%
-  word-wrap: normal
-  white-space: nowrap
+.row-sale__price {
+  color: $blue;
+  font-weight: bold;
+  font-size: 28px;
+  width: 50%;
+  word-wrap: normal;
+  white-space: nowrap;
+}
 
-.row-sale__prices
-  display: flex
-  flex-direction: row
-  align-items: center
-  justify-content: space-around
+.row-sale__old-price {
+  color: $red;
+  font-weight: bold;
+  font-size: 22px;
+  text-decoration: line-through;
+  width: 50%;
+  word-wrap: normal;
+  white-space: nowrap;
+}
 
-.row-sale-head
-  display: flex
-  flex-direction: row
-  padding-bottom: 5px
+.row-sale__prices {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
 
-.row-sale-head__tags
-  margin-left: 20px
+.row-sale-head {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 5px;
+}
 
-.row-sale-head__title
-  font-size: 18px
-  margin-right: 10px
+.row-sale-head__tags {
+  margin-left: 20px;
+}
 
-.prices-td
-  min-width: 20%
-
-.v-middle
-  vertical-align: middle
-
-td
-  padding: 0
-
-+mobile
-  .row-sale-head__title
-    font-size: 16px
-    margin-right: 0
-  .row-sale-head
-    padding-bottom: 0
-  .row-sale__price
-    font-size: 18px
-  .row-sale__old-price
-    font-size: 16px
-  .title-td
-    width: 65%
-    padding-left: 5px
+.row-sale-head__title {
+  font-size: 18px;
+  margin-right: 10px;
+}
 </style>
