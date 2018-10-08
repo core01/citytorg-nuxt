@@ -7,10 +7,11 @@
     </div>
     <div class="container mx-auto">
       <div class="flex flex-wrap">
-        <a
+        <nuxt-link
           v-for="category in categories"
           :key="category.id"
-          class="block w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer p-2 text-black hover:text-blue-dark">
+          :to="{ path: '/categories/' + category.id + '-' + category.alias }"
+          class="block w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer p-2 text-black hover:text-blue-dark no-underline">
           <div class="overflow-hidden">
             <figure class="relative overflow-hidden">
               <img
@@ -30,7 +31,7 @@
           <div class="w-full">
             <p class="text-sm">{{ category.title | truncate(22) }}</p>
           </div>
-        </a>
+        </nuxt-link>
       </div>
     </div>
   </section>
