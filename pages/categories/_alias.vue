@@ -8,14 +8,18 @@
         class="cover w-full bg-cover bg-center relative">
         <div class="pt-24 pb-8 pl-5 relative">
           <h1>{{ category.title }}</h1>
-          <h4
-            v-if="meta.total"
-            class="font-normal">Действующих акций в категории: {{ meta.total }}</h4>
+          <h4 class="font-normal">
+            <span v-if="meta.total">Действующих акций в категории: {{ meta.total }}
+            </span>
+            <span v-else>Нет действующих акций в категории</span>
+          </h4>
         </div>
       </div>
     </div>
-    <div class="container mx-auto my-6">
-      <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between">
+    <div
+      v-if="meta.total"
+      class="container mx-auto">
+      <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between my-6">
         <div class="flex justify-start mb-3">
           <sales-tabs
             :type="type"
@@ -23,8 +27,6 @@
           />
         </div>
       </div>
-    </div>
-    <div class="container mx-auto">
       <sales-grids-list
         v-if="type === 'grids'"
         :sales="sales"
@@ -102,9 +104,7 @@ export default {
       this.$store.commit('pages/SET_CATEGORY_TYPE', type);
     },
     async getMoreSales(){
-      this.$store.commit('spinner/SHOW_SPINNER', true);
       await this.$store.dispatch('sales/getMoreCategorySales', this.id);
-      this.$store.commit('spinner/SHOW_SPINNER', false);
     }
   }
 };

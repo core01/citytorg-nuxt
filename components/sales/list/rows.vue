@@ -15,6 +15,7 @@
       <mugen-scroll
         :handler="loadMoreSales"
         :should-handle="!loading"
+        :threshold="0.3"
       />
     </no-ssr>
   </div>

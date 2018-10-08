@@ -126,11 +126,11 @@ module.exports = {
       ssr: false
     },
     {
-      src: '~/plugins/gallery.js',
+      src: '~plugins/gallery.js',
       ssr: false
     },
     {
-      src: '~/plugins/axios',
+      src: '~plugins/axios',
     },
   ],
   /*

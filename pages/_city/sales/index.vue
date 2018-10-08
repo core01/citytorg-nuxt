@@ -79,9 +79,7 @@ export default {
       this.$store.commit('pages/SET_SALES_TYPE', type);
     },
     async getMoreSales(){
-      this.$store.commit('spinner/SHOW_SPINNER', true);
       await this.$store.dispatch('sales/getMoreSales');
-      this.$store.commit('spinner/SHOW_SPINNER', false);
     }
   },
 };

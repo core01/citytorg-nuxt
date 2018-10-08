@@ -15,13 +15,11 @@
           <div class="overflow-hidden">
             <figure class="relative overflow-hidden">
               <img
-                v-lazyload
                 v-if="category.images"
                 :src="UPLOADS_URL + category.images[0].small"
                 :alt="category.title"
                 class="w-full rounded  ">
               <img
-                v-lazyload
                 v-else
                 :alt="category.title"
                 src="~assets/images/placeholder.png"
@@ -64,7 +62,9 @@ export default {
   computed: {
   },
   mounted() {
-
+    for(let i =0 ; i < this.categories.length; i++){
+      console.log(this.UPLOADS_URL + this.categories[i].images[0].small);
+    }
   },
   methods: {
 

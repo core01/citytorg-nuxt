@@ -46,14 +46,6 @@
           role="navigation">
           <ul class="lg:flex lg:flex-grow lg:justify-end lg:flex-no-shrink lg:items-center p-0">
             <nuxt-link
-              :exact="true"
-              tag="li"
-              to="/"
-              active-class="border-blue-matisse hover:border-blue-matisse active"
-              class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
-              <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">Главная</a>
-            </nuxt-link>
-            <nuxt-link
               :to="{ name: 'city-sales', params: { city: city.alias }}"
               tag="li"
               active-class="border-blue-matisse hover:border-blue-matisse active"
@@ -66,6 +58,14 @@
               active-class="border-blue-matisse hover:border-blue-matisse active"
               class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
               <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">Магазины</a>
+            </nuxt-link>
+            <nuxt-link
+              :exact="true"
+              :to="{ name: 'categories' }"
+              tag="li"
+              active-class="border-blue-matisse hover:border-blue-matisse active"
+              class="block px-1 mx-2 border-b border-grey-light py-1 hover:border-black">
+              <a class="block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora">Категории</a>
             </nuxt-link>
             <nuxt-link
               :exact="true"
