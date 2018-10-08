@@ -10,7 +10,7 @@
     <no-ssr>
       <mugen-scroll
         :handler="loadMoreSales"
-        :should-handle="!loading"
+        :should-handle="loading"
       />
     </no-ssr>
     <div v-if="sales.length === 0">
@@ -42,17 +42,17 @@ export default {
   },
   data() {
     return {
-      loading: false,
+
     };
   },
-  mounted() {},
+  computed: {
+    loading() {
+      return !this.$store.state.spinner.show;
+    },
+  },
   methods: {
-    async loadMoreSales() {
-      this.loading = true;
-      this.$store.commit('spinner/SHOW_SPINNER', true);
-      await this.$store.dispatch('sales/getMoreSales');
-      this.loading = false;
-      this.$store.commit('spinner/SHOW_SPINNER', false);
+    loadMoreSales() {
+      this.$emit('get-more-sales');
     },
   },
 };

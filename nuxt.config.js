@@ -128,7 +128,10 @@ module.exports = {
     {
       src: '~/plugins/gallery.js',
       ssr: false
-    }
+    },
+    {
+      src: '~/plugins/axios',
+    },
   ],
   /*
    ** Nuxt.js modules

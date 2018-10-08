@@ -11,6 +11,9 @@ export const state = () => ({
   shops: {
     type: 'grids',
   },
+  category: {
+    type: 'grids',
+  }
 });
 
 export const getters = {
@@ -26,6 +29,9 @@ export const getters = {
   salesType: state => {
     return state.sales.type;
   },
+  categoryType: state => {
+    return state.category.type;
+  }
 };
 
 export const mutations = {
@@ -47,4 +53,7 @@ export const mutations = {
   SET_SALES_TYPE(state, type) {
     state.sales.type = type;
   },
+  SET_CATEGORY_TYPE(state, type){
+    state.category.type = type;
+  }
 };
