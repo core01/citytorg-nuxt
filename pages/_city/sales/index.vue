@@ -22,17 +22,18 @@
         v-if="type === 'grids'"
         :sales="sales"
         :absence_text="absence_text"
+        @get-more-sales="getMoreSales"
       />
       <sales-rows-list
         v-else
         :sales="sales"
         :absence_text="absence_text"
+        @get-more-sales="getMoreSales"
       />
     </div>
   </section>
 </template>
 <script>
-import navbar from '../../../components/navbar/navbar.vue';
 import salesGridsList from '../../../components/sales/list/grids.vue';
 import salesRowsList from '../../../components/sales/list/rows.vue';
 import salesTabs from '../../../components/tabs/sales.vue';
@@ -55,7 +56,6 @@ export default {
     }
   },
   components: {
-    navbar,
     salesGridsList,
     salesRowsList,
     salesTabs,
@@ -78,6 +78,11 @@ export default {
     switchType(type) {
       this.$store.commit('pages/SET_SALES_TYPE', type);
     },
+    async getMoreSales(){
+      this.$store.commit('spinner/SHOW_SPINNER', true);
+      await this.$store.dispatch('sales/getMoreSales');
+      this.$store.commit('spinner/SHOW_SPINNER', false);
+    }
   },
 };
 </script>

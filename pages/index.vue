@@ -29,10 +29,12 @@
         <sales-list-grids
           v-if="type === 'grids'"
           :sales="sales"
+          @get-more-sales="getMoreSales"
         />
         <sales-list-rows
           v-else
           :sales="sales"
+          @get-more-sales="getMoreSales"
         />
       </template>
       <template v-else>
@@ -103,6 +105,11 @@ export default {
     switchType(type) {
       this.$store.commit('pages/SET_INDEX_TYPE', type);
     },
+    async getMoreSales(){
+      this.$store.commit('spinner/SHOW_SPINNER', true);
+      await this.$store.dispatch('sales/getMoreSales');
+      this.$store.commit('spinner/SHOW_SPINNER', false);
+    }
   },
 };
 </script>
