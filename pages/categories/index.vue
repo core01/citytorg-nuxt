@@ -62,9 +62,7 @@ export default {
   computed: {
   },
   mounted() {
-    for(let i =0 ; i < this.categories.length; i++){
-      console.log(this.UPLOADS_URL + this.categories[i].images[0].small);
-    }
+
   },
   methods: {
 
