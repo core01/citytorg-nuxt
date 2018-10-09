@@ -11,10 +11,8 @@
           class="row-sale__img"
         >
         <img
-          v-lazyload
           v-else
           :alt="sale.title"
-          :data-src="'https://placehold.jp/140x160.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
           class="row-sale__img"
         >
@@ -136,7 +134,7 @@ $red: #e31e24;
 }
 
 .row-sale-head__title {
-  font-size: 18px;
+  font-size: 16px;
   margin-right: 10px;
 }
 </style>

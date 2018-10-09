@@ -12,10 +12,8 @@
           class="grid-shop__img"
         >
         <img
-          v-lazyload
           v-else
           :alt="shop.title"
-          :data-src="'https://placehold.jp/350x250.png?text=' + shop.title"
           src="~assets/images/placeholder.png"
           class="grid-shop__img"
         >
@@ -29,9 +27,9 @@
     </nuxt-link>
     <nuxt-link
       :to="{ path: path }"
-      class="grid-shop__title"
+      class="grid-shop__title no-underline"
     >
-      {{ shop.title | truncate(45) }}
+      {{ shop.title | truncate(38) }}
     </nuxt-link>
     <div class="grid-shop__address">
       {{ shop.address }}
@@ -94,7 +92,6 @@ $red: #e31e24;
 
 .grid-shop__title:hover {
 	color: $red;
-	text-decoration: underline;
 }
 
 .grid-shop__address {

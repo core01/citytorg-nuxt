@@ -42,7 +42,7 @@ export const mutations = {
 export const actions = {
   async getSales(context) {
     let response = await this.$axios.get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&filter[city_id]=' +
+        'sales?sort=-created_at&expand=category&filter[city_id]=' +
         this.getters['cities/city'].id);
     if (response.headers) {
       let page = response.headers['x-pagination-current-page'];
@@ -66,7 +66,7 @@ export const actions = {
         page: page
       });
       let sales = await this.$axios.$get(process.env.BACKEND_URL +
-          'sales?sort=-created_at&filter[city_id]=' +
+          'sales?sort=-created_at&expand=category&filter[city_id]=' +
           this.getters['cities/city'].id +
           '&page=' +
           this.getters['meta/salesPages'].page);
@@ -75,7 +75,7 @@ export const actions = {
   },
   async getCategorySales(context, id) {
     let response = await this.$axios.get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&filter[category_id]=' +
+        'sales?sort=-created_at&expand=category&filter[category_id]=' +
         id +
         '&filter[city_id]=' +
         this.getters['cities/city'].id);
@@ -105,7 +105,7 @@ export const actions = {
         page: page
       });
       let response = await this.$axios.get(process.env.BACKEND_URL +
-          'sales?sort=-created_at&filter[category_id]=' +
+          'sales?sort=-created_at&expand=category&filter[category_id]=' +
           id +
           '&filter[city_id]=' +
           this.getters['cities/city'].id +

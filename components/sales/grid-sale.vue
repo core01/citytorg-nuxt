@@ -12,10 +12,8 @@
           class="grid-sale__img"
         >
         <img
-          v-lazyload
           v-else
           :alt="sale.title"
-          :data-src="'https://placehold.jp/350x250.png?text=' + sale.title"
           src="~assets/images/placeholder.png"
           class="grid-sale__img"
         >
@@ -23,11 +21,11 @@
     </nuxt-link>
     <nuxt-link
       :to="{ path: path }"
-      class="grid-sale__title"
+      class="grid-sale__title no-underline"
     >
-      {{ sale.title | truncate(45) }}
+      {{ sale.title | truncate(38) }}
     </nuxt-link>
-    <div class="grid-sale-prices">
+    <div class="grid-sale-prices my-1">
       <div class="grid-sale__price">
         {{ sale.price }} ₸
       </div>
@@ -38,6 +36,12 @@
         {{ sale.old_price }} ₸
       </div>
     </div>
+    <nuxt-link
+      v-if="sale.category"
+      :to="{ path: '/categories/' + sale.category.id + '-' + sale.category.alias }"
+      class="self-center my-1 bg-transparent text-grey-darker text-sm py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter">
+      {{ sale.category.title }}
+    </nuxt-link>
   </div>
 </template>
 <script>
@@ -89,14 +93,13 @@ $red: #e31e24;
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 320px;
+  height: 355px;
   margin-bottom: 20px;
 }
 
 .grid-sale__title {
   color: $blue;
-  font-size: 18px;
-  height: 45px;
+  font-size: 16px;
   line-height: 1.2;
   text-align: center;
   margin-top: 5px;
@@ -104,7 +107,6 @@ $red: #e31e24;
 
 .grid-sale__title:hover {
   color: $red;
-  text-decoration: underline;
 }
 
 .grid-sale__description {

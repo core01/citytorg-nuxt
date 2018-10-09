@@ -29,7 +29,7 @@
                 <img
                   v-else
                   :alt="sale.title"
-                  :src="'https://placehold.jp/350x250.png?text=' + sale.title"
+                  src="~assets/images/placeholder.png"
                   class="sale-card__image"
                 >
               </figure>
@@ -171,9 +171,11 @@ export default {
   },
   computed: {},
   mounted() {
-    for (let image of this.sale.images) {
-      this.images.push(this.UPLOADS_URL + image.regular);
-      this.previews.push(this.UPLOADS_URL + image.small);
+    if(this.sale.images){
+      for (let image of this.sale.images) {
+        this.images.push(this.UPLOADS_URL + image.regular);
+        this.previews.push(this.UPLOADS_URL + image.small);
+      }
     }
   },
   methods: {

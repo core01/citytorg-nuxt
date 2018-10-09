@@ -30,9 +30,8 @@
                 <img
                   v-else
                   :alt="shop.title"
-                  :src="'https://placehold.jp/350x250.png?text=' + shop.title"
+                  src="~assets/images/placeholder.png"
                 >
-
                 <div
                   v-if="shop.sample"
                   class="shop-image__text"
