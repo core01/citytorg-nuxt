@@ -66,7 +66,9 @@ export default {
 
     data.id = id;
     data.category  = await app.$axios.$get(process.env.BACKEND_URL + 'categories/' + id);
-    await store.dispatch('sales/getCategorySales', id);
+    if (store.state.pages.previous !== 'city-sales-alias') {
+      await store.dispatch('sales/getCategorySales', id);
+    }
 
     return data;
   },

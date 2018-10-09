@@ -48,7 +48,7 @@ export default {
   },
   async asyncData({app}) {
     let data = {};
-    data.categories = await app.$axios.$get(process.env.BACKEND_URL + 'categories?sort=priority');
+    data.categories = await app.$axios.$get(process.env.BACKEND_URL + 'categories?sort=-priority');
 
     return data;
   },
