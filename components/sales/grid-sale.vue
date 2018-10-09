@@ -39,7 +39,7 @@
     <nuxt-link
       v-if="sale.category"
       :to="{ path: '/categories/' + sale.category.id + '-' + sale.category.alias }"
-      class="self-center my-1 bg-transparent text-grey-darker text-sm py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter">
+      class="self-center my-1 bg-transparent text-grey-darker text-xs py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter">
       {{ sale.category.title }}
     </nuxt-link>
   </div>
