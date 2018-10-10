@@ -33,7 +33,7 @@ module.exports = {
       {
         name: 'msapplication-TileColor',
         content: '#00a300'
-      }
+      },
     ],
     link: [
       {
@@ -99,7 +99,7 @@ module.exports = {
    */
   css: [
     {
-      src: '@/assets/css/app.css',
+      src: '~assets/css/app.css',
       lang: 'postcss'
     }
   ],
@@ -130,7 +130,7 @@ module.exports = {
       ssr: false
     },
     {
-      src: '~plugins/axios',
+      src: '~plugins/axios'
     },
   ],
   /*

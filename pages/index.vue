@@ -1,26 +1,21 @@
 <template>
-  <section
-    id="main"
-  >
+  <section id="main">
     <div class="container mx-auto my-6">
       <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between">
         <div class="flex mb-3">
           <main-tabs
             :mode="mode"
-            @switch-mode="switchMode"
-          />
+            @switch-mode="switchMode" />
         </div>
         <div class="flex lg:justify-end justify-start mb-3">
           <sales-tabs
             v-if="mode === 'sales'"
             :type="type"
-            @switch-type="switchType"
-          />
+            @switch-type="switchType" />
           <shops-tabs
             v-else
             :type="type"
-            @switch-type="switchType"
-          />
+            @switch-type="switchType" />
         </div>
       </div>
     </div>
@@ -29,24 +24,20 @@
         <sales-list-grids
           v-if="type === 'grids'"
           :sales="sales"
-          @get-more-sales="getMoreSales"
-        />
+          @get-more-sales="getMoreSales" />
         <sales-list-rows
           v-else
           :sales="sales"
-          @get-more-sales="getMoreSales"
-        />
+          @get-more-sales="getMoreSales" />
       </template>
       <template v-else>
         <shops-list-grids
           v-if="type === 'grids'"
-          :shops="shops"
-        />
+          :shops="shops" />
         <shops-list-map
           v-else
           :shops="shops"
-          :zoom="13"
-        />
+          :zoom="13" />
       </template>
     </div>
   </section>
@@ -68,6 +59,10 @@ import {mapGetters} from 'vuex';
 export default {
   head: {
     title: 'Главная страница',
+    meta: [
+      { hid: 'gv', name: 'google-site-verification', content:  'sfkKY7P61TQiML-kc0Foncz2ISZClSQIMmqj64feJys' },
+      { hid: 'yv', name: 'yandex-verification', content: 'a88b4377e605e8ee' },
+    ],
   },
   async asyncData({app, store, route}) {
     if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
