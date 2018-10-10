@@ -27,7 +27,7 @@
             </figure>
           </div>
           <div class="w-full">
-            <p class="text-sm">{{ category.title | truncate(22) }}</p>
+            <p class="text-sm">{{ category.title | truncate(40) }}</p>
           </div>
         </nuxt-link>
       </div>
