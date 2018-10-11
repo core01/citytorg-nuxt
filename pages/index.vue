@@ -24,10 +24,12 @@
         <sales-list-grids
           v-if="type === 'grids'"
           :sales="sales"
+          :loading="loading"
           @get-more-sales="getMoreSales" />
         <sales-list-rows
           v-else
           :sales="sales"
+          :loading="loading"
           @get-more-sales="getMoreSales" />
       </template>
       <template v-else>
@@ -80,7 +82,9 @@ export default {
     shopsTabs,
   },
   data() {
-    return {};
+    return {
+      loading: false,
+    };
   },
   computed: {
     ...mapGetters({
@@ -101,7 +105,9 @@ export default {
       this.$store.commit('pages/SET_INDEX_TYPE', type);
     },
     async getMoreSales(){
+      this.loading = true;
       await this.$store.dispatch('sales/getMoreSales');
+      this.loading = false;
     }
   },
 };
