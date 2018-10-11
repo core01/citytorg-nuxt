@@ -30,11 +30,13 @@
       <sales-grids-list
         v-if="type === 'grids'"
         :sales="sales"
+        :loading="loading"
         @get-more-sales="getMoreSales"
       />
       <sales-rows-list
         v-else
         :sales="sales"
+        :loading="loading"
         @get-more-sales="getMoreSales"
       />
     </div>
@@ -80,6 +82,7 @@ export default {
   data() {
     return {
       UPLOADS_URL: process.env.UPLOADS_URL,
+      loading: false,
     };
   },
   computed: {
@@ -106,7 +109,9 @@ export default {
       this.$store.commit('pages/SET_CATEGORY_TYPE', type);
     },
     async getMoreSales(){
+      this.loading = true;
       await this.$store.dispatch('sales/getMoreCategorySales', this.id);
+      this.loading = false;
     }
   }
 };

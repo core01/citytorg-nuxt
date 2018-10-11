@@ -22,12 +22,14 @@
         v-if="type === 'grids'"
         :sales="sales"
         :absence_text="absence_text"
+        :loading="loading"
         @get-more-sales="getMoreSales"
       />
       <sales-rows-list
         v-else
         :sales="sales"
         :absence_text="absence_text"
+        :loading="loading"
         @get-more-sales="getMoreSales"
       />
     </div>
@@ -63,6 +65,7 @@ export default {
   data() {
     return {
       absence_text: 'Информации о действующих акциях на данный момент нет',
+      loading: false,
     };
   },
   computed: {
@@ -79,7 +82,9 @@ export default {
       this.$store.commit('pages/SET_SALES_TYPE', type);
     },
     async getMoreSales(){
+      this.loading = true;
       await this.$store.dispatch('sales/getMoreSales');
+      this.loading = false;
     }
   },
 };
