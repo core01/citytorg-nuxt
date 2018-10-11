@@ -1,22 +1,17 @@
 <template>
-  <div
-    v-if="sales.length > 0"
-  >
-    <table
-      class="table w-full">
+  <div v-if="sales.length > 0">
+    <table class="table w-full">
       <tbody>
         <sale
           v-for="sale in sales"
           :key="sale.id"
-          :sale="sale"
-        />
+          :sale="sale" />
       </tbody>
     </table>
     <no-ssr>
       <mugen-scroll
         :handler="loadMoreSales"
-        :should-handle="!loading"
-      />
+        :should-handle="!loading" />
     </no-ssr>
   </div>
   <div v-else>
