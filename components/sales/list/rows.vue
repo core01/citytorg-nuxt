@@ -2,7 +2,8 @@
   <div
     v-if="sales.length > 0"
   >
-    <table class="table w-full">
+    <table
+      class="table w-full">
       <tbody>
         <sale
           v-for="sale in sales"

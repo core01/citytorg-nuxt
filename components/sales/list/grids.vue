@@ -54,7 +54,6 @@ export default {
   },
   methods: {
     loadMoreSales() {
-      console.log('load');
       this.$emit('get-more-sales');
     },
   },
