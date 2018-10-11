@@ -1,4 +1,8 @@
 require('dotenv').config();
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
+const path = require('path');
+const TailwindExtractor = require('./TailwindExtractor.js');
 process.env.DEBUG = 'nuxt:*';
 const postCSSConfig = require('./postcss.config.js');
 module.exports = {
@@ -191,6 +195,27 @@ module.exports = {
           }
         ]
       });
+      if(!ctx.isDev){
+        // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
+        // for more information about purgecss.
+        config.plugins.push(new PurgecssPlugin({
+          paths: glob.sync([
+            path.join(__dirname, './pages/**/*.vue'),
+            path.join(__dirname, './layouts/**/*.vue'),
+            path.join(__dirname, './components/**/*.vue')
+          ]),
+          whitelist: ['html', 'body'],
+          extractors: [
+            {
+              extractor: TailwindExtractor,
+
+              // Specify the file extensions to include when scanning for
+              // class names.
+              extensions: ['html', 'js', 'php', 'vue']
+            }
+          ]
+        }));
+      }
     }
   },
   env: {
