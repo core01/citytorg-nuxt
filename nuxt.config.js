@@ -77,6 +77,12 @@ module.exports = {
       },
       {
         rel: 'stylesheet',
+        href: 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.33.0/css/blueimp-gallery.min.css',
+        integrity: 'sha256-Y0i7rzAjNSxOrq/x6gK6k0OeK1V2WNWwjh0/l+KapNk=',
+        crossorigin: 'anonymous'
+      },
+      {
+        rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
         integrity:
           'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
@@ -211,7 +217,7 @@ module.exports = {
 
               // Specify the file extensions to include when scanning for
               // class names.
-              extensions: ['html', 'js', 'php', 'vue']
+              extensions: ['html', 'js', 'vue']
             }
           ]
         }));

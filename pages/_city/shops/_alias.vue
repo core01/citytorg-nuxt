@@ -7,68 +7,70 @@
         </div>
         <div class="flex flex-wrap">
           <div class="w-full lg:w-2/5 text-center">
-            <no-ssr>
-              <figure class="shop-image">
-                <div
-                  v-if="images.length > 0">
-                  <gallery
-                    :images="images"
-                    :index="imageIndex"
-                    :options="{
-                      closeOnEscape: true,
-                      closeOnSlideClick: true,
-                      closeOnSwipeUpOrDown: true,
-                      continuous: true,
-                    }"
-                    @close="imageIndex = null"
-                  />
+            <div class="block">
+              <no-ssr>
+                <figure class="shop-image">
+                  <div
+                    v-if="images.length > 0">
+                    <gallery
+                      :images="images"
+                      :index="imageIndex"
+                      :options="{
+                        closeOnEscape: true,
+                        closeOnSlideClick: true,
+                        closeOnSwipeUpOrDown: true,
+                        continuous: true,
+                      }"
+                      @close="imageIndex = null"
+                    />
+                    <img
+                      :src="previews[0]"
+                      class="preview-image"
+                      @click="imageIndex = 0">
+                  </div>
                   <img
-                    :src="previews[0]"
-                    class="preview-image"
-                    @click="imageIndex = 0">
-                </div>
-                <img
-                  v-else
-                  :alt="shop.title"
-                  src="~assets/images/placeholder.png"
-                >
-                <div
-                  v-if="shop.sample"
-                  class="shop-image__text"
-                >Образец
-                </div>
-              </figure>
-            </no-ssr>
-            <table class="table mx-auto my-2">
-              <tbody>
-                <tr>
-                  <th class="border-b p-1">Адрес:</th>
-                  <td class="border-b p-1">{{ shop.address }}</td>
-                </tr>
-                <tr>
-                  <td
-                    class="border-b p-1"
-                    colspan="2">{{ shop.description }}</td>
-                </tr>
-              </tbody>
-            </table>
-            <div
-              v-if="sales.length >0"
-              class="buttons text-center"
-            >
-              <button
-                v-scroll-to="'#items'"
-                class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded inline-flex items-center"
+                    v-else
+                    :alt="shop.title"
+                    src="~assets/images/placeholder.png"
+                  >
+                  <div
+                    v-if="shop.sample"
+                    class="shop-image__text"
+                  >Образец
+                  </div>
+                </figure>
+              </no-ssr>
+              <table class="table mx-auto my-2">
+                <tbody>
+                  <tr>
+                    <th class="border-b p-1">Адрес:</th>
+                    <td class="border-b p-1">{{ shop.address }}</td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="border-b p-1"
+                      colspan="2">{{ shop.description }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div
+                v-if="sales.length >0"
+                class="buttons text-center"
               >
-                <span>Посмотреть акции в магазине</span>
-                <span class="justify-center items-center inline-flex w-6 h-6">
-                  <i class="fas fa-angle-double-down"/>
-                </span>
-              </button>
+                <button
+                  v-scroll-to="'#items'"
+                  class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded inline-flex items-center"
+                >
+                  <span>Посмотреть акции в магазине</span>
+                  <span class="justify-center items-center inline-flex w-6 h-6">
+                    <i class="fas fa-angle-double-down"/>
+                  </span>
+                </button>
+              </div>
+              <p v-else>
+                В данном магазине в настоящее время нет акций
+              </p>
             </div>
-            <p v-else>
-              В данном магазине в настоящее время нет акций
-            </p>
           </div>
           <div class="w-full lg:w-3/5">
             <no-ssr>
@@ -116,6 +118,7 @@
             v-if="mode === 'sales'"
             :sales="sales"
             :absence-text="absenceText"
+            :loading="false"
           />
           <shopListGrids
             v-else

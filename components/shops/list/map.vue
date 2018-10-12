@@ -127,6 +127,6 @@ export default {
 <style lang="postcss" scoped>
 .map_shop-map {
   z-index: 10;
-  height: 70vh;
+  height: 450px;
 }
 </style>
