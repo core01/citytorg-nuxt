@@ -1,8 +1,4 @@
 require('dotenv').config();
-const PurgecssPlugin = require('purgecss-webpack-plugin');
-const glob = require('glob-all');
-const path = require('path');
-const TailwindExtractor = require('./TailwindExtractor.js');
 process.env.DEBUG = 'nuxt:*';
 const postCSSConfig = require('./postcss.config.js');
 module.exports = {
@@ -70,16 +66,6 @@ module.exports = {
       {
         rel: 'manifest',
         href: '/site.webmanifest'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdnjs.cloudflare.com/ajax/libs/blueimp-gallery/2.33.0/css/blueimp-gallery.min.css',
-        integrity: 'sha256-Y0i7rzAjNSxOrq/x6gK6k0OeK1V2WNWwjh0/l+KapNk=',
-        crossorigin: 'anonymous'
       },
       {
         rel: 'stylesheet',
@@ -196,32 +182,9 @@ module.exports = {
         use: [
           'vue-style-loader',
           'css-loader',
-          {
-            loader: 'postcss-loader'
-          }
+          'postcss-loader',
         ]
       });
-      if(!ctx.isDev){
-        // Remove unused CSS using purgecss. See https://github.com/FullHuman/purgecss
-        // for more information about purgecss.
-        config.plugins.push(new PurgecssPlugin({
-          paths: glob.sync([
-            path.join(__dirname, './pages/**/*.vue'),
-            path.join(__dirname, './layouts/**/*.vue'),
-            path.join(__dirname, './components/**/*.vue')
-          ]),
-          whitelist: ['html', 'body'],
-          extractors: [
-            {
-              extractor: TailwindExtractor,
-
-              // Specify the file extensions to include when scanning for
-              // class names.
-              extensions: ['html', 'js', 'vue']
-            }
-          ]
-        }));
-      }
     }
   },
   env: {

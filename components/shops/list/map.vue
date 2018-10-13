@@ -23,6 +23,7 @@
   </l-map>
 </template>
 <script>
+import 'leaflet/dist/leaflet.css';
 let Vue2Leaflet = {};
 let L = {
   icon: () => {},
