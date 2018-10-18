@@ -40,19 +40,12 @@
                   </div>
                 </figure>
               </no-ssr>
-              <table class="table mx-auto my-2">
-                <tbody>
-                  <tr>
-                    <th class="border-b p-1">Адрес:</th>
-                    <td class="border-b p-1">{{ shop.address }}</td>
-                  </tr>
-                  <tr>
-                    <td
-                      class="border-b p-1"
-                      colspan="2">{{ shop.description }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div>
+                <p>
+                  Адрес: {{ shop.address }}
+                </p>
+                <p v-html="shop.description"/>
+              </div>
               <div
                 v-if="sales.length >0"
                 class="buttons text-center"
