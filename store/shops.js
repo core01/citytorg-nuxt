@@ -18,7 +18,6 @@ export const actions = {
   async getShops(context) {
     let data = await this.$axios.$get(process.env.BACKEND_URL +
         'shops?sort=-priority,-id' +
-        '&expand=shopType' +
         '&filter[city_id]=' + this.getters['cities/city'].id +
         '&per-page=0');
     context.commit('SET_SHOPS', data);

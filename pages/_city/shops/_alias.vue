@@ -137,12 +137,12 @@ export default {
       sales: [],
       shops: [],
     };
-    data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales,shopType,stalls');
+    data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales,stalls');
     data.sales = data.shop.sales;
     // Если у нас точка торговой сети
     if (data.shop.parent !== 0) {
       // Получаем магазины торговой сети по parent id
-      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.shop.parent + '?expand=stalls,shopType&per-page=0');
+      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.shop.parent + '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции в текущей точке
       response =
@@ -152,13 +152,13 @@ export default {
     } else if (data.shop.shopType.alias === 'network') {
       // Получаем магазины торговой сети по id
       let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id +
-      '?expand=stalls,shopType&per-page=0');
+      '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции торговой сети
       data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales/network?id=' + data.id);
     } else {
       // Получаем магазины с акциями
-      data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?expand=shopType&per-page=0');
+      data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?per-page=0');
     }
 
     return data;
