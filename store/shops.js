@@ -20,7 +20,7 @@ export const actions = {
         'shops?sort=-priority,-id' +
         '&expand=shopType' +
         '&filter[city_id]=' + this.getters['cities/city'].id +
-        '&per-page=50');
+        '&per-page=0');
     context.commit('SET_SHOPS', data);
   },
 };
