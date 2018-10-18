@@ -6,35 +6,12 @@
       <h2 class="text-center content_h2">Категории</h2>
     </div>
     <div class="container mx-auto">
-      <div class="flex flex-wrap">
-        <nuxt-link
-          v-for="category in categories"
-          :key="category.id"
-          :to="{ path: '/categories/' + category.id + '-' + category.alias }"
-          class="block w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer p-2 text-black hover:text-blue-dark no-underline">
-          <div class="overflow-hidden">
-            <figure class="relative overflow-hidden">
-              <img
-                v-if="category.images"
-                :src="UPLOADS_URL + category.images[0].small"
-                :alt="category.title"
-                class="w-full rounded  ">
-              <img
-                v-else
-                :alt="category.title"
-                src="~assets/images/placeholder.png"
-                class="w-full rounded  ">
-            </figure>
-          </div>
-          <div class="w-full">
-            <p class="text-sm">{{ category.title | truncate(40) }}</p>
-          </div>
-        </nuxt-link>
-      </div>
+      <category-list :categories="categories"/>
     </div>
   </section>
 </template>
 <script>
+import categoryList from '../../components/categories/list.vue';
 export default {
   head: {
     title: 'Категории',
@@ -53,6 +30,7 @@ export default {
     return data;
   },
   components: {
+    categoryList
   },
   data() {
     return {

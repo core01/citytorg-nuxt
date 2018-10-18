@@ -85,7 +85,6 @@ $font-family: 'Open Sans', Arial, Helvetica, sans-senif;
   background: #fff;
   box-shadow: rgba(0, 0, 0, 0.27) 0 0 4px;
   border-radius: 4px;
-  display: inline-block;
   margin: 0 5px;
   position: relative;
   /*transition: all 0.2s ease-in-out*/

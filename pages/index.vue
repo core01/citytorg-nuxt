@@ -1,61 +1,53 @@
 <template>
   <section id="main">
-    <div class="container mx-auto my-6">
-      <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between">
-        <div class="flex mb-3">
-          <main-tabs
-            :mode="mode"
-            @switch-mode="switchMode" />
-        </div>
-        <div class="flex lg:justify-end justify-start mb-3">
-          <sales-tabs
-            v-if="mode === 'sales'"
-            :type="type"
-            @switch-type="switchType" />
-          <shops-tabs
-            v-else
-            :type="type"
-            @switch-type="switchType" />
-        </div>
-      </div>
-    </div>
     <div class="container mx-auto">
-      <template v-if="mode === 'sales'">
+
+      <div class="my-3">
+        <h2 class="my-3">Новые
+          <nuxt-link
+            :to="{ name: 'city-sales', params: { city: city.alias }}"
+            class="no-underline hover:underline">
+            акции
+          </nuxt-link>
+        </h2>
         <sales-list-grids
-          v-if="type === 'grids'"
           :sales="sales"
           :loading="loading"
           @get-more-sales="getMoreSales" />
-        <sales-list-rows
-          v-else
-          :sales="sales"
-          :loading="loading"
-          @get-more-sales="getMoreSales" />
-      </template>
-      <template v-else>
-        <shops-list-grids
-          v-if="type === 'grids'"
-          :shops="shops" />
-        <shops-list-map
-          v-else
-          :shops="shops"
-          :zoom="13" />
-      </template>
+      </div>
+      <div class="my-3">
+        <h2 class="my-3">
+          Популярные
+          <nuxt-link
+            :to="{ name: 'categories' }"
+            class="no-underline hover:underline">
+            категории
+          </nuxt-link>
+        </h2>
+        <category-list :categories="categories" />
+      </div>
+      <div
+        v-show="shops.length > 0"
+        class="my-3">
+        <h2 class="my-3">
+          Популярные
+          <nuxt-link
+            :to="{ name: 'city-shops', params: { city: city.alias }}"
+            class="no-underline hover:underline">
+            магазины
+          </nuxt-link>
+        </h2>
+        <shopListGrids :shops="shops" />
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import navbar from '../components/navbar/navbar.vue';
 import salesListGrids from '../components/sales/list/grids.vue';
-import salesListRows from '../components/sales/list/rows.vue';
+import categoryList from '../components/categories/list.vue';
+import shopListGrids from '../components/shops/list/grids.vue';
 
-import salesTabs from '../components/tabs/sales.vue';
-import mainTabs from '../components/tabs/main.vue';
-import shopsTabs from '../components/tabs/shops.vue';
-
-import shopsListGrids from '../components/shops/list/grids.vue';
-import shopsListMap from '../components/shops/list/map.vue';
 import {mapGetters} from 'vuex';
 
 export default {
@@ -67,19 +59,24 @@ export default {
     ],
   },
   async asyncData({app, store, route}) {
-    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
-      await store.dispatch('sales/getSales');
-    }
+    let sales = await app.$axios.$get(process.env.BACKEND_URL +
+        'sales?sort=-created_at&expand=category' +
+        '&filter[city_id]=' + store.getters['cities/city'].id + '&per-page=5');
+    let categories = await app.$axios.$get(process.env.BACKEND_URL +
+     'categories/top?sort=-priority&per-page=6');
+    let shops = await app.$axios.$get(process.env.BACKEND_URL +
+        'shops/top?sort=-priority,-id' +
+        '&filter[city_id]=' + store.getters['cities/city'].id + '&per-page=4');
+    return {
+      sales,
+      categories,
+      shops,
+    };
   },
   components: {
-    navbar,
     salesListGrids,
-    shopsListGrids,
-    salesListRows,
-    shopsListMap,
-    mainTabs,
-    salesTabs,
-    shopsTabs,
+    categoryList,
+    shopListGrids,
   },
   data() {
     return {
@@ -88,10 +85,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      shops: 'shops/shops',
-      sales: 'sales/sales',
-      mode: 'pages/indexMode',
-      type: 'pages/indexType',
+      city: 'cities/city',
     }),
   },
   mounted() {

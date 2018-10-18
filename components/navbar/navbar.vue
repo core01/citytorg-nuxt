@@ -5,7 +5,7 @@
         <div class="brand flex items-stretch flex-no-shrink">
           <nuxt-link
             to="/"
-            class="flex flex-no-grow flex-no-shrink items-center py-0 px-0 lg:py-1 lg:px-2">
+            class="flex flex-no-grow flex-no-shrink items-center py-0 px-0">
             <img
               class="logo"
               src="~assets/images/logo_beta.png"
