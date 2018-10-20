@@ -1,6 +1,7 @@
 export const state = () => ({
   sales: [],
-  categorySales: {}
+  categorySales: {},
+  topSales: [],
 });
 
 export const getters = {
@@ -15,6 +16,9 @@ export const getters = {
   },
   categorySales: state => {
     return state.categorySales;
+  },
+  top: state => {
+    return state.topSales;
   }
 };
 
@@ -36,6 +40,9 @@ export const mutations = {
       ...state.categorySales,
       [payload.id]: state.categorySales[payload.id].concat(payload.sales)
     };
+  },
+  SET_TOP_SALES(state, sales){
+    state.topSales = sales;
   }
 };
 
@@ -72,6 +79,12 @@ export const actions = {
           this.getters['meta/salesPages'].page);
       context.commit('ADD_SALES', sales);
     }
+  },
+  async getTopSales(context){
+    let sales = await this.$axios.$get(process.env.BACKEND_URL +
+      'sales?sort=-created_at&expand=category' +
+      '&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=5');
+    context.commit('SET_TOP_SALES', sales);
   },
   async getCategorySales(context, id) {
     let response = await this.$axios.get(process.env.BACKEND_URL +

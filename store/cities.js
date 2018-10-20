@@ -37,7 +37,9 @@ export const actions = {
       city: city,
     });
     context.commit('SET_CITY', data.city);
-    await this.dispatch('shops/getShops');
-    await this.dispatch('sales/getSales');
+    this.dispatch('shops/getShops');
+    this.dispatch('sales/getSales');
+    this.dispatch('sales/getTopSales');
+    this.dispatch('shops/getTopShops');
   },
 };

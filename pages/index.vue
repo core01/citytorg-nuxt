@@ -1,8 +1,9 @@
 <template>
   <section id="main">
     <div class="container mx-auto">
-
-      <div class="my-3">
+      <div
+        v-show="sales.length > 0"
+        class="my-3">
         <h2 class="my-3">Новые
           <nuxt-link
             :to="{ name: 'city-sales', params: { city: city.alias }}"
@@ -12,8 +13,7 @@
         </h2>
         <sales-list-grids
           :sales="sales"
-          :loading="loading"
-          @get-more-sales="getMoreSales" />
+          :loading="loading" />
       </div>
       <div class="my-3">
         <h2 class="my-3">
@@ -59,18 +59,10 @@ export default {
     ],
   },
   async asyncData({app, store, route}) {
-    let sales = await app.$axios.$get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&expand=category' +
-        '&filter[city_id]=' + store.getters['cities/city'].id + '&per-page=5');
     let categories = await app.$axios.$get(process.env.BACKEND_URL +
      'categories/top?sort=-priority&per-page=6');
-    let shops = await app.$axios.$get(process.env.BACKEND_URL +
-        'shops/top?sort=-priority,-id' +
-        '&filter[city_id]=' + store.getters['cities/city'].id + '&per-page=4');
     return {
-      sales,
       categories,
-      shops,
     };
   },
   components: {
@@ -86,23 +78,13 @@ export default {
   computed: {
     ...mapGetters({
       city: 'cities/city',
+      sales: 'sales/top',
+      shops: 'shops/top',
     }),
   },
   mounted() {
   },
   methods: {
-    switchMode(mode) {
-      this.$store.commit('pages/SET_INDEX_MODE', mode);
-      this.switchType('grids');
-    },
-    switchType(type) {
-      this.$store.commit('pages/SET_INDEX_TYPE', type);
-    },
-    async getMoreSales(){
-      this.loading = true;
-      await this.$store.dispatch('sales/getMoreSales');
-      this.loading = false;
-    }
   },
 };
 </script>
