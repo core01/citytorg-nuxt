@@ -21,14 +21,6 @@
           </nuxt-link>
           <nuxt-link
             :exact="true"
-            to="/about"
-            class="p-1 no-underline"
-            active-class="is-active"
-          >
-            О проекте
-          </nuxt-link>
-          <nuxt-link
-            :exact="true"
             to="/request"
             class="p-1 no-underline"
             active-class="is-active"
