@@ -202,9 +202,13 @@ export default {
         this.switchMode('shops');
       }
     }
-    for (let image of this.shop.images) {
-      this.images.push(this.UPLOADS_URL + image.regular);
-      this.previews.push(this.UPLOADS_URL + image.small);
+    if(this.shop.images !== null){
+      if(this.shop.images.length > 0){
+        for (let image of this.shop.images) {
+          this.images.push(this.UPLOADS_URL + image.regular);
+          this.previews.push(this.UPLOADS_URL + image.small);
+        }
+      }
     }
   },
   methods: {
