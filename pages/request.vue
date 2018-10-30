@@ -1,6 +1,6 @@
 <template>
   <section class="min-h-screen">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-1 md:px-0">
       <div class="content">
         <form
           class="request-form  text-black-tundora"

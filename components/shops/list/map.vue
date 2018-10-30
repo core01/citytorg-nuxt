@@ -5,6 +5,7 @@
     :center="center"
     :max-zoom="maxZoom"
     :min-zoom="minZoom"
+    :options="{ scrollWheelZoom:false }"
     class="map_shop-map"
   >
     <l-tile-layer
@@ -47,7 +48,7 @@ export default {
     },
     zoom: {
       type: Number,
-      default: 13,
+      default: 15,
     },
     currentId: {
       type: Number,
@@ -61,7 +62,7 @@ export default {
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       // marker: L.latLng(49.9553, 82.6134),
       maxZoom: 18,
-      minZoom: 8,
+      minZoom: 11,
       selectedIcon: L.icon({
         // shadowUrl: require('~/assets/markers/marker-shadow.png'),
         // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
@@ -117,10 +118,12 @@ export default {
     },
   },
   mounted() {
+    let options = { padding : [50,50] };
+    if(this.currentId === -1 && this.markers.length === 1){
+      options.maxZoom = 16;
+    }
     if (this.currentId === -1 && this.markers.length > 0) {
-      this.$refs.map.mapObject.fitBounds(this.markers, {
-        padding: [50, 50],
-      });
+      this.$refs.map.mapObject.fitBounds(this.markers, options);
     }
   },
 };

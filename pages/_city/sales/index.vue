@@ -7,7 +7,7 @@
       <h2 class="text-center content_h2">Акции</h2>
     </div>
 
-    <div class="container mx-auto mb-6">
+    <div class="container mx-auto mb-6 px-1 md:px-0">
       <div class="flex zero-side-margin">
         <div class="w-full lg:w-1/2">
           <sales-tabs
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="container mx-auto">
+    <div class="container mx-auto px-1 md:px-0">
       <sales-grids-list
         v-if="type === 'grids'"
         :sales="sales"

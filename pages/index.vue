@@ -1,6 +1,6 @@
 <template>
   <section id="main">
-    <div class="container mx-auto">
+    <div class="container mx-auto px-1 md:px-0">
       <div
         v-show="sales.length > 0"
         class="my-3">

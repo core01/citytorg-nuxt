@@ -1,12 +1,12 @@
 <template>
   <div>
-    <section class="shop min-h-screen">
-      <div class="container mx-auto">
+    <section class="shop">
+      <div class="container mx-auto px-1 md:px-0">
         <div class="content">
           <h2 class="text-center content_h2">{{ shop.title }}</h2>
         </div>
         <div class="flex flex-wrap">
-          <div class="w-full lg:w-2/5 text-center">
+          <div class="w-full lg:w-2/5 text-center mb-5 md:mb-0">
             <div class="block">
               <no-ssr>
                 <figure class="shop-image">
@@ -40,7 +40,7 @@
                   </div>
                 </figure>
               </no-ssr>
-              <div>
+              <div class="my-4">
                 <p>
                   Адрес: {{ shop.address }}
                 </p>
@@ -75,14 +75,14 @@
             </no-ssr>
           </div>
         </div>
+        <hr class="border-none my-8">
       </div>
     </section>
     <section
       v-if="shop.stalls.length > 0 || sales.length > 0"
       id="items"
-      class="min-h-screen"
     >
-      <div class="container mx-auto">
+      <div class="container mx-auto px-1 md:px-0">
         <div
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
           class="flex flex-wrap"

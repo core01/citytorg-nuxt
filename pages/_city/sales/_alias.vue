@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="sale-card">
-      <div class="container mx-auto">
+      <div class="container mx-auto px-1 md:px-0">
         <div class="content">
           <h2 class="text-center content_h2">{{ sale.title }}</h2>
         </div>
@@ -46,14 +46,14 @@
                 <div class="sale-card__price-title">
                   Цена:
                 </div>
+                <div class="sale-card__price">
+                  {{ sale.price }} ₸
+                </div>
                 <div
                   v-if="sale.old_price"
                   class="sale-card__old-price"
                 >
                   {{ sale.old_price }} ₸
-                </div>
-                <div class="sale-card__price">
-                  {{ sale.price }} ₸
                 </div>
               </div>
               <div
@@ -99,7 +99,7 @@
       id="shops"
       class="shops min-h-screen"
     >
-      <div class="container mx-auto">
+      <div class="container mx-auto px-1 md:px-0">
         <div class="content">
           <h2 class="text-center content_h2">Магазины</h2>
         </div>
@@ -117,7 +117,8 @@
           v-else
           class="container"
         >
-          <shop-list-map :shops="sale.shops"/>
+          <shop-list-map
+            :shops="sale.shops"/>
         </div>
       </div>
     </section>
@@ -200,14 +201,14 @@ $red: #e31e24;
 }
 
 .sale-card__price {
-  color: $red;
+  color: $blue;
   font-size: 28px;
   font-weight: bold;
   padding: 0 5px;
 }
 
 .sale-card__old-price {
-  color: #f60;
+  color: $red;
   font-weight: bold;
   font-size: 22px;
   text-decoration: line-through;

@@ -6,7 +6,7 @@
     <div class="content">
       <h2 class="text-center content_h2">Магазины</h2>
     </div>
-    <div class="container mx-auto mb-6">
+    <div class="container mx-auto mb-6 px-1 md:px-0">
       <div class="flex">
         <div class="w-full lg:w-1/2">
           <shops-tabs
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="container mx-auto">
+    <div class="container mx-auto px-1 md:px-0">
       <shopListGrids
         v-if="type === 'grids'"
         :shops="shops"
