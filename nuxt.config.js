@@ -4,6 +4,12 @@ const postCSSConfig = require('./postcss.config.js');
 module.exports = {
   debug: true,
   mode: 'universal',
+  messages: {
+    server_error: 'Oh no! Server error',
+    nuxtjs: '',
+    back_to_home: 'Cmon, back home!',
+    server_error_details: 'Uh uh :| Server errorrrrr',
+  },
   router: {
     middleware: ['cityCheck', 'pageHistory']
   },
