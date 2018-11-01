@@ -81,10 +81,6 @@ module.exports = {
         color: '#5bbad5'
       },
       {
-        rel: 'manifest',
-        href: '/site.webmanifest'
-      },
-      {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
         integrity:
