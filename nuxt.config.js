@@ -11,7 +11,7 @@ module.exports = {
     server_error_details: 'Uh uh :| Server errorrrrr',
   },
   manifest: {
-    name: 'Citytorg.kz - Торговая сеть акционных продаж',
+    name: 'Торговая сеть акционных продаж',
     short_name: 'Citytorg',
     description: 'Акции, скидки в магазинах города на карте',
     theme_color: '#ffffff'
