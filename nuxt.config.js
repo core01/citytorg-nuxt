@@ -10,6 +10,12 @@ module.exports = {
     back_to_home: 'Cmon, back home!',
     server_error_details: 'Uh uh :| Server errorrrrr',
   },
+  manifest: {
+    name: 'Citytorg.kz - Торговая сеть акционных продаж',
+    short_name: 'Citytorg',
+    description: 'Акции, скидки в магазинах города на карте',
+    theme_color: '#ffffff'
+  },
   router: {
     middleware: ['cityCheck', 'pageHistory']
   },
@@ -40,6 +46,11 @@ module.exports = {
         name: 'msapplication-TileColor',
         content: '#00a300'
       },
+      {
+        property: 'og:image',
+        content:
+          'https://citytorg.kz/citytorg_og_image.png'
+      },
     ],
     link: [
       {
@@ -68,10 +79,6 @@ module.exports = {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg',
         color: '#5bbad5'
-      },
-      {
-        rel: 'manifest',
-        href: '/site.webmanifest'
       },
       {
         rel: 'stylesheet',
@@ -139,6 +146,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     [
@@ -152,7 +160,7 @@ module.exports = {
         accurateTrackBounce: true
       }
     ],
-    ['@nuxtjs/moment', ['ru']]
+    ['@nuxtjs/moment', ['ru']],
   ],
 
   /*
@@ -160,9 +168,15 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    proxy: true,
   },
-
+  proxy: {
+    '/api': {
+      target: 'https://api.hnpwa.com/v0/',
+      pathRewrite: { '^/api/': '' }
+    }
+  },
   /*
    ** Build configuration
    */
@@ -202,5 +216,18 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
     BACKEND_URL: process.env.BACKEND_URL,
     UPLOADS_URL: process.env.UPLOADS_URL
+  },
+  render: {
+    http2: {
+      push: true
+    },
+    static: {
+      maxAge: '1y',
+      setHeaders(res, path) {
+        if (path.includes('sw.js')) {
+          res.setHeader('Cache-Control', `public, max-age=${15 * 60}`);
+        }
+      }
+    }
   }
 };

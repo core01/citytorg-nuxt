@@ -15,3 +15,4 @@ dist
 .contentful.json
 .env
 assets/tiles
+sw.*
