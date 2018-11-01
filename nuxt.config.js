@@ -81,6 +81,10 @@ module.exports = {
         color: '#5bbad5'
       },
       {
+        rel: 'manifest',
+        href: '/site.webmanifest'
+      },
+      {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
         integrity:
@@ -169,9 +173,15 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    proxy: true,
   },
-
+  proxy: {
+    '/api': {
+      target: 'https://api.hnpwa.com/v0/',
+      pathRewrite: { '^/api/': '' }
+    }
+  },
   /*
    ** Build configuration
    */

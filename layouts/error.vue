@@ -10,6 +10,9 @@
         <h1 >Упс! Ошибочка вышла!</h1>
         <h2 class="text-grey-darker">Попробуйте повторить запрос позже!</h2>
       </div>
+      <div>
+        {{ error.message }} {{ error.message }}
+      </div>
     </div>
   </div>
 </template>
