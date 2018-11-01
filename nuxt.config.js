@@ -10,6 +10,12 @@ module.exports = {
     back_to_home: 'Cmon, back home!',
     server_error_details: 'Uh uh :| Server errorrrrr',
   },
+  manifest: {
+    name: 'Citytorg.kz - Торговая сеть акционных продаж',
+    short_name: 'Citytorg.kz',
+    description: 'Акции, скидки в магазинах города на карте',
+    theme_color: '#ffffff'
+  },
   router: {
     middleware: ['cityCheck', 'pageHistory']
   },
@@ -152,7 +158,8 @@ module.exports = {
         accurateTrackBounce: true
       }
     ],
-    ['@nuxtjs/moment', ['ru']]
+    ['@nuxtjs/moment', ['ru']],
+    '@nuxtjs/pwa',
   ],
 
   /*
