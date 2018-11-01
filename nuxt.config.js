@@ -12,7 +12,7 @@ module.exports = {
   },
   manifest: {
     name: 'Citytorg.kz - Торговая сеть акционных продаж',
-    short_name: 'Citytorg.kz',
+    short_name: 'Citytorg',
     description: 'Акции, скидки в магазинах города на карте',
     theme_color: '#ffffff'
   },

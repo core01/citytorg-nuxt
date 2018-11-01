@@ -11,7 +11,7 @@
         <h2 class="text-grey-darker">Попробуйте повторить запрос позже!</h2>
       </div>
       <div>
-        {{ error.message }} {{ error.message }}
+        {{ error.statusCode }} {{ error.message }}
       </div>
     </div>
   </div>
