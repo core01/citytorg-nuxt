@@ -46,6 +46,11 @@ module.exports = {
         name: 'msapplication-TileColor',
         content: '#00a300'
       },
+      {
+        property: 'og:image',
+        content:
+          'https://citytorg.kz/citytorg_og_image.png'
+      },
     ],
     link: [
       {
@@ -145,6 +150,8 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/pwa',
+    '@nuxtjs/component-cache',
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
     [
@@ -159,7 +166,6 @@ module.exports = {
       }
     ],
     ['@nuxtjs/moment', ['ru']],
-    '@nuxtjs/pwa',
   ],
 
   /*
@@ -209,5 +215,18 @@ module.exports = {
     BASE_URL: process.env.BASE_URL,
     BACKEND_URL: process.env.BACKEND_URL,
     UPLOADS_URL: process.env.UPLOADS_URL
+  },
+  render: {
+    http2: {
+      push: true
+    },
+    static: {
+      maxAge: '1y',
+      setHeaders(res, path) {
+        if (path.includes('sw.js')) {
+          res.setHeader('Cache-Control', `public, max-age=${15 * 60}`);
+        }
+      }
+    }
   }
 };
