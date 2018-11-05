@@ -67,7 +67,7 @@ export default {
     let [id] = params.alias.split('-');
 
     data.id = id;
-    data.category  = await app.$axios.$get(process.env.BACKEND_URL + 'categories/' + id);
+    data.category  = await app.$axios.$get('api/categories/' + id);
     if (store.state.pages.previous !== 'city-sales-alias') {
       await store.dispatch('sales/getCategorySales', id);
     }
@@ -81,7 +81,6 @@ export default {
   },
   data() {
     return {
-      UPLOADS_URL: process.env.UPLOADS_URL,
       loading: false,
     };
   },
@@ -98,7 +97,7 @@ export default {
       return this.metaById(this.id);
     },
     backgroundImage(){
-      return 'background-image: url("' + this.UPLOADS_URL +  this.category.images[0].wide + '");';
+      return 'background-image: url("/' +  this.category.images[0].wide + '");';
     },
   },
   mounted() {

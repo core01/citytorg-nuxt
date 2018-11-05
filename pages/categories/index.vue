@@ -6,7 +6,7 @@
       <h2 class="text-center content_h2">Категории</h2>
     </div>
     <div class="container mx-auto">
-      <category-list :categories="categories"/>
+      <category-list :categories="categories" />
     </div>
   </section>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   async asyncData({app}) {
     let data = {};
-    data.categories = await app.$axios.$get(process.env.BACKEND_URL + 'categories?sort=-priority');
+    data.categories = await app.$axios.$get('api/categories?sort=-priority');
 
     return data;
   },
@@ -34,7 +34,6 @@ export default {
   },
   data() {
     return {
-      UPLOADS_URL: process.env.UPLOADS_URL,
     };
   },
   computed: {

@@ -2,7 +2,7 @@ export default async ({error, app, route}) => {
   if (process.server) {
     if (await route.params.alias) {
       let [id] = route.params.alias.split('-');
-      let sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id +
+      let sale = await app.$axios.$get('api/sales/' + id +
           '?expand=city');
       if (sale.city.alias !== route.params.city) {
         return error({

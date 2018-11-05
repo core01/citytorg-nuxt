@@ -146,6 +146,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/proxy',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
@@ -173,9 +174,10 @@ module.exports = {
   },
   proxy: {
     '/api': {
-      target: 'https://api.hnpwa.com/v0/',
-      pathRewrite: { '^/api/': '' }
-    }
+      target: process.env.YII_API,
+      pathRewrite: { '^/api': '' }
+    },
+    '/uploads': process.env.YII_URL,
   },
   /*
    ** Build configuration
@@ -214,8 +216,7 @@ module.exports = {
     SMTP_PASS: process.env.SMTP_PASS,
     SMTP_PORT: process.env.SMTP_PORT,
     BASE_URL: process.env.BASE_URL,
-    BACKEND_URL: process.env.BACKEND_URL,
-    UPLOADS_URL: process.env.UPLOADS_URL
+    YII_API : process.env.YII_API,
   },
   render: {
     http2: {

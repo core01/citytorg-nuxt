@@ -9,7 +9,7 @@
         <figure class="relative overflow-hidden">
           <img
             v-if="category.images"
-            :src="UPLOADS_URL + category.images[0].small"
+            :src="'/' + category.images[0].small"
             :alt="category.title"
             class="w-full rounded  ">
           <img
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      UPLOADS_URL: process.env.UPLOADS_URL,
+
     };
   },
   computed: {

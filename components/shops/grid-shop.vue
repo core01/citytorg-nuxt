@@ -6,7 +6,7 @@
         <img
           v-lazyload
           v-if="shop.images"
-          :data-src="UPLOADS_URL + shop.images[0].small"
+          :data-src="'/' + shop.images[0].small"
           :alt="shop.title"
           src="~assets/images/placeholder.png"
           class="grid-shop__img"
@@ -55,9 +55,6 @@ export default {
     ...mapGetters({
       city: 'cities/city',
     }),
-    UPLOADS_URL() {
-      return process.env.UPLOADS_URL;
-    },
     path() {
       return '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias;
     },
