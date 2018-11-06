@@ -137,28 +137,28 @@ export default {
       sales: [],
       shops: [],
     };
-    data.shop = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales,stalls');
+    data.shop = await app.$axios.$get('api/shops/' + data.id + '?expand=sales,stalls');
     data.sales = data.shop.sales;
     // Если у нас точка торговой сети
     if (data.shop.parent !== 0) {
       // Получаем магазины торговой сети по parent id
-      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.shop.parent + '?expand=stalls&per-page=0');
+      let response = await app.$axios.$get('api/shops/' + data.shop.parent + '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции в текущей точке
       response =
-          await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id + '?expand=sales');
+          await app.$axios.$get('api/shops/' + data.id + '?expand=sales');
       data.sales = response.sales;
       // если у нас сеть
     } else if (data.shop.shopType.alias === 'network') {
       // Получаем магазины торговой сети по id
-      let response = await app.$axios.$get(process.env.BACKEND_URL + 'shops/' + data.id +
+      let response = await app.$axios.$get('api/shops/' + data.id +
       '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции торговой сети
-      data.sales = await app.$axios.$get(process.env.BACKEND_URL + 'sales/network?id=' + data.id);
+      data.sales = await app.$axios.$get('api/sales/network?id=' + data.id);
     } else {
       // Получаем магазины с акциями
-      data.shops = await app.$axios.$get(process.env.BACKEND_URL + 'shops?per-page=0');
+      data.shops = await app.$axios.$get('api/shops?per-page=0');
     }
 
     return data;
@@ -187,7 +187,6 @@ export default {
       shops: [],
       shop: {},
       mode: 'sales',
-      UPLOADS_URL: process.env.UPLOADS_URL,
       images: [],
       imageIndex: null,
       previews: [],
@@ -205,8 +204,8 @@ export default {
     if(this.shop.images !== null){
       if(this.shop.images.length > 0){
         for (let image of this.shop.images) {
-          this.images.push(this.UPLOADS_URL + image.regular);
-          this.previews.push(this.UPLOADS_URL + image.small);
+          this.images.push('/' + image.regular);
+          this.previews.push('/' + image.small);
         }
       }
     }

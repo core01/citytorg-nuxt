@@ -16,3 +16,4 @@ dist
 .env
 assets/tiles
 sw.*
+sessions

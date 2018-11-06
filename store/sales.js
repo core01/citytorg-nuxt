@@ -48,8 +48,7 @@ export const mutations = {
 
 export const actions = {
   async getSales(context) {
-    let response = await this.$axios.get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&expand=category&filter[city_id]=' +
+    let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
         this.getters['cities/city'].id);
     if (response.headers) {
       let page = response.headers['x-pagination-current-page'];
@@ -72,8 +71,7 @@ export const actions = {
       this.commit('meta/SET_SALES_PAGES', {
         page: page
       });
-      let sales = await this.$axios.$get(process.env.BACKEND_URL +
-          'sales?sort=-created_at&expand=category&filter[city_id]=' +
+      let sales = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
           this.getters['cities/city'].id +
           '&page=' +
           this.getters['meta/salesPages'].page);
@@ -81,14 +79,12 @@ export const actions = {
     }
   },
   async getTopSales(context){
-    let sales = await this.$axios.$get(process.env.BACKEND_URL +
-      'sales?sort=-created_at&expand=category' +
+    let sales = await this.$axios.$get('api/sales?sort=-created_at&expand=category' +
       '&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=5');
     context.commit('SET_TOP_SALES', sales);
   },
   async getCategorySales(context, id) {
-    let response = await this.$axios.get(process.env.BACKEND_URL +
-        'sales?sort=-created_at&expand=category&filter[category_id]=' +
+    let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
         id +
         '&filter[city_id]=' +
         this.getters['cities/city'].id);
@@ -117,8 +113,7 @@ export const actions = {
         id: id,
         page: page
       });
-      let response = await this.$axios.get(process.env.BACKEND_URL +
-          'sales?sort=-created_at&expand=category&filter[category_id]=' +
+      let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
           id +
           '&filter[city_id]=' +
           this.getters['cities/city'].id +

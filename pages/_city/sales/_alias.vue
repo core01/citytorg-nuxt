@@ -136,7 +136,7 @@ export default {
   async asyncData({app, params}) {
     let [id] = params.alias.split('-');
     let data = {};
-    data.sale = await app.$axios.$get(process.env.BACKEND_URL + 'sales/' + id + '?expand=shops,city');
+    data.sale = await app.$axios.$get('api/sales/' + id + '?expand=shops,city');
 
     return data;
   },
@@ -164,7 +164,6 @@ export default {
   data() {
     return {
       type: 'grids',
-      UPLOADS_URL: process.env.UPLOADS_URL,
       imageIndex: null,
       images: [],
       previews: [],
@@ -174,8 +173,8 @@ export default {
   mounted() {
     if(this.sale.images){
       for (let image of this.sale.images) {
-        this.images.push(this.UPLOADS_URL + image.regular);
-        this.previews.push(this.UPLOADS_URL + image.small);
+        this.images.push('/' + image.regular);
+        this.previews.push('/' + image.small);
       }
     }
   },

@@ -28,8 +28,7 @@ export const mutations = {
 
 export const actions = {
   async getCities(context) {
-    let data = await this.$axios.$get(process.env.BACKEND_URL +
-        'cities');
+    let data = await this.$axios.$get('api/cities');
     context.commit('SET_CITIES', data);
   },
   async setCity(context, city) {
