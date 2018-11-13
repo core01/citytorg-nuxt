@@ -1,6 +1,10 @@
 <template>
   <div class="grid-sale is-shady is-scale">
-    <sale-type :sale="sale"/>
+    <div class="mb-2">
+      <sale-type
+        :sale="sale"
+        :grid="true"/>
+    </div>
     <nuxt-link :to="{ path: path }">
       <div class="grid-sale__img-container">
         <img

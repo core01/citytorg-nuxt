@@ -1,7 +1,9 @@
 <template>
-  <div class="navbar">
-    <header class="container flex items-stretch w-full mx-auto px-1 md:px-0">
-      <div class="flex flex-row items-center w-full flex-wrap lg:flex-no-wrap">
+  <div class="navbar bg-white mb-16">
+    <header
+      :class="headerClass"
+      class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-10">
+      <div class="flex flex-row items-center w-full flex-wrap lg:flex-no-wrap bg-white">
         <div class="brand flex items-stretch flex-no-shrink">
           <nuxt-link
             to="/"
@@ -95,9 +97,12 @@ export default {
   data() {
     return {
       show: false,
-      liActiveClass: 'border-blue-matisse hover:border-blue-matisse active',
-      liClass: 'block px-1 mx-2 border-b border-grey-light py-1 hover:border-black',
+      liActiveClass: 'active font-medium',
+      liClass: 'block px-1 mx-2 py-1',
       linkClass: 'block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora',
+      currentScroll: 0,
+      previousScroll: 0,
+      headerClass: '',
     };
   },
   computed: {
@@ -105,10 +110,32 @@ export default {
       city: 'cities/city',
     }),
   },
+  created(){
+    if (process.browser) {
+      window.addEventListener('scroll', this.handleScroll);
+    }
+  },
+  destroyed () {
+    if (process.browser) {
+      window.removeEventListener('scroll', this.handleScroll);
+    }
+  },
   methods: {
     showMenu() {
       this.show = !this.show;
     },
+    handleScroll () {
+      this.previousScroll = this.currentScroll;
+      this.currentScroll = window.scrollY;
+      if(this.currentScroll > 140 && this.currentScroll < this.previousScroll){
+        this.headerClass = ' show';
+      }
+      else if(this.currentScroll > 140 && this.currentScroll > this.previousScroll){
+        this.headerClass = 'hide';
+      }else{
+        this.headerClass = '';
+      }
+    }
   },
 };
 </script>
@@ -121,5 +148,14 @@ export default {
 }
 .active a {
   color: config('textColors.blue-matisse');
+}
+.hide {
+  opacity: 0;
+  transform: translate(0, -90px);
+}
+.show {
+  opacity: 1;
+  transform: translate(0, 0);
+  transition: transform 0.3s, background 0.3s, color 0.3s;
 }
 </style>

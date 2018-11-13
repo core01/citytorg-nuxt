@@ -100,21 +100,9 @@ $font-family: 'Open Sans', Arial, Helvetica, sans-senif;
   z-index: 2;
 }
 
-.sale-card__image {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
-}
-.sale-card_content {
-  margin: 0 !important;
-}
-.sale-card__hr {
-  margin: 0.5rem 0;
-}
+
 .content_h2 {
   margin: 1em auto;
-}
-
-.shop-image {
-  position: relative;
 }
 
 .shop-image__text {

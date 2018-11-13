@@ -1,26 +1,19 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const FileSession = require('session-file-store')(session);
-const {Nuxt, Builder} = require('nuxt');
+const cookieParser = require('cookie-parser');
+const { Nuxt, Builder } = require('nuxt');
 const app = express();
 const host = process.env.HOST || '127.0.0.1';
 const port = process.env.PORT || 3000;
-require('dotenv').config();
 const application = require('./routes/application');
 const osm = require('./routes/osm');
 const city = require('./routes/city');
-// TODO Заменить на использование cookie
-app.use(session({
-  store: new FileSession({}),
-  secret: process.env.COOKIE_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  secure: true,
-}));
+
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: false,
+  extended: false
 }));
 app.set('port', port);
 app.use('/application', application);

@@ -1,34 +1,34 @@
 <template>
   <div
-    class="flex justify-center text-center text-sm mb-2"
+    class="flex text-center text-sm justify-center"
   >
     <span
-      v-if="sale.sale"
+      v-if="types.sale"
       class="rounded bg-green-dark text-white py-1 px-2 mx-2"
       title="Скидка на товар"
-    >%</span>
+    >Скидка</span>
     <span
-      v-if="sale.akcion"
-      class="rounded text-white p-1 bg-red-akcion"
+      v-if="types.akcion"
+      class="rounded text-white bg-red-akcion py-1 px-2 mx-2"
       title="Продажа товаров на основое специального ценового предложения"
     >Акцион</span>
     <span
-      v-if="sale.one_plus_one"
+      v-if="types.one_plus_one"
       class="rounded text-white bg-blue-matisse py-1 px-2 mx-2"
       title="Скидка при покупке комплекта из двух товаров"
     >1+1</span>
     <span
-      v-if="sale.two_equals_three"
+      v-if="types.two_equals_three"
       class="rounded text-black bg-yellow-dark py-1 px-2 mx-2"
       title="Три товара по цене двух"
     >1+1=3</span>
     <span
-      v-if="sale.new"
+      v-if="types.new"
       class="rounded text-white bg-blue-dark py-1 px-2 mx-2"
       title="Новинка"
     >Новинка</span>
     <span
-      v-if="sale.social"
+      v-if="types.social"
       class="rounded text-white bg-blue-light py-1 px-2 mx-2"
       title="Товар по социальной цене"
     >
@@ -45,10 +45,35 @@ export default {
       },
       type: Object,
     },
+    grid: {
+      type: Boolean,
+      default: false,
+    }
   },
   data() {
-    return {};
+    return {
+      types: {
+        sale: false,
+        new: false,
+        social: false,
+        akcion: false,
+        one_plus_one: false,
+        two_equals_three: false,
+      },
+    };
   },
+  created(){
+    let j = 0;
+    for (let property in this.types){
+      if(this.grid && j === 2){
+        break;
+      }
+      if(this.sale[property]){
+        this.types[property] = true;
+        j++;
+      }
+    }
+  }
 };
 </script>
 <style lang="postcss" scoped>

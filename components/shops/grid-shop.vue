@@ -2,7 +2,7 @@
 
   <div class="is-shady grid-shop">
     <nuxt-link :to="{ path: path }">
-      <div class="grid-shop__img-container shop-image">
+      <div class="grid-shop__img-container relative">
         <img
           v-lazyload
           v-if="shop.images"

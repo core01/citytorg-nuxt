@@ -9,7 +9,7 @@
           <div class="w-full lg:w-2/5 text-center mb-5 md:mb-0">
             <div class="block">
               <no-ssr>
-                <figure class="shop-image">
+                <figure class="relative">
                   <div
                     v-if="images.length > 0">
                     <gallery
@@ -40,7 +40,7 @@
                   </div>
                 </figure>
               </no-ssr>
-              <div class="my-4">
+              <div class="my-4 text-lg">
                 <p>
                   Адрес: {{ shop.address }}
                 </p>
@@ -52,11 +52,11 @@
               >
                 <button
                   v-scroll-to="'#items'"
-                  class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded inline-flex items-center"
+                  class="bg-transparent hover:bg-blue text-blue-dark hover:text-white py-1 px-2 border border-blue hover:border-transparent rounded inline-flex items-center"
                 >
-                  <span>Посмотреть акции в магазине</span>
+                  <span>Перейти к акциям</span>
                   <span class="justify-center items-center inline-flex w-6 h-6">
-                    <i class="fas fa-angle-double-down"/>
+                    <i class="fas fa-caret-down"/>
                   </span>
                 </button>
               </div>
