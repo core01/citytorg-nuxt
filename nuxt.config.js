@@ -230,5 +230,22 @@ module.exports = {
         }
       }
     }
+  },
+  workbox: {
+    runtimeCaching: [
+      {
+        urlPattern: process.env.BASE_URL + '/uploads/.*',
+        method: 'GET',
+        handler: 'cacheFirst',
+        strategyOptions: {
+          cacheName: 'uploads',
+          cacheableResponse: { statuses: [0, 200] },
+          cacheExpiration: {
+            maxEntries: 100,
+            maxAgeSeconds: 180
+          }
+        }
+      }
+    ]
   }
 };

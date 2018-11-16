@@ -59,9 +59,9 @@ export default {
     ],
   },
   async asyncData({app, store, route}) {
-    let categories = await app.$axios.$get('api/categories/top?sort=-priority&per-page=6');
+    let data = await app.$axios.$get('api/categories/top?sort=-priority&per-page=6');
     return {
-      categories,
+      categories: data.categories,
     };
   },
   components: {

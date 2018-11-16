@@ -29,7 +29,7 @@ export const mutations = {
 export const actions = {
   async getCities(context) {
     let data = await this.$axios.$get('api/cities');
-    context.commit('SET_CITIES', data);
+    context.commit('SET_CITIES', data.cities);
   },
   async setCity(context, city) {
     let data = await this.$axios.$post('/city/set', {

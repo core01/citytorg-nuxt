@@ -26,11 +26,11 @@ export const actions = {
     let data = await this.$axios.$get('api/shops?sort=-priority,-id' +
         '&filter[city_id]=' + this.getters['cities/city'].id +
         '&per-page=0');
-    context.commit('SET_SHOPS', data);
+    context.commit('SET_SHOPS', data.shops);
   },
   async getTopShops(context){
-    let shops = await this.$axios.$get('api/shops/top?sort=-priority,-id' +
+    let data = await this.$axios.$get('api/shops/top?sort=-priority,-id' +
       '&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=4');
-    context.commit('SET_TOP_SHOPS', shops);
+    context.commit('SET_TOP_SHOPS', data.shops);
   }
 };

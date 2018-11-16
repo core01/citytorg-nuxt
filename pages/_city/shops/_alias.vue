@@ -158,7 +158,8 @@ export default {
       data.sales = await app.$axios.$get('api/sales/network?id=' + data.id);
     } else {
       // Получаем магазины с акциями
-      data.shops = await app.$axios.$get('api/shops?per-page=0');
+      let response = await app.$axios.$get('api/shops?per-page=0');
+      data.shops = response.shops;
     }
 
     return data;

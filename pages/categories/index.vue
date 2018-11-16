@@ -25,7 +25,8 @@ export default {
   },
   async asyncData({app}) {
     let data = {};
-    data.categories = await app.$axios.$get('api/categories?sort=-priority');
+    let response = await app.$axios.$get('api/categories?sort=-priority');
+    data.categories = response.categories;
 
     return data;
   },

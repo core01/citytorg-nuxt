@@ -39,7 +39,7 @@
             <div class="flex justify-start text-center text-sm mb-2">
               <nuxt-link
                 v-if="sale.category"
-                :to="{ path: '/categories/' + sale.category.id + '-' + sale.category.alias }"
+                :to="{ name: 'categories-alias', params: { alias: sale.category.id + '-' + sale.category.alias, fetchData: true } }"
                 class="self-start bg-transparent text-grey-darker py-1 px-2 mr-2 border border-grey rounded no-underline hover:bg-grey-lighter">
                 {{ sale.category.title }}
               </nuxt-link>

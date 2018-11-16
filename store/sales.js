@@ -48,19 +48,16 @@ export const mutations = {
 
 export const actions = {
   async getSales(context) {
-    let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
+    let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
         this.getters['cities/city'].id);
-    if (response.headers) {
-      let page = response.headers['x-pagination-current-page'];
-      let maxPage = response.headers['x-pagination-page-count'];
-      if (page && maxPage) {
-        this.commit('meta/SET_SALES_PAGES', {
-          page: page,
-          maxPage: maxPage
-        });
-      }
+    if (data['_meta']) {
+      let meta = data['_meta'];
+      this.commit('meta/SET_SALES_PAGES', {
+        page: meta.currentPage,
+        maxPage: meta.pageCount
+      });
     }
-    context.commit('SET_SALES', response.data);
+    context.commit('SET_SALES', data.sales);
   },
   async getMoreSales(context) {
     if (
@@ -71,37 +68,34 @@ export const actions = {
       this.commit('meta/SET_SALES_PAGES', {
         page: page
       });
-      let sales = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
+      let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[city_id]=' +
           this.getters['cities/city'].id +
           '&page=' +
           this.getters['meta/salesPages'].page);
-      context.commit('ADD_SALES', sales);
+      context.commit('ADD_SALES', data.sales);
     }
   },
   async getTopSales(context){
-    let sales = await this.$axios.$get('api/sales?sort=-created_at&expand=category' +
+    let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category' +
       '&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=5');
-    context.commit('SET_TOP_SALES', sales);
+    context.commit('SET_TOP_SALES', data.sales);
   },
   async getCategorySales(context, id) {
-    let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
+    let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
         id +
         '&filter[city_id]=' +
         this.getters['cities/city'].id);
-    if (response.headers) {
-      let page = response.headers['x-pagination-current-page'];
-      let maxPage = response.headers['x-pagination-page-count'];
-      let total = response.headers['x-pagination-total-count'];
-      if (page && maxPage) {
-        this.commit('meta/SET_CATEGORY_SALES_PAGES', {
-          page: page,
-          maxPage: maxPage,
-          id: id,
-          total: total
-        });
-      }
+
+    if (data['_meta']) {
+      let meta = data['_meta'];
+      this.commit('meta/SET_CATEGORY_SALES_PAGES', {
+        page: meta.currentPage,
+        maxPage: meta.pageCount,
+        id: id,
+        total: meta.totalCount
+      });
     }
-    context.commit('SET_CATEGORY_SALES', { id: id, sales: response.data });
+    context.commit('SET_CATEGORY_SALES', { id: id, sales: data.sales });
   },
   async getMoreCategorySales(context, id) {
     if (
@@ -113,13 +107,13 @@ export const actions = {
         id: id,
         page: page
       });
-      let response = await this.$axios.get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
+      let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category&filter[category_id]=' +
           id +
           '&filter[city_id]=' +
           this.getters['cities/city'].id +
           '&page=' +
           this.getters['meta/categorySalesById'](id).page);
-      context.commit('ADD_CATEGORY_SALES', { id: id, sales: response.data });
+      context.commit('ADD_CATEGORY_SALES', { id: id, sales: data.sales });
     }
   }
 };
