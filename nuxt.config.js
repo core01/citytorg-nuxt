@@ -162,6 +162,10 @@ module.exports = {
       }
     ],
     ['@nuxtjs/moment', ['ru']],
+    // Doc: https://github.com/nuxt-community/analytics-module
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-107573642-2'
+    }]
   ],
 
   /*
