@@ -43,7 +43,7 @@
                 class="self-start bg-transparent text-grey-darker py-1 px-2 mr-2 border border-grey rounded no-underline hover:bg-grey-lighter">
                 {{ sale.category.title }}
               </nuxt-link>
-              <sale-type :sale="sale"/>
+              <sale-class :sale="sale"/>
             </div>
             <div class="py-2 text-lg">
               <div
@@ -112,12 +112,12 @@
         </div>
         <div class="mb-3 p-3">
           <shops-tabs
-            :type="type"
-            @switch-type="switchType"
+            :mode="mode"
+            @switch-mode="switchMode"
           />
         </div>
         <shopListGrids
-          v-if="type === 'grids'"
+          v-if="mode === 'grids'"
           :shops="sale.shops"
         />
         <div
@@ -135,7 +135,7 @@
 import navbar from '../../../components/navbar/navbar.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
 import shopListMap from '../../../components/shops/list/map.vue';
-import saleType from '../../../components/sales/type.vue';
+import saleClass from '../../../components/sales/class.vue';
 import shopsTabs from '../../../components/tabs/shops.vue';
 
 export default {
@@ -165,12 +165,12 @@ export default {
     navbar,
     shopListGrids,
     shopListMap,
-    saleType,
+    saleClass,
     shopsTabs,
   },
   data() {
     return {
-      type: 'grids',
+      mode: 'grids',
       imageIndex: null,
       images: [],
       previews: [],
@@ -186,8 +186,8 @@ export default {
     }
   },
   methods: {
-    switchType(type) {
-      this.type = type;
+    switchMode(mode) {
+      this.mode = mode;
     },
   },
 };

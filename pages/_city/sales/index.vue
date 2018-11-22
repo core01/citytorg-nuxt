@@ -6,39 +6,36 @@
     <div class="content">
       <h2 class="text-center content_h2">Акции</h2>
     </div>
-
     <div class="container mx-auto mb-6 px-1 md:px-0">
       <div class="flex zero-side-margin">
         <div class="w-full lg:w-1/2">
-          <sales-tabs
+          <sales-type
             :type="type"
-            @switch-type="switchType"
-          />
+            @switch-type="switchType"/>
         </div>
       </div>
     </div>
     <div class="container mx-auto px-1 md:px-0">
       <sales-grids-list
-        v-if="type === 'grids'"
+        v-if="type === 'active'"
         :sales="sales"
-        :absence_text="absence_text"
         :loading="loading"
+        absence-text="Информации о действующих акциях на данный момент нет"
         @get-more-sales="getMoreSales"
       />
-      <sales-rows-list
+      <future-sales-grids-list
         v-else
-        :sales="sales"
-        :absence_text="absence_text"
+        :sales="futureSales"
         :loading="loading"
-        @get-more-sales="getMoreSales"
+        absence-text="Информации об ожидаемых акциях на данный момент нет"
       />
     </div>
   </section>
 </template>
 <script>
 import salesGridsList from '../../../components/sales/list/grids.vue';
-import salesRowsList from '../../../components/sales/list/rows.vue';
-import salesTabs from '../../../components/tabs/sales.vue';
+import futureSalesGridsList from '../../../components/sales/list/future-grids.vue';
+import salesType from '../../../components/tabs/sales-type.vue';
 import {mapGetters} from 'vuex';
 
 export default {
@@ -59,18 +56,19 @@ export default {
   },
   components: {
     salesGridsList,
-    salesRowsList,
-    salesTabs,
+    salesType,
+    futureSalesGridsList
   },
   data() {
     return {
-      absence_text: 'Информации о действующих акциях на данный момент нет',
+      absence_text: '',
       loading: false,
     };
   },
   computed: {
     ...mapGetters({
       sales: 'sales/sales',
+      futureSales: 'sales/futureSales',
       type: 'pages/salesType',
     }),
   },
@@ -78,13 +76,14 @@ export default {
     // let vm = this
   },
   methods: {
-    switchType(type) {
-      this.$store.commit('pages/SET_SALES_TYPE', type);
-    },
     async getMoreSales(){
       this.loading = true;
       await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
+    },
+    async switchType(type){
+      await this.$store.dispatch('sales/getFutureSales');
+      this.$store.commit('pages/SET_SALES_TYPE', type);
     }
   },
 };

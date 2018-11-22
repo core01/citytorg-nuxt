@@ -19,22 +19,7 @@
     <div
       v-if="meta.total"
       class="container mx-auto">
-      <div class="flex lg:flex-row flex-col lg:items-stretch items-center justify-between my-6">
-        <div class="flex justify-start mb-3">
-          <sales-tabs
-            :type="type"
-            @switch-type="switchType"
-          />
-        </div>
-      </div>
       <sales-grids-list
-        v-if="type === 'grids'"
-        :sales="sales"
-        :loading="loading"
-        @get-more-sales="getMoreSales"
-      />
-      <sales-rows-list
-        v-else
         :sales="sales"
         :loading="loading"
         @get-more-sales="getMoreSales"
@@ -44,8 +29,6 @@
 </template>
 <script>
 import salesGridsList from '../../components/sales/list/grids.vue';
-import salesRowsList from '../../components/sales/list/rows.vue';
-import salesTabs from '../../components/tabs/sales.vue';
 import {mapGetters} from 'vuex';
 export default {
   head() {
@@ -77,8 +60,6 @@ export default {
   },
   components: {
     salesGridsList,
-    salesRowsList,
-    salesTabs,
   },
   data() {
     return {
@@ -89,7 +70,6 @@ export default {
     ...mapGetters({
       salesById: 'sales/categorySalesById',
       metaById: 'meta/categorySalesById',
-      type: 'pages/categoryType',
     }),
     sales(){
       return this.salesById(this.id);
@@ -105,9 +85,6 @@ export default {
 
   },
   methods: {
-    switchType(type) {
-      this.$store.commit('pages/SET_CATEGORY_TYPE', type);
-    },
     async getMoreSales(){
       this.loading = true;
       await this.$store.dispatch('sales/getMoreCategorySales', this.id);

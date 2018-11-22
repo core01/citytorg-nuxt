@@ -3,32 +3,32 @@
     class="flex text-center text-sm justify-center"
   >
     <span
-      v-if="types.sale"
+      v-if="classes.sale"
       class="rounded bg-green-dark text-white py-1 px-2 mx-2"
       title="Скидка на товар"
     >Скидка</span>
     <span
-      v-if="types.akcion"
+      v-if="classes.akcion"
       class="rounded text-white bg-red-akcion py-1 px-2 mx-2"
       title="Продажа товаров на основое специального ценового предложения"
     >Акцион</span>
     <span
-      v-if="types.one_plus_one"
+      v-if="classes.one_plus_one"
       class="rounded text-white bg-blue-matisse py-1 px-2 mx-2"
       title="Скидка при покупке комплекта из двух товаров"
     >1+1</span>
     <span
-      v-if="types.two_equals_three"
+      v-if="classes.two_equals_three"
       class="rounded text-black bg-yellow-dark py-1 px-2 mx-2"
       title="Три товара по цене двух"
     >1+1=3</span>
     <span
-      v-if="types.new"
+      v-if="classes.new"
       class="rounded text-white bg-blue-dark py-1 px-2 mx-2"
       title="Новинка"
     >Новинка</span>
     <span
-      v-if="types.social"
+      v-if="classes.social"
       class="rounded text-white bg-blue-light py-1 px-2 mx-2"
       title="Товар по социальной цене"
     >
@@ -52,7 +52,7 @@ export default {
   },
   data() {
     return {
-      types: {
+      classes: {
         sale: false,
         new: false,
         social: false,
@@ -64,12 +64,13 @@ export default {
   },
   created(){
     let j = 0;
-    for (let property in this.types){
+    for (let property in this.classes){
+      // Если это страница плиток и если элементов 2, то больше не показываем
       if(this.grid && j === 2){
         break;
       }
       if(this.sale[property]){
-        this.types[property] = true;
+        this.classes[property] = true;
         j++;
       }
     }

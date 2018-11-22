@@ -1,5 +1,6 @@
 export const state = () => ({
   sales: [],
+  futureSales: [],
   categorySales: {},
   topSales: [],
 });
@@ -7,6 +8,9 @@ export const state = () => ({
 export const getters = {
   sales: state => {
     return state.sales;
+  },
+  futureSales: state => {
+    return state.futureSales;
   },
   categorySalesById: state => id => {
     if (state.categorySales[id]) {
@@ -25,6 +29,9 @@ export const getters = {
 export const mutations = {
   SET_SALES(state, sales) {
     state.sales = sales;
+  },
+  SET_FUTURE_SALES(state, sales){
+    state.futureSales = sales;
   },
   ADD_SALES(state, sales) {
     state.sales = state.sales.concat(sales);
@@ -75,6 +82,18 @@ export const actions = {
       context.commit('ADD_SALES', data.sales);
     }
   },
+  /**
+   * Получение будущих акций без пагинации
+   * @param context
+   */
+  async getFutureSales(context){
+    let data = await this.$axios.$get('api/sales/future?sort=date_end&expand=category&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=0');
+    context.commit('SET_FUTURE_SALES', data.sales);
+  },
+  /**
+   * Получение топовых акций (Всего 5 строк)
+   * @param context
+   */
   async getTopSales(context){
     let data = await this.$axios.$get('api/sales?sort=-created_at&expand=category' +
       '&filter[city_id]=' + this.getters['cities/city'].id + '&per-page=5');

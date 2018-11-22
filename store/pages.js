@@ -2,26 +2,20 @@ export const state = () => ({
   current: null,
   previous: null,
   sales: {
-    type: 'grids',
+    type: 'active',
   },
   shops: {
-    type: 'grids',
+    mode: 'grids',
   },
-  category: {
-    type: 'grids',
-  }
 });
 
 export const getters = {
-  shopsType: state => {
-    return state.shops.type;
+  shopsMode: state => {
+    return state.shops.mode;
   },
   salesType: state => {
     return state.sales.type;
   },
-  categoryType: state => {
-    return state.category.type;
-  }
 };
 
 export const mutations = {
@@ -31,13 +25,10 @@ export const mutations = {
   SET_PREVIOUS(state, page) {
     state.previous = page;
   },
-  SET_SHOPS_TYPE(state, type) {
-    state.shops.type = type;
+  SET_SHOPS_MODE(state, mode) {
+    state.shops.mode = mode;
   },
-  SET_SALES_TYPE(state, type) {
+  SET_SALES_TYPE(state, type){
     state.sales.type = type;
   },
-  SET_CATEGORY_TYPE(state, type){
-    state.category.type = type;
-  }
 };

@@ -10,15 +10,15 @@
       <div class="flex">
         <div class="w-full lg:w-1/2">
           <shops-tabs
-            :type="type"
-            @switch-type="switchType"
+            :mode="mode"
+            @switch-mode="switchMode"
           />
         </div>
       </div>
     </div>
     <div class="container mx-auto px-1 md:px-0">
       <shopListGrids
-        v-if="type === 'grids'"
+        v-if="mode === 'grids'"
         :shops="shops"
       />
       <shop-list-map
@@ -64,13 +64,13 @@ export default {
   computed: {
     ...mapGetters({
       shops: 'shops/shops',
-      type: 'pages/shopsType',
+      mode: 'pages/shopsMode',
     }),
   },
   mounted() {},
   methods: {
-    switchType(type) {
-      this.$store.commit('pages/SET_SHOPS_TYPE', type);
+    switchMode(mode) {
+      this.$store.commit('pages/SET_SHOPS_MODE', mode);
     },
   },
 };

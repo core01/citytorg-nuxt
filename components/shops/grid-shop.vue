@@ -1,6 +1,6 @@
 <template>
 
-  <div class="is-shady grid-shop">
+  <div class="is-shady grid-shop my-2">
     <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container relative">
         <img
@@ -76,7 +76,6 @@ $red: #e31e24;
 	display: flex;
 	flex-direction: column;
 	height: 320px;
-	margin-bottom: 20px;
 }
 
 .grid-shop__title {

@@ -3,15 +3,15 @@
     <li>
       <button
         :class="gridsClass"
-        class="inline-block border border-r-0 py-3 px-4 rounded-tl rounded-bl cursor-pointer"
-        @click.prevent="switchType('grids')"
+        class="inline-block border border-r-0 py-2 px-3 rounded-tl rounded-bl cursor-pointer"
+        @click.prevent="switchMode('grids')"
       >Плитками</button>
     </li>
     <li>
       <button
         :class="mapClass"
-        class="inline-block border border-l-0 py-3 px-4 rounded-tr rounded-br cursor-pointer"
-        @click.prevent="switchType('map')"
+        class="inline-block border border-l-0 py-2 px-3 rounded-tr rounded-br cursor-pointer"
+        @click.prevent="switchMode('map')"
       >На карте</button>
     </li>
   </ul>
@@ -19,7 +19,7 @@
 <script>
 export default {
   props: {
-    type: {
+    mode: {
       type: String,
       default: 'grids'
     }
@@ -32,15 +32,15 @@ export default {
   },
   computed: {
     gridsClass() {
-      return this.type === 'grids' ? this.activeClass : this.inActiveClass;
+      return this.mode === 'grids' ? this.activeClass : this.inActiveClass;
     },
     mapClass() {
-      return this.type === 'map' ? this.activeClass : this.inActiveClass;
+      return this.mode === 'map' ? this.activeClass : this.inActiveClass;
     }
   },
   methods: {
-    switchType(type) {
-      this.$emit('switch-type', type);
+    switchMode(mode) {
+      this.$emit('switch-mode', mode);
     }
   }
 };
