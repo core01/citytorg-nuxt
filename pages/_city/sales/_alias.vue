@@ -64,6 +64,11 @@
                 </div>
               </div>
               <div
+                v-if="sale.future"
+                class="text-lg">
+                Начало акции:  <b>{{ sale.date_start | dateFormat }}</b>
+              </div>
+              <div
                 v-if="sale.date_end"
                 class="text-lg"
               >
