@@ -1,12 +1,12 @@
 <template>
   <div>
     <div
-      v-for="(sales, date) in groupedSales"
-      :key="date">
-      <h3 class="my-4 text-xl "><i class="fa fa-calendar-alt mr-2"/>{{ date | dateFormat }}</h3>
+      v-for="(data, key) in groupedSales"
+      :key="key">
+      <h3 class="my-4 text-xl "><i class="fa fa-calendar-alt mr-2"/>{{ data.date | dateFormat }}</h3>
       <div class="flex flex-wrap">
         <div
-          v-for="sale in sales"
+          v-for="sale in data.sales"
           :key="sale.id"
           class="w-full sm:w-1/3 lg:w-1/5"
         >
@@ -63,13 +63,18 @@ export default {
     let groupedSales = {};
     /**
      * Для группировки по дате, перебираем акции и вставляем в объект в ввиде:
-     * "date" : { ...sale }
+     * "key" : { 'date': "2018-11-23", 'sales': [] }
      */
     for( let sale of this.sales){
-      if(!groupedSales.hasOwnProperty(sale.date_start)){
-        groupedSales[sale.date_start] = [];
+      // делаем ключем цифры из даты
+      let key = sale.date_start.replace(/\D/g,'');
+      if(!groupedSales.hasOwnProperty(key)){
+        groupedSales[key] = {
+          'date': sale.date_start,
+          'sales' : [],
+        };
       }
-      groupedSales[sale.date_start].push(sale);
+      groupedSales[key].sales.push(sale);
     }
     this.groupedSales = Object.assign({}, this.groupedSales, groupedSales);
   },
