@@ -16,6 +16,18 @@ module.exports = {
     description: 'Акции, скидки в магазинах города на карте',
     theme_color: '#ffffff'
   },
+  meta: {
+    name: 'Citytorg',
+    description: 'Скидки и акции в магазинах города',
+    ogHost: process.env.BASE_URL || 'https://citytorg.kz',
+    ogSiteName: 'Citytorg',
+    viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+    author: false,
+    ogImage: {
+      path: 'citytorg_og_image.jpg'
+    },
+    twitterCard: 'summary'
+  },
   router: {
     middleware: ['cityCheck', 'pageHistory']
   },
