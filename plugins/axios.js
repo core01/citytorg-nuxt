@@ -1,5 +1,5 @@
 export default function ({ $axios, error }) {
-  $axios.onRequest((config) => { config.timeout = 10000; });
+  $axios.onRequest((config) => { config.timeout = 25000; });
   // TODO разобраться с кодами ошибок
   $axios.onError(err => {
     if (err.code === 408 || err.code === 'ECONNABORTED') {

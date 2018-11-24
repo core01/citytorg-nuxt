@@ -23,9 +23,6 @@ module.exports = {
     ogSiteName: 'Citytorg',
     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
     author: false,
-    ogImage: {
-      path: 'citytorg_og_image.jpg'
-    },
     twitterCard: 'summary'
   },
   router: {
@@ -60,8 +57,7 @@ module.exports = {
       },
       {
         property: 'og:image',
-        content:
-          'https://citytorg.kz/citytorg_og_image.png'
+        content: process.env.BASE_URL + '/citytorg_og_image.jpg'
       },
     ],
     link: [
