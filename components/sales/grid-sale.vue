@@ -45,7 +45,7 @@
       class="mb-1 font-semibold">До {{ sale.date_end | dateFormat }}</p>
     <nuxt-link
       v-if="sale.category"
-      :to="{ name: 'categories', params: { alias: sale.category.id + '-' + sale.category.alias }}"
+      :to="{ name: 'categories-alias', params: { alias: sale.category.id + '-' + sale.category.alias }}"
       class="self-center my-1 bg-transparent text-grey-darker text-xs py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter">
       {{ sale.category.title }}
     </nuxt-link>
