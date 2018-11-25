@@ -3,7 +3,7 @@
     <div
       v-for="sale in sales"
       :key="sale.id"
-      class="w-full sm:w-1/3 lg:w-1/5"
+      class="w-1/2 sm:w-1/3 lg:w-1/5"
     >
       <sale :sale="sale"/>
     </div>

@@ -6,7 +6,7 @@
         :grid="true" />
     </div>
     <nuxt-link :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}">
-      <div class="grid-sale__img-container">
+      <div class="grid-sale__img-container h-48">
         <img
           v-lazyload
           v-if="sale.images"
@@ -23,7 +23,7 @@
     </nuxt-link>
     <nuxt-link
       :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}"
-      class="grid-sale__title no-underline">
+      class="grid-sale__title no-underline h-10">
       {{ sale.title | truncate(38) }}
     </nuxt-link>
 
@@ -83,7 +83,7 @@ $blue: #204b98;
 $red: #e31e24;
 
 .grid-sale__img-container {
-  height: 155px;
+
 }
 
 .grid-sale {
@@ -92,7 +92,6 @@ $red: #e31e24;
   text-align: center;
   display: flex;
   flex-direction: column;
-  height: 370px;
 }
 
 .grid-sale__title {
