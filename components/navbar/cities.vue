@@ -19,7 +19,7 @@
       </div>
       <div
         v-show="show"
-        class="absolute pin-l mt-px z-10">
+        class="absolute pin-l mt-px z-20">
         <div class="bg-white border overflow-hidden">
           <a
             v-for="(city,index) in cities"

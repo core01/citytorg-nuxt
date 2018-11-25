@@ -2,7 +2,7 @@
   <div class="navbar bg-white mb-16">
     <header
       :class="headerClass"
-      class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-10">
+      class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-20">
       <div class="flex flex-row items-center w-full flex-wrap lg:flex-no-wrap bg-white">
         <div class="brand flex items-stretch flex-no-shrink">
           <nuxt-link
