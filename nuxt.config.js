@@ -158,6 +158,7 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
+    '@nuxtjs/sentry',
     [
       '@nuxtjs/yandex-metrika',
       {
@@ -191,6 +192,13 @@ module.exports = {
     },
     '/uploads': process.env.YII_URL,
   },
+  sentry: {
+    dsn: process.env.SENTRY_DSN,
+    config: {
+      // Additional config
+      disabled: process.env.NODE_ENV === 'development',
+    },
+  },
   /*
    ** Build configuration
    */
@@ -203,7 +211,7 @@ module.exports = {
      */
     extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
+      if (ctx.isDev && process.client) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,

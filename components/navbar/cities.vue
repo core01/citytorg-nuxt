@@ -54,9 +54,6 @@ export default {
       currentCity: 'cities/city'
     })
   },
-  mounted() {
-    this.$store.dispatch('cities/getCities');
-  },
   methods: {
     showMenu() {
       this.show = !this.show;

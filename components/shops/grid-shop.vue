@@ -1,6 +1,6 @@
 <template>
 
-  <div class="is-shady grid-shop my-2">
+  <div class="is-shady grid-shop my-2 bg-white overflow-hidden text-center flex flex-col p-1">
     <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container relative">
         <img
@@ -9,13 +9,13 @@
           :data-src="'/' + shop.images[0].small"
           :alt="shop.title"
           src="~assets/images/placeholder.png"
-          class="grid-shop__img"
+          class="grid-shop__img h-full my-0 mx-auto"
         >
         <img
           v-else
           :alt="shop.title"
           src="~assets/images/placeholder.png"
-          class="grid-shop__img"
+          class="grid-shop__img h-full my-0 mx-auto"
         >
         <div
           v-if="shop.sample"
@@ -27,11 +27,11 @@
     </nuxt-link>
     <nuxt-link
       :to="{ path: path }"
-      class="grid-shop__title no-underline"
+      class="text-blue-matisse leading-tight text-center text-base sm:text-xl no-underline hover:text-red-akcion"
     >
       {{ shop.title | truncate(38) }}
     </nuxt-link>
-    <div class="grid-shop__address">
+    <div class="flex items-center flex-grow self-center leading-none">
       {{ shop.address }}
     </div>
   </div>
@@ -65,45 +65,27 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-$blue: #204b98;
-$red: #e31e24;
-
 .grid-shop {
-	background-color: #fff;
-	overflow: hidden;
-	padding: 5px;
-	text-align: center;
-	display: flex;
-	flex-direction: column;
-	height: 320px;
+	height: 245px;
 }
 
-.grid-shop__title {
-	color: $blue;
-	font-size: 18px;
-	height: 45px;
-	line-height: 1.2;
-	text-align: center;
-}
-
-.grid-shop__title:hover {
-	color: $red;
-}
-
-.grid-shop__address {
-	display: flex;
-	align-items: center;
-	flex-grow: 1;
-	align-self: center;
+@media (min-width: 360px) {
+  .grid-shop {
+    height: 320px
+  }
 }
 
 .grid-shop__img {
-	width: 100%;
-	max-height: 200px;
 	object-fit: contain;
 }
 
 .grid-shop__img-container {
-	min-height: 205px;
+  height: 120px;
+}
+
+@media (min-width: 360px) {
+  .grid-shop__img-container {
+    height: 205px;
+  }
 }
 </style>
