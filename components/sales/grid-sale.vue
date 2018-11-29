@@ -1,12 +1,12 @@
 <template>
-  <div class="grid-sale is-shady is-scale my-2">
+  <div class="grid-sale is-shady is-scale my-2 bg-white p-2 text-center flex flex-col">
     <div class="mb-2">
       <sale-class
         :sale="sale"
         :grid="true" />
     </div>
     <nuxt-link :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}">
-      <div class="grid-sale__img-container h-48">
+      <div class="grid-sale__img-container">
         <img
           v-lazyload
           v-if="sale.images"
@@ -23,17 +23,17 @@
     </nuxt-link>
     <nuxt-link
       :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}"
-      class="grid-sale__title no-underline h-10">
+      class="grid-sale__title no-underline h-10 leading-tight text-center text-blue-matisse mt-2 hover:text-red-akcion">
       {{ sale.title | truncate(38) }}
     </nuxt-link>
 
     <div class="grid-sale-prices mb-1">
-      <div class="grid-sale__price">
+      <div class="grid-sale__price font-bold text-xl sm:text-2xl text-red-akcion">
         {{ sale.price }} ₸
       </div>
       <div
         v-if="sale.old_price"
-        class="grid-sale__old-price">
+        class="grid-sale__old-price font-bold text-base sm:text-xl line-through  text-blue-matisse">
         {{ sale.old_price }} ₸
       </div>
     </div>
@@ -79,50 +79,23 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-$blue: #204b98;
-$red: #e31e24;
 
 .grid-sale__img-container {
+  height: 110px;
+}
 
+@media (min-width: 360px) {
+  .grid-sale__img-container {
+    height: 160px;
+  }
 }
 
 .grid-sale {
-  background-color: #fff;
-  padding: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
+  height: 370px;
 }
 
 .grid-sale__title {
-  color: $blue;
-  font-size: 16px;
-  line-height: 1.2;
-  text-align: center;
   margin-top: 5px;
-}
-
-.grid-sale__title:hover {
-  color: $red;
-}
-
-.grid-sale__description {
-  color: #949494;
-  line-height: 1.25;
-  font-size: 1rem;
-}
-
-.grid-sale__price {
-  color: $blue;
-  font-weight: bold;
-  font-size: 28px;
-}
-
-.grid-sale__old-price {
-  color: $red;
-  font-weight: bold;
-  font-size: 22px;
-  text-decoration: line-through;
 }
 
 .grid-sale-prices {

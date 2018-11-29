@@ -3,7 +3,7 @@
     <div
       v-for="shop in shops"
       :key="shop.id"
-      class="w-full sm:w-1/3 lg:w-1/4"
+      class="w-1/2 sm:w-1/3 lg:w-1/4"
     >
       <grid-shop :shop="shop"/>
     </div>
