@@ -10,8 +10,7 @@
             <div class="block">
               <no-ssr>
                 <figure class="relative">
-                  <div
-                    v-if="images.length > 0">
+                  <div v-if="images.length > 0">
                     <gallery
                       :images="images"
                       :index="imageIndex"
@@ -26,7 +25,8 @@
                     <img
                       :src="previews[0]"
                       class="preview-image"
-                      @click="imageIndex = 0">
+                      @click="imageIndex = 0"
+                    >
                   </div>
                   <img
                     v-else
@@ -44,7 +44,7 @@
                 <p>
                   Адрес: {{ shop.address }}
                 </p>
-                <p v-html="shop.description"/>
+                <p v-html="shop.description" />
               </div>
               <div
                 v-if="sales.length >0"
@@ -56,7 +56,7 @@
                 >
                   <span>Перейти к акциям</span>
                   <span class="justify-center items-center inline-flex w-6 h-6">
-                    <i class="fas fa-caret-down"/>
+                    <i class="fas fa-caret-down" />
                   </span>
                 </button>
               </div>
@@ -87,23 +87,23 @@
           v-if="shop.shopType.alias === 'network' && shop.stalls.length > 0 && sales.length > 0"
           class="flex flex-wrap"
         >
-          <div class="w-full lg:w-1/2">
-            <div class="tabs is-toggle">
-              <ul>
-                <li
-                  :class="{'is-active': mode === 'sales'}"
+          <div class="w-full lg:w-1/2 mb-6">
+            <ul class="list-reset flex">
+              <li>
+                <button
+                  :class="salesClass"
+                  class="inline-block border border-r-0 py-2 px-3 rounded-tl rounded-bl cursor-pointer"
                   @click.prevent="switchMode('sales')"
-                >
-                  <a>Список акций</a>
-                </li>
-                <li
-                  :class="{'is-active': mode === 'shops'}"
+                >Список акций</button>
+              </li>
+              <li>
+                <button
+                  :class="shopsClass"
+                  class="inline-block border border-l-0 py-2 px-3 rounded-tr rounded-br cursor-pointer"
                   @click.prevent="switchMode('shops')"
-                >
-                  <a>Список магазинов</a>
-                </li>
-              </ul>
-            </div>
+                >Список магазинов</button>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="content">
@@ -129,13 +129,13 @@ import shopListMap from '../../../components/shops/list/map.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
 
 export default {
-  async asyncData({app, params}) {
+  async asyncData({ app, params }) {
     let [id] = params.alias.split('-');
     let data = {
       id: parseInt(id),
       shop: {},
       sales: [],
-      shops: [],
+      shops: []
     };
     data.shop = await app.$axios.$get('api/shops/' + data.id + '?expand=sales,stalls');
     data.sales = data.shop.sales;
@@ -145,14 +145,12 @@ export default {
       let response = await app.$axios.$get('api/shops/' + data.shop.parent + '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции в текущей точке
-      response =
-          await app.$axios.$get('api/shops/' + data.id + '?expand=sales');
+      response = await app.$axios.$get('api/shops/' + data.id + '?expand=sales');
       data.sales = response.sales;
       // если у нас сеть
     } else if (data.shop.shopType.alias === 'network') {
       // Получаем магазины торговой сети по id
-      let response = await app.$axios.$get('api/shops/' + data.id +
-      '?expand=stalls&per-page=0');
+      let response = await app.$axios.$get('api/shops/' + data.id + '?expand=stalls&per-page=0');
       data.shops = response.stalls;
       // Получаем акции торговой сети
       data.sales = await app.$axios.$get('api/sales/network?id=' + data.id);
@@ -170,16 +168,20 @@ export default {
       meta: [
         {
           hid: 'description',
-          description: 'Акции магазина ' + this.shop.title + ', Адрес: ' + this.shop.address,
-        },
-      ],
+          description:
+            'Акции магазина ' +
+            this.shop.title +
+            ', Адрес: ' +
+            this.shop.address
+        }
+      ]
     };
   },
   components: {
     navbar,
     gridSales,
     shopListMap,
-    shopListGrids,
+    shopListGrids
   },
   data() {
     return {
@@ -191,9 +193,18 @@ export default {
       images: [],
       imageIndex: null,
       previews: [],
+      active: 'border-blue-matisse bg-blue-matisse text-white',
+      inActive: 'hover:border-blue-matisse border-grey'
     };
   },
-  computed: {},
+  computed: {
+    salesClass() {
+      return this.mode === 'sales' ? this.active : this.inActive;
+    },
+    shopsClass() {
+      return this.mode === 'shops' ? this.active : this.inActive;
+    }
+  },
   mounted() {
     if (this.shop.shopType.alias === 'network') {
       if (this.sales.length > 0) {
@@ -202,8 +213,8 @@ export default {
         this.switchMode('shops');
       }
     }
-    if(this.shop.images !== null){
-      if(this.shop.images.length > 0){
+    if (this.shop.images !== null) {
+      if (this.shop.images.length > 0) {
         for (let image of this.shop.images) {
           this.images.push('/' + image.regular);
           this.previews.push('/' + image.small);
@@ -214,8 +225,8 @@ export default {
   methods: {
     switchMode(mode) {
       this.mode = mode;
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="postcss" scoped>
