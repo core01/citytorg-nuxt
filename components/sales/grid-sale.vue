@@ -84,7 +84,7 @@ export default {
   height: 110px;
 }
 
-@media (min-width: 360px) {
+@media (min-width: 384px) {
   .grid-sale__img-container {
     height: 160px;
   }
