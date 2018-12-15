@@ -45,6 +45,7 @@
           role="navigation">
           <ul class="lg:flex lg:flex-grow lg:justify-end lg:flex-no-shrink lg:items-center p-0">
             <nuxt-link
+              :key="city.alias"
               :to="{ name: 'city-sales', params: { city: city.alias }}"
               :active-class="liActiveClass"
               :class="liClass"
@@ -53,6 +54,7 @@
               <a :class="linkClass">Акции</a>
             </nuxt-link>
             <nuxt-link
+              :key="city.alias"
               :to="{ name: 'city-shops', params: { city: city.alias }}"
               :active-class="liActiveClass"
               :class="liClass"

@@ -4,6 +4,7 @@
       <div class="content text-center">
         <p class="footer-links mb-4">
           <nuxt-link
+            :key="city.alias"
             :exact="false"
             :to="{ name: 'city-sales', params: { city: city.alias }}"
             class="p-1 no-underline"
@@ -12,6 +13,7 @@
             Акции
           </nuxt-link>
           <nuxt-link
+            :key="city.alias"
             :exact="false"
             :to="{ name: 'city-shops', params: { city: city.alias }}"
             class="p-1 no-underline"
