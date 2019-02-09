@@ -23,110 +23,103 @@
     />
   </l-map>
 </template>
-<script>
-import 'leaflet/dist/leaflet.css';
-let Vue2Leaflet = {};
-let L = {
-  icon: () => {},
-};
-if (process.browser) {
-  Vue2Leaflet = require('vue2-leaflet');
-  L = require('leaflet');
-}
-import mapMarker from '../../map/marker.vue';
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
 
-export default {
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer } from "vue2-leaflet";
+
+import mapMarker from "../../map/marker.vue";
+import { Shop } from "types/Shop";
+import { LatLngTuple, FitBoundsOptions } from "leaflet";
+
+@Component({
   components: {
-    'l-map': Vue2Leaflet.LMap,
-    'l-tile-layer': Vue2Leaflet.LTileLayer,
-    mapMarker,
-  },
-  props: {
-    shops: {
-      type: Array,
-      required: true,
-    },
-    zoom: {
-      type: Number,
-      default: 15,
-    },
-    currentId: {
-      type: Number,
-      default: -1,
-    },
-  },
-  data() {
-    return {
-      url: '/osm/?z={z}&x={x}&y={y}&s={s}',
-      attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      // marker: L.latLng(49.9553, 82.6134),
-      maxZoom: 18,
-      minZoom: 11,
-      selectedIcon: L.icon({
-        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
-        // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
-        iconUrl: require('~/assets/markers/marker-icon-red.png'),
-        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -41],
-      }),
-      defaultIcon: L.icon({
-        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
-        // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
-        iconUrl: require('~/assets/markers/marker-icon.png'),
-        iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -41],
-      }),
-      inactiveIcon: L.icon({
-        // shadowUrl: require('~/assets/markers/marker-shadow.png'),
-        iconUrl: require('~/assets/markers/marker-icon-grey-inactive.png'),
-        iconAnchor: [7, 22], // point of the icon which will correspond to marker's location
-        popupAnchor: [0, -22],
-      }),
-    };
-  },
-  computed: {
-    markers() {
-      let markers = [];
-      for (let i = 0; i < this.filteredShops.length; i++) {
-        if (this.shops[i].lat && this.shops[i].lon) {
-          markers.push([
-            this.shops[i].lat,
-            this.shops[i].lon,
-          ]);
-        }
-      }
+    "l-map": LMap,
+    "l-tile-layer": LTileLayer,
+    mapMarker
+  }
+})
+export default class Map extends Vue {
+  @Prop({ type: Array, required: true }) shops: Shop[];
+  @Prop({ type: Number, default: 15 }) zoom: number;
+  @Prop({ type: Number, default: -1 }) currentId: number;
 
-      return markers;
-    },
-    center() {
-      if (this.currentId !== -1) {
-        for(let i =0; i<this.shops.length; i++){
-          if(this.shops[i].id === this.currentId){
-            let currentShop = this.shops[i];
-            if (currentShop.lat && currentShop.lon) {
-              return [currentShop.lat, currentShop.lon];
-            }
+  url: string = "/osm/?z={z}&x={x}&y={y}&s={s}";
+  attribution: string =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+  maxZoom: number = 18;
+  minZoom: number = 11;
+  $refs: {
+    map: LMap;
+  };
+  selectedIcon = {
+    // shadowUrl: require('~/assets/markers/marker-shadow.png'),
+    // iconRetinaUrl: require('~/assets/markers/marker-icon-2x-red.png'),
+    iconUrl: "~/assets/markers/marker-icon-red.png",
+    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -41]
+  };
+  defaultIcon = {
+    // shadowUrl: require('~/assets/markers/marker-shadow.png'),
+    // iconRetinaUrl: require('~/assets/markers/marker-icon-2x.png'),
+    iconUrl: require("~/assets/markers/marker-icon.png"),
+    iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -41]
+  };
+  inactiveIcon = {
+    // shadowUrl: require('~/assets/markers/marker-shadow.png'),
+    iconUrl: require("~/assets/markers/marker-icon-grey-inactive.png"),
+    iconAnchor: [7, 22], // point of the icon which will correspond to marker's location
+    popupAnchor: [0, -22]
+  };
+
+  get markers() {
+    const markers: LatLngTuple[] = [];
+
+    for (let i = 0; i < this.filteredShops.length; i++) {
+      if (this.shops[i].lat && this.shops[i].lon) {
+        const lat = this.shops[i].lat;
+        const lon = this.shops[i].lon;
+        markers.push([lat, lon]);
+      }
+    }
+
+    return markers;
+  }
+  get center() {
+    if (this.currentId !== -1) {
+      for (const shop of this.shops) {
+        if (shop.id === this.currentId) {
+          if (shop.lat && shop.lon) {
+            return [shop.lat, shop.lon];
           }
         }
       }
+    }
 
-      return [this.$store.getters['cities/city'].lat, this.$store.getters['cities/city'].lon];
-    },
-    filteredShops() {
-      return this.shops.filter(shop => shop.shopType.alias !== 'network');
-    },
-  },
+    return [
+      this.$store.getters["cities/city"].lat,
+      this.$store.getters["cities/city"].lon
+    ];
+  }
+  get filteredShops() {
+    return this.shops.filter(shop => shop.shopType.alias !== "network");
+  }
+
   mounted() {
-    let options = { padding : [50,50] };
-    if(this.currentId === -1 && this.markers.length === 1){
+    const options: FitBoundsOptions = {
+      padding: [50, 50],
+      maxZoom: 18
+    };
+    if (this.currentId === -1 && this.markers.length === 1) {
       options.maxZoom = 16;
     }
     if (this.currentId === -1 && this.markers.length > 0) {
       this.$refs.map.mapObject.fitBounds(this.markers, options);
     }
-  },
-};
+  }
+}
 </script>
 <style lang="postcss" scoped>
 .map_shop-map {

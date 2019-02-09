@@ -5,7 +5,7 @@
       :key="sale.id"
       class="w-1/2 sm:w-1/3 lg:w-1/5"
     >
-      <sale :sale="sale"/>
+      <sale :sale="sale" />
     </div>
     <no-ssr>
       <mugen-scroll
@@ -20,42 +20,29 @@
     </div>
   </div>
 </template>
-<script>
-import sale from '../grid-sale.vue';
-import MugenScroll from 'vue-mugen-scroll';
-
-export default {
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import sale from "../grid-sale.vue";
+import MugenScroll from "vue-mugen-scroll";
+import Sale from "types/Sale";
+@Component({
   components: {
     sale,
-    MugenScroll,
-  },
-  props: {
-    sales: {
-      type: Array,
-      required: true,
-    },
-    absenceText: {
-      type: String,
-      required: false,
-      default: 'Нет действующих акций на данный момент',
-    },
-    loading: {
-      type: Boolean,
-      required: true,
-    },
-  },
-  data() {
-    return {
+    MugenScroll
+  }
+})
+export default class GridsList extends Vue {
+  @Prop({ type: Array, required: true }) sales: Sale[];
+  @Prop({
+    type: String,
+    required: false,
+    default: "Нет действующих акций на данный момент"
+  })
+  absenceText: string;
+  @Prop({ type: Boolean, required: true }) loading: boolean;
 
-    };
-  },
-  computed: {
-
-  },
-  methods: {
-    loadMoreSales() {
-      this.$emit('get-more-sales');
-    },
-  },
-};
+  loadMoreSales() {
+    this.$emit("get-more-sales");
+  }
+}
 </script>

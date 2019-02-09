@@ -11,7 +11,8 @@
         <div class="w-full lg:w-1/2">
           <sales-type
             :type="type"
-            @switch-type="switchType"/>
+            @switch-type="switchType"
+          />
         </div>
       </div>
     </div>
@@ -32,26 +33,27 @@
     </div>
   </section>
 </template>
-<script>
-import salesGridsList from '../../../components/sales/list/grids.vue';
-import futureSalesGridsList from '../../../components/sales/list/future-grids.vue';
-import salesType from '../../../components/tabs/sales-type.vue';
-import {mapGetters} from 'vuex';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import salesGridsList from "../../../components/sales/list/grids.vue";
+import futureSalesGridsList from "../../../components/sales/list/future-grids.vue";
+import salesType from "../../../components/tabs/sales-type.vue";
 
-export default {
+@Component({
   head: {
-    title: 'Все акции',
+    title: "Все акции",
     meta: [
       {
-        hid: 'description',
-        name: 'description',
-        content: 'Полный перечень всех действующих акций в городе',
-      },
-    ],
+        hid: "description",
+        name: "description",
+        content: "Полный перечень всех действующих акций в городе"
+      }
+    ]
   },
-  async asyncData({store}) {
-    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
-      await store.dispatch('sales/getSales');
+  async asyncData({ store }) {
+    if (process.browser && store.state.pages.previous !== "city-sales-alias") {
+      await store.dispatch("sales/getSales");
     }
   },
   components: {
@@ -59,34 +61,28 @@ export default {
     salesType,
     futureSalesGridsList
   },
-  data() {
-    return {
-      absence_text: '',
-      loading: false,
-    };
-  },
   computed: {
     ...mapGetters({
-      sales: 'sales/sales',
-      futureSales: 'sales/futureSales',
-      type: 'pages/salesType',
-    }),
-  },
-  mounted() {
-    // let vm = this
-  },
-  methods: {
-    async getMoreSales(){
-      this.loading = true;
-      await this.$store.dispatch('sales/getMoreSales');
-      this.loading = false;
-    },
-    async switchType(type){
-      await this.$store.dispatch('sales/getFutureSales');
-      this.$store.commit('pages/SET_SALES_TYPE', type);
-    }
-  },
-};
+      sales: "sales/sales",
+      futureSales: "sales/futureSales",
+      type: "pages/salesType"
+    })
+  }
+})
+export default class Sales extends Vue {
+  loading: boolean = false;
+
+  async getMoreSales() {
+    this.loading = true;
+    await this.$store.dispatch("sales/getMoreSales");
+    this.loading = false;
+  }
+
+  async switchType(type) {
+    await this.$store.dispatch("sales/getFutureSales");
+    this.$store.commit("pages/SET_SALES_TYPE", type);
+  }
+}
 </script>
 <style>
 </style>

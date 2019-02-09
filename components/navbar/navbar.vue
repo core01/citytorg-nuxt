@@ -2,16 +2,19 @@
   <div class="navbar bg-white mb-16">
     <header
       :class="headerClass"
-      class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-20">
+      class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-20"
+    >
       <div class="flex flex-row items-center w-full flex-wrap lg:flex-no-wrap bg-white">
         <div class="brand flex items-stretch flex-no-shrink">
           <nuxt-link
             to="/"
-            class="flex flex-no-grow flex-no-shrink items-center py-0 px-0">
+            class="flex flex-no-grow flex-no-shrink items-center py-0 px-0"
+          >
             <img
               class="logo"
               src="~assets/images/logo_beta.png"
-              alt="Citytorg">
+              alt="Citytorg"
+            >
           </nuxt-link>
         </div>
         <div class="flex flex-no-shrink">
@@ -24,17 +27,20 @@
           Call-center:&nbsp;
           <a
             href="tel:+77776461355"
-            class="text-blue-matisse no-underline">+7-777-646-13-55</a>
+            class="text-blue-matisse no-underline"
+          >+7-777-646-13-55</a>
         </div>
         <div class="text-right lg:hidden flex-grow">
           <button
             type="button"
             class="nav-toggle appearance-none"
-            @click="showMenu()">
+            @click="showMenu()"
+          >
             <svg
               class="fill-current text-grey-dark w-6 h-6"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20">
+              viewBox="0 0 20 20"
+            >
               <path d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z" />
             </svg>
           </button>
@@ -42,7 +48,8 @@
         <nav
           :class="{'hidden' : !show}"
           class="w-full lg:w-auto block flex-no-shrink flex-grow lg:flex lg:flex-wrap lg:justify-end bg-white min-h-100"
-          role="navigation">
+          role="navigation"
+        >
           <ul class="lg:flex lg:flex-grow lg:justify-end lg:flex-no-shrink lg:items-center p-0">
             <nuxt-link
               :key="city.alias"
@@ -50,7 +57,8 @@
               :active-class="liActiveClass"
               :class="liClass"
               tag="li"
-              @click.native="showMenu">
+              @click.native="showMenu"
+            >
               <a :class="linkClass">Акции</a>
             </nuxt-link>
             <nuxt-link
@@ -59,7 +67,8 @@
               :active-class="liActiveClass"
               :class="liClass"
               tag="li"
-              @click.native="showMenu">
+              @click.native="showMenu"
+            >
               <a :class="linkClass">Магазины</a>
             </nuxt-link>
             <nuxt-link
@@ -68,7 +77,8 @@
               :active-class="liActiveClass"
               :class="liClass"
               tag="li"
-              @click.native="showMenu">
+              @click.native="showMenu"
+            >
               <a :class="linkClass">Категории</a>
             </nuxt-link>
             <nuxt-link
@@ -77,7 +87,8 @@
               :class="liClass"
               to="/request"
               tag="li"
-              @click.native="showMenu">
+              @click.native="showMenu"
+            >
               <a :class="linkClass">
                 Обратная связь
               </a>
@@ -88,58 +99,60 @@
     </header>
   </div>
 </template>
-<script>
-import navbarCities from './cities.vue';
-import {mapGetters} from 'vuex';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import navbarCities from "./cities.vue";
+import { mapGetters } from "vuex";
 
-export default {
+@Component({
   components: {
-    navbarCities,
-  },
-  data() {
-    return {
-      show: false,
-      liActiveClass: 'active font-medium',
-      liClass: 'block px-1 mx-2 py-1',
-      linkClass: 'block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora',
-      currentScroll: 0,
-      previousScroll: 0,
-      headerClass: '',
-    };
+    navbarCities
   },
   computed: {
     ...mapGetters({
-      city: 'cities/city',
-    }),
-  },
-  created(){
+      city: "cities/city"
+    })
+  }
+})
+export default class Navbar extends Vue {
+  show: boolean = false;
+  liActiveClass: string = "active font-medium";
+  liClass: string = "block px-1 mx-2 py-1";
+  linkClass: string =
+    "block py-1 px-3 no-underline -mb-px flex justify-center items-center align-top text-black-tundora";
+  currentScroll: number = 0;
+  previousScroll: number = 0;
+  headerClass: string = "";
+
+  created() {
     if (process.browser) {
-      window.addEventListener('scroll', this.handleScroll);
+      window.addEventListener("scroll", this.handleScroll);
     }
-  },
-  destroyed () {
+  }
+  destroyed() {
     if (process.browser) {
-      window.removeEventListener('scroll', this.handleScroll);
+      window.removeEventListener("scroll", this.handleScroll);
     }
-  },
-  methods: {
-    showMenu() {
-      this.show = !this.show;
-    },
-    handleScroll () {
-      this.previousScroll = this.currentScroll;
-      this.currentScroll = window.scrollY;
-      if(this.currentScroll > 140 && this.currentScroll < this.previousScroll){
-        this.headerClass = ' show';
-      }
-      else if(this.currentScroll > 140 && this.currentScroll > this.previousScroll){
-        this.headerClass = 'hide';
-      }else{
-        this.headerClass = '';
-      }
+  }
+
+  showMenu() {
+    this.show = !this.show;
+  }
+  handleScroll() {
+    this.previousScroll = this.currentScroll;
+    this.currentScroll = window.scrollY;
+    if (this.currentScroll > 140 && this.currentScroll < this.previousScroll) {
+      this.headerClass = " show";
+    } else if (
+      this.currentScroll > 140 &&
+      this.currentScroll > this.previousScroll
+    ) {
+      this.headerClass = "hide";
+    } else {
+      this.headerClass = "";
     }
-  },
-};
+  }
+}
 </script>
 <style lang="postcss" scoped>
 .logo {
@@ -149,7 +162,7 @@ export default {
   min-height: 3.25rem;
 }
 .active a {
-  color: config('textColors.blue-matisse');
+  color: config("textColors.blue-matisse");
 }
 .hide {
   opacity: 0;

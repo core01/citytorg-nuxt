@@ -118,7 +118,9 @@
                 <svg
                   class="fill-current h-4 w-4"
                   xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
               </div>
             </div>
             <p
@@ -170,71 +172,67 @@
     </div>
   </section>
 </template>
-<script>
-import navbar from '../components/navbar/navbar.vue';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
+@Component({
   head: {
-    title: 'Обратная связь',
+    title: "Обратная связь",
     meta: [
       {
-        hid: 'description',
-        name: 'description',
-        content: 'Форма обратной связи',
-      },
-    ],
-  },
-  components: {
-    navbar,
-  },
-  data() {
-    return {
-      email: '',
-      name: '',
-      subject: 'Заявка на участие в проекте Citytorg.kz',
-      type: 'Поставщик/Производитель',
-      message: '',
-      phone: '',
-      error: false,
-      success: false,
-      statusText: '',
-    };
-  },
-  methods: {
-    reset() {
-      this.email = '';
-      this.name = '';
-      this.message = '';
-      this.phone = '';
-    },
-    sendMessage() {
-      let vm = this;
-      vm.error = false;
-      vm.success = false;
-      this.$validator.validateAll('request-form').then(result => {
-        if (result) {
-          vm.$store.commit('SHOW_SPINNER', true);
-          vm.$axios.$post('/application', vm.$data).then(response => {
-            vm.$store.commit('SHOW_SPINNER', false);
-            vm.pending = false;
-            if (response.status) {
-              vm.success = true;
-              vm.statusText = 'Ваше обращение успешно отправлено!';
-            } else {
-              vm.error = true;
-              vm.statusText = 'Ошибка при отправке сообщения, пожалуйста попробуйте позже!';
-            }
-          });
-        } else {
-          // notification
-          vm.error = true;
-          vm.statusText = 'Ошибка при заполнении формы, пожалуйста проверьте все поля и попробуйте снова!';
-        }
-      });
+        hid: "description",
+        name: "description",
+        content: "Форма обратной связи"
+      }
+    ]
+  }
+  // $_veeValidate: { validator: "new" }
+})
+export default class RequestIndex extends Vue {
+  email: string = "";
+  name: string = "";
+  subject: string = "Заявка на участие в проекте Citytorg.kz";
+  type: string = "Поставщик/Производитель";
+  message: string = "";
+  phone: string = "";
+  error: boolean = false;
+  success: boolean = false;
+  statusText: string = "";
 
-    },
-  },
-};
+  reset() {
+    this.email = "";
+    this.name = "";
+    this.message = "";
+    this.phone = "";
+  }
+
+  sendMessage() {
+    const vm = this;
+    vm.error = false;
+    vm.success = false;
+    this.$validator.validateAll("request-form").then(result => {
+      if (result) {
+        vm.$store.commit("SHOW_SPINNER", true);
+        vm.$axios.$post("/application", vm.$data).then(response => {
+          vm.$store.commit("SHOW_SPINNER", false);
+          if (response.status) {
+            vm.success = true;
+            vm.statusText = "Ваше обращение успешно отправлено!";
+          } else {
+            vm.error = true;
+            vm.statusText =
+              "Ошибка при отправке сообщения, пожалуйста попробуйте позже!";
+          }
+        });
+      } else {
+        // notification
+        vm.error = true;
+        vm.statusText =
+          "Ошибка при заполнении формы, пожалуйста проверьте все поля и попробуйте снова!";
+      }
+    });
+  }
+}
 </script>
 <style lang="postcss" scoped>
 .request-form {

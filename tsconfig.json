@@ -1,0 +1,19 @@
+{
+  "extends": "@nuxt/typescript",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "noImplicitAny": false,
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "types": [
+      "@types/node",
+      "@nuxt/vue-app",
+      "vee-validate/types",
+      "@nuxtjs/axios",
+      "vue2-leaflet/types"
+    ],
+    "strictPropertyInitialization": false,
+    "strict": true
+  }
+}

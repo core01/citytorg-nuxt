@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex text-center text-sm justify-center"
-  >
+  <div class="flex text-center text-sm justify-center">
     <span
       v-if="classes.sale"
       class="rounded bg-green-dark text-white py-1 px-2 mx-2"
@@ -37,45 +35,37 @@
   </div>
 </template>
 <script>
-export default {
-  props: {
-    sale: {
-      default() {
-        return {'sale': true};
-      },
-      type: Object,
-    },
-    grid: {
-      type: Boolean,
-      default: false,
-    }
-  },
-  data() {
-    return {
-      classes: {
-        sale: false,
-        new: false,
-        social: false,
-        akcion: false,
-        one_plus_one: false,
-        two_equals_three: false,
-      },
-    };
-  },
-  created(){
+import { Component, Vue, Prop } from "vue-property-decorator";
+@Component
+export default class extends Vue {
+  @Prop({ type: Object, default: { sale: true } }) sale;
+  @Prop({ type: Boolean, default: false }) grid;
+
+  classes = {
+    sale: false,
+    new: false,
+    social: false,
+    akcion: false,
+    one_plus_one: false,
+    two_equals_three: false
+  };
+
+  created() {
     let j = 0;
-    for (let property in this.classes){
-      // Если это страница плиток и если элементов 2, то больше не показываем
-      if(this.grid && j === 2){
-        break;
-      }
-      if(this.sale[property]){
-        this.classes[property] = true;
-        j++;
+    for (const property in this.classes) {
+      if (this.classes.hasOwnProperty(property)) {
+        // Если это страница плиток и если элементов 2, то больше не показываем
+        if (this.grid && j === 2) {
+          break;
+        }
+        if (this.sale[property]) {
+          this.classes[property] = true;
+          j++;
+        }
       }
     }
   }
-};
+}
 </script>
 <style lang="postcss" scoped>
 .tags-center {

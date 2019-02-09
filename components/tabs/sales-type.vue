@@ -16,32 +16,25 @@
     </li>
   </ul>
 </template>
-<script>
-export default {
-  props: {
-    type: {
-      type: String,
-      default: 'active'
-    }
-  },
-  data() {
-    return {
-      active: 'border-blue-matisse bg-blue-matisse text-white',
-      inActive: 'hover:border-blue-matisse border-grey'
-    };
-  },
-  computed: {
-    activeClass() {
-      return this.type === 'active' ? this.active : this.inActive;
-    },
-    futureClass() {
-      return this.type === 'future' ? this.active : this.inActive;
-    }
-  },
-  methods: {
-    switchType(type) {
-      this.$emit('switch-type', type);
-    }
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+
+@Component
+export default class SalesTypeTab extends Vue {
+  @Prop({ default: "active" }) type: string;
+
+  active: string = "border-blue-matisse bg-blue-matisse text-white";
+  inActive: string = "hover:border-blue-matisse border-grey";
+
+  get activeClass() {
+    return this.type === "active" ? this.active : this.inActive;
   }
-};
+  get futureClass() {
+    return this.type === "future" ? this.active : this.inActive;
+  }
+
+  switchType(type) {
+    this.$emit("switch-type", type);
+  }
+}
 </script>

@@ -42,13 +42,13 @@
             class="p-1 no-underline"
           >
             <span class="justify-center items-center inline-flex w-6 h-6">
-              <i class="fas fa-mobile-alt"/>
+              <i class="fas fa-mobile-alt" />
             </span>
             +77776461355
           </a> (по Казахстану)
           <a class="p-1 no-underline">
             <span class="justify-center items-center inline-flex w-6 h-6">
-              <i class="fas fa-phone"/>
+              <i class="fas fa-phone" />
             </span>
             1355
           </a> (г. Усть-Каменогорск)
@@ -68,20 +68,18 @@
     </div>
   </footer>
 </template>
-<script>
-import {mapGetters} from 'vuex';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
 
-export default {
-  components: {},
-  data() {
-    return {};
-  },
+@Component({
   computed: {
     ...mapGetters({
-      city: 'cities/city',
-    }),
-  },
-};
+      city: "cities/city"
+    })
+  }
+})
+export default class Footer extends Vue {}
 </script>
 <style>
 </style>

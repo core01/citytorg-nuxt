@@ -4,26 +4,26 @@
       <div
         role="button"
         class="inline-block select-none"
-        @click="showMenu()">
+        @click="showMenu()"
+      >
         <div class="appearance-none flex items-center inline-block text-black-tundora p-2 ">
           <span class="mr-1">{{ currentCity.title }}</span>
           <svg
             class="h-6 w-6 fill-current"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20">
-            <path
-              d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-            />
+            viewBox="0 0 20 20"
+          >
+            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
           </svg>
         </div>
       </div>
       <div
         v-show="show"
-        class="absolute pin-l mt-px z-20">
+        class="absolute pin-l mt-px z-20"
+      >
         <div class="bg-white border overflow-hidden">
           <a
-            v-for="(city,index) in cities"
-            v-if="currentCity.id !== city.id"
+            v-for="(city,index) in filteredCities"
             :key="index"
             class="no-underline w-48 block py-2 px-4 border-b text-black-tundora bg-white hover:text-black hover:bg-indigo-lightest whitespace-no-wrap cursor-pointer"
             @click="setCity(city)"
@@ -35,39 +35,47 @@
     </div>
   </on-click-outside>
 </template>
-<script>
-import { mapGetters } from 'vuex';
-import OnClickOutside from '../on-click-outside';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 
-export default {
-  components: {
-    OnClickOutside
-  },
-  data() {
-    return {
-      show: false
-    };
-  },
+import { mapGetters } from "vuex";
+
+import { City } from "types/City";
+import OnClickOutside from "../on-click-outside.vue";
+
+@Component({
   computed: {
     ...mapGetters({
-      cities: 'cities/cities',
-      currentCity: 'cities/city'
+      cities: "cities/cities",
+      currentCity: "cities/city"
     })
   },
-  methods: {
-    showMenu() {
-      this.show = !this.show;
-    },
-    async setCity(city) {
-      this.handleClickOutside();
-      this.$store.dispatch('cities/setCity', city);
-      this.$router.push('/');
-    },
-    handleClickOutside() {
-      if (this.show) {
-        this.show = false;
-      }
+  components: {
+    OnClickOutside
+  }
+})
+export default class CitiesNavbar extends Vue {
+  show: boolean = false;
+  currentCity: City;
+  cities: City[];
+
+  get filteredCities() {
+    const current = this.currentCity;
+    return this.cities.filter(city => city.id !== current.id);
+  }
+
+  showMenu() {
+    this.show = !this.show;
+  }
+  async setCity(city) {
+    this.handleClickOutside();
+    this.$store.dispatch("cities/setCity", city);
+    this.$router.push("/");
+  }
+  handleClickOutside() {
+    if (this.show) {
+      this.show = false;
     }
   }
-};
+}
 </script>

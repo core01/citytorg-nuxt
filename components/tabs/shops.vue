@@ -16,32 +16,25 @@
     </li>
   </ul>
 </template>
-<script>
-export default {
-  props: {
-    mode: {
-      type: String,
-      default: 'grids'
-    }
-  },
-  data() {
-    return {
-      activeClass: 'border-blue-matisse bg-blue-matisse text-white',
-      inActiveClass: 'hover:border-blue-matisse border-grey'
-    };
-  },
-  computed: {
-    gridsClass() {
-      return this.mode === 'grids' ? this.activeClass : this.inActiveClass;
-    },
-    mapClass() {
-      return this.mode === 'map' ? this.activeClass : this.inActiveClass;
-    }
-  },
-  methods: {
-    switchMode(mode) {
-      this.$emit('switch-mode', mode);
-    }
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+
+@Component
+export default class ShopsTab extends Vue {
+  @Prop({ default: "grids" }) mode!: string;
+
+  activeClass: string = "border-blue-matisse bg-blue-matisse text-white";
+  inActiveClass: string = "hover:border-blue-matisse border-grey";
+
+  get gridsClass() {
+    return this.mode === "grids" ? this.activeClass : this.inActiveClass;
   }
-};
+  get mapClass() {
+    return this.mode === "map" ? this.activeClass : this.inActiveClass;
+  }
+
+  switchMode(mode) {
+    this.$emit("switch-mode", mode);
+  }
+}
 </script>

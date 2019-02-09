@@ -122,112 +122,126 @@
     </section>
   </div>
 </template>
-<script>
-import navbar from '../../../components/navbar/navbar.vue';
-import gridSales from '../../../components/sales/list/grids.vue';
-import shopListMap from '../../../components/shops/list/map.vue';
-import shopListGrids from '../../../components/shops/list/grids.vue';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Shop from "../../../types/Shop";
+import Sale from "../../../types/Sale";
+import navbar from "../../../components/navbar/navbar.vue";
+import gridSales from "../../../components/sales/list/grids.vue";
+import shopListMap from "../../../components/shops/list/map.vue";
+import shopListGrids from "../../../components/shops/list/grids.vue";
+// @TODO Разобраться с интерфейсом
+interface Data {
+  id: number;
+  shop: Shop;
+  sales: Sale[];
+  shops?: Shop[];
+}
 
-export default {
+@Component({
   async asyncData({ app, params }) {
-    let [id] = params.alias.split('-');
-    let data = {
-      id: parseInt(id),
-      shop: {},
-      sales: [],
-      shops: []
+    const [id] = params.alias.split("-");
+    const shopData = await app.$axios.$get(
+      "api/shops/" + id + "?expand=sales,stalls"
+    );
+    const data: Data = {
+      id: parseInt(id, 10),
+      shop: shopData,
+      sales: shopData.sales
     };
-    data.shop = await app.$axios.$get('api/shops/' + data.id + '?expand=sales,stalls');
-    data.sales = data.shop.sales;
     // Если у нас точка торговой сети
     if (data.shop.parent !== 0) {
       // Получаем магазины торговой сети по parent id
-      let response = await app.$axios.$get('api/shops/' + data.shop.parent + '?expand=stalls&per-page=0');
+      let response = await app.$axios.$get(
+        "api/shops/" + data.shop.parent + "?expand=stalls&per-page=0"
+      );
       data.shops = response.stalls;
       // Получаем акции в текущей точке
-      response = await app.$axios.$get('api/shops/' + data.id + '?expand=sales');
+      response = await app.$axios.$get(
+        "api/shops/" + data.id + "?expand=sales"
+      );
       data.sales = response.sales;
       // если у нас сеть
-    } else if (data.shop.shopType.alias === 'network') {
+    } else if (data.shop.shopType.alias === "network") {
       // Получаем магазины торговой сети по id
-      let response = await app.$axios.$get('api/shops/' + data.id + '?expand=stalls&per-page=0');
+      const response = await app.$axios.$get(
+        "api/shops/" + data.id + "?expand=stalls&per-page=0"
+      );
       data.shops = response.stalls;
       // Получаем акции торговой сети
-      data.sales = await app.$axios.$get('api/sales/network?id=' + data.id);
+      data.sales = await app.$axios.$get("api/sales/network?id=" + data.id);
     } else {
       // Получаем магазины с акциями
-      let response = await app.$axios.$get('api/shops?per-page=0');
+      const response = await app.$axios.$get("api/shops?per-page=0");
       data.shops = response.shops;
     }
 
     return data;
-  },
-  head() {
-    return {
-      title: this.shop.title,
-      meta: [
-        {
-          hid: 'description',
-          description:
-            'Акции магазина ' +
-            this.shop.title +
-            ', Адрес: ' +
-            this.shop.address
-        }
-      ]
-    };
   },
   components: {
     navbar,
     gridSales,
     shopListMap,
     shopListGrids
-  },
-  data() {
+  }
+})
+export default class ShopsAlias extends Vue {
+  absenceText: string = "Информации о действующих акциях на данный момент нет";
+  sales: Sale[];
+  shops: Shop[];
+  shop: Shop;
+  mode: string = "sales";
+  images: string[];
+  imageIndex: null = null;
+  previews: string[];
+  active: string = "border-blue-matisse bg-blue-matisse text-white";
+  inActive: string = "hover:border-blue-matisse border-grey";
+
+  head() {
     return {
-      absenceText: 'Информации о действующих акциях на данный момент нет',
-      sales: [],
-      shops: [],
-      shop: {},
-      mode: 'sales',
-      images: [],
-      imageIndex: null,
-      previews: [],
-      active: 'border-blue-matisse bg-blue-matisse text-white',
-      inActive: 'hover:border-blue-matisse border-grey'
+      title: this.shop.title,
+      meta: [
+        {
+          hid: "description",
+          description:
+            "Акции магазина " +
+            this.shop.title +
+            ", Адрес: " +
+            this.shop.address
+        }
+      ]
     };
-  },
-  computed: {
-    salesClass() {
-      return this.mode === 'sales' ? this.active : this.inActive;
-    },
-    shopsClass() {
-      return this.mode === 'shops' ? this.active : this.inActive;
-    }
-  },
+  }
+
+  get salesClass() {
+    return this.mode === "sales" ? this.active : this.inActive;
+  }
+  get shopsClass() {
+    return this.mode === "shops" ? this.active : this.inActive;
+  }
+
   mounted() {
-    if (this.shop.shopType.alias === 'network') {
+    if (this.shop.shopType.alias === "network") {
       if (this.sales.length > 0) {
-        this.switchMode('sales');
+        this.switchMode("sales");
       } else {
-        this.switchMode('shops');
+        this.switchMode("shops");
       }
     }
     if (this.shop.images !== null) {
       if (this.shop.images.length > 0) {
-        for (let image of this.shop.images) {
-          this.images.push('/' + image.regular);
-          this.previews.push('/' + image.small);
+        for (const image of this.shop.images) {
+          this.images.push("/" + image.regular);
+          this.previews.push("/" + image.small);
         }
       }
     }
-  },
-  methods: {
-    switchMode(mode) {
-      this.mode = mode;
-    }
   }
-};
+
+  switchMode(mode) {
+    this.mode = mode;
+  }
+}
 </script>
 <style lang="postcss" scoped>
 .sales {

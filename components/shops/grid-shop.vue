@@ -37,46 +37,44 @@
   </div>
 
 </template>
-<script>
-import {mapGetters} from 'vuex';
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+import { City } from "types/City";
+import { Shop } from "types/Shop";
 
-export default {
-  components: {},
-  props: {
-    shop: {
-      type: Object,
-      required: true,
-    },
-  },
-  data() {
-    return {};
-  },
+@Component({
   computed: {
     ...mapGetters({
-      city: 'cities/city',
-    }),
-    path() {
-      return '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias;
-    },
-  },
-  mounted() {},
-  methods: {},
-};
+      city: "cities/city"
+    })
+  }
+})
+export default class GridShop extends Vue {
+  @Prop({ type: Object, required: true }) shop: Shop;
+  city: City;
+
+  get path() {
+    return (
+      "/" + this.city.alias + "/shops/" + this.shop.id + "-" + this.shop.alias
+    );
+  }
+}
 </script>
 
 <style lang="postcss" scoped>
 .grid-shop {
-	height: 245px;
+  height: 245px;
 }
 
 @media (min-width: 360px) {
   .grid-shop {
-    height: 320px
+    height: 320px;
   }
 }
 
 .grid-shop__img {
-	object-fit: contain;
+  object-fit: contain;
 }
 
 .grid-shop__img-container {

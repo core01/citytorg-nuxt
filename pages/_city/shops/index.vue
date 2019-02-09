@@ -23,57 +23,54 @@
       />
       <shop-list-map
         v-else
-        :shops="shops"/>
+        :shops="shops"
+      />
     </div>
   </section>
 </template>
-<script>
-import navbar from '../../../components/navbar/navbar.vue';
-import shopListMap from '../../../components/shops/list/map.vue';
-import shopListGrids from '../../../components/shops/list/grids.vue';
-import shopsTabs from '../../../components/tabs/shops.vue';
-import {mapGetters} from 'vuex';
-
-export default {
+<script lang="ts">
+import navbar from "../../../components/navbar/navbar.vue";
+import shopListMap from "../../../components/shops/list/map.vue";
+import shopListGrids from "../../../components/shops/list/grids.vue";
+import shopsTabs from "../../../components/tabs/shops.vue";
+import { Component, Vue } from "vue-property-decorator";
+import { mapGetters } from "vuex";
+@Component({
   head: {
-    title: 'Все магазины',
+    title: "Все магазины",
     meta: [
       {
-        hid: 'description',
-        name: 'description',
-        content: 'Полный перечень всех магазинов в городе',
-      },
-    ],
+        hid: "description",
+        name: "description",
+        content: "Полный перечень всех магазинов в городе"
+      }
+    ]
   },
-  async asyncData({store}) {
-    await store.dispatch('shops/getShops');
+  async asyncData({ store }) {
+    await store.dispatch("shops/getShops");
   },
   components: {
     navbar,
     shopListMap,
     shopListGrids,
-    shopsTabs,
-  },
-  data() {
-    return {
-      map: null,
-      tileLayer: null,
-      layers: [],
-    };
+    shopsTabs
   },
   computed: {
     ...mapGetters({
-      shops: 'shops/shops',
-      mode: 'pages/shopsMode',
-    }),
-  },
-  mounted() {},
-  methods: {
-    switchMode(mode) {
-      this.$store.commit('pages/SET_SHOPS_MODE', mode);
-    },
-  },
-};
+      shops: "shops/shops",
+      mode: "pages/shopsMode"
+    })
+  }
+})
+export default class Shops extends Vue {
+  // map: null;
+  // tileLayer: null;
+  // layers: Array<any>;
+
+  switchMode(mode) {
+    this.$store.commit("pages/SET_SHOPS_MODE", mode);
+  }
+}
 </script>
 <style lang="css" scoped>
 /* .shops {

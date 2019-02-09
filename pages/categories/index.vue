@@ -1,7 +1,8 @@
 <template>
   <section
     id="categories"
-    class="min-h-screen">
+    class="min-h-screen"
+  >
     <div class="content">
       <h2 class="text-center content_h2">Категории</h2>
     </div>
@@ -10,42 +11,34 @@
     </div>
   </section>
 </template>
-<script>
-import categoryList from '../../components/categories/list.vue';
-export default {
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import categoryList from "../../components/categories/list.vue";
+@Component({
   head: {
-    title: 'Категории',
+    title: "Категории",
     meta: [
       {
-        hid: 'description',
-        name: 'description',
-        content: 'Категории'
+        hid: "description",
+        name: "description",
+        content: "Категории"
       }
     ]
   },
-  async asyncData({app}) {
-    let data = {};
-    let response = await app.$axios.$get('api/categories?sort=-priority');
+  async asyncData({ app }) {
+    const data = {
+      categories: []
+    };
+    const response = await app.$axios.$get("api/categories?sort=-priority");
     data.categories = response.categories;
 
     return data;
   },
   components: {
     categoryList
-  },
-  data() {
-    return {
-    };
-  },
-  computed: {
-  },
-  mounted() {
-
-  },
-  methods: {
-
   }
-};
+})
+export default class Categories extends Vue {}
 </script>
 <style>
 </style>

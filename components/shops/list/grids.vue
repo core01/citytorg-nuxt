@@ -5,27 +5,21 @@
       :key="shop.id"
       class="w-1/2 sm:w-1/3 lg:w-1/4"
     >
-      <grid-shop :shop="shop"/>
+      <grid-shop :shop="shop" />
     </div>
   </div>
 </template>
-<script>
-import gridShop from '../grid-shop.vue';
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import gridShop from "../grid-shop.vue";
+import { Shop } from "types/Shop";
 
-export default {
+@Component({
   components: {
     gridShop
-  },
-  props: {
-    shops: {
-      type: Array,
-      required: true
-    }
-  },
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {}
-};
+  }
+})
+export default class ListGrids extends Vue {
+  @Prop({ type: Array, required: true }) shops: Shop[];
+}
 </script>

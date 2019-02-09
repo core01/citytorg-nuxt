@@ -4,19 +4,22 @@
       v-for="category in categories"
       :key="category.id"
       :to="{ path: '/categories/' + category.id + '-' + category.alias }"
-      class="block w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer p-2 text-black hover:text-blue-dark no-underline">
+      class="block w-1/2 md:w-1/4 lg:w-1/6 cursor-pointer p-2 text-black hover:text-blue-dark no-underline"
+    >
       <div class="overflow-hidden">
         <figure class="relative overflow-hidden">
           <img
             v-if="category.images"
             :src="'/' + category.images[0].small"
             :alt="category.title"
-            class="w-full rounded  ">
+            class="w-full rounded  "
+          >
           <img
             v-else
             :alt="category.title"
             src="~assets/images/placeholder.png"
-            class="w-full rounded  ">
+            class="w-full rounded  "
+          >
         </figure>
       </div>
       <div class="w-full">
@@ -25,28 +28,11 @@
     </nuxt-link>
   </div>
 </template>
-<script>
-export default {
-  components: {
-  },
-  props: {
-    categories: {
-      type: Array,
-      required: true,
-    },
-  },
-  data() {
-    return {
-
-    };
-  },
-  computed: {
-  },
-  mounted() {
-
-  },
-  methods: {
-
-  }
-};
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import Category from "types/Category";
+@Component
+export default class ListCategories extends Vue {
+  @Prop({ type: Array, required: true }) categories: Category[];
+}
 </script>

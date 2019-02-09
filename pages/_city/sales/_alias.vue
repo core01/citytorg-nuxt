@@ -24,7 +24,8 @@
                   <img
                     :src="previews[0]"
                     class="preview-image"
-                    @click="imageIndex = 0">
+                    @click="imageIndex = 0"
+                  >
                 </div>
                 <img
                   v-else
@@ -40,15 +41,14 @@
               <nuxt-link
                 v-if="sale.category"
                 :to="{ name: 'categories-alias', params: { alias: sale.category.id + '-' + sale.category.alias, fetchData: true } }"
-                class="self-start bg-transparent text-grey-darker py-1 px-2 mr-2 border border-grey rounded no-underline hover:bg-grey-lighter">
+                class="self-start bg-transparent text-grey-darker py-1 px-2 mr-2 border border-grey rounded no-underline hover:bg-grey-lighter"
+              >
                 {{ sale.category.title }}
               </nuxt-link>
-              <sale-class :sale="sale"/>
+              <sale-class :sale="sale" />
             </div>
             <div class="py-2 text-lg">
-              <div
-                v-html="sale.description"
-              />
+              <div v-html="sale.description" />
               <div class="flex justify-start flex-grow items-center">
                 <div class="">
                   Цена:
@@ -65,8 +65,9 @@
               </div>
               <div
                 v-if="sale.future"
-                class="text-lg">
-                Начало акции:  <b>{{ sale.date_start | dateFormat }}</b>
+                class="text-lg"
+              >
+                Начало акции: <b>{{ sale.date_start | dateFormat }}</b>
               </div>
               <div
                 v-if="sale.date_end"
@@ -80,10 +81,11 @@
                 <a
                   v-scroll-to="'#shops'"
                   v-if="sale.shops.length > 0"
-                  class="cursor-pointer bg-transparent hover:bg-blue-matisse text-blue-matisse hover:text-white py-1 px-2 border border-blue-matisse hover:border-transparent rounded inline-flex items-center text-base">
+                  class="cursor-pointer bg-transparent hover:bg-blue-matisse text-blue-matisse hover:text-white py-1 px-2 border border-blue-matisse hover:border-transparent rounded inline-flex items-center text-base"
+                >
                   <span>Посмотреть магазины</span>
                   <span class="justify-center items-center inline-flex w-5 h-5">
-                    <i class="fa fa-caret-down"/>
+                    <i class="fa fa-caret-down" />
                   </span>
                 </a>
                 <a
@@ -94,7 +96,7 @@
                 >
                   <span>Прочитать в блоге</span>
                   <span class="justify-center items-center inline-flex w-6 h-6">
-                    <i class="fa fa-book"/>
+                    <i class="fa fa-book" />
                   </span>
                 </a>
               </div>
@@ -129,73 +131,76 @@
           v-else
           class="container"
         >
-          <shop-list-map
-            :shops="sale.shops"/>
+          <shop-list-map :shops="sale.shops" />
         </div>
       </div>
     </section>
   </div>
 </template>
-<script>
-import navbar from '../../../components/navbar/navbar.vue';
-import shopListGrids from '../../../components/shops/list/grids.vue';
-import shopListMap from '../../../components/shops/list/map.vue';
-import saleClass from '../../../components/sales/class.vue';
-import shopsTabs from '../../../components/tabs/shops.vue';
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import Sale from "../../../types/Sale";
 
-export default {
-  middleware: 'saleCityCheck',
-  async asyncData({app, params}) {
-    let [id] = params.alias.split('-');
-    let data = {};
-    data.sale = await app.$axios.$get('api/sales/' + id + '?expand=shops,city');
+import navbar from "../../../components/navbar/navbar.vue";
+import shopListGrids from "../../../components/shops/list/grids.vue";
+import shopListMap from "../../../components/shops/list/map.vue";
+import saleClass from "../../../components/sales/class.vue";
+import shopsTabs from "../../../components/tabs/shops.vue";
+
+@Component({
+  middleware: "saleCityCheck",
+  async asyncData({ app, params }) {
+    const [id] = params.alias.split("-");
+    const sale = await app.$axios.$get(
+      "api/sales/" + id + "?expand=shops,city"
+    );
+    const data: { sale: Sale } = {
+      sale
+    };
 
     return data;
-  },
-  head() {
-    return {
-      title: this.sale.title,
-      meta: [
-        {
-          hid: 'description',
-          description:
-              'Условия акции' +
-              this.sale.title +
-              ', срок действия, магазины',
-        },
-      ],
-    };
   },
   components: {
     navbar,
     shopListGrids,
     shopListMap,
     saleClass,
-    shopsTabs,
-  },
-  data() {
+    shopsTabs
+  }
+})
+export default class SalesAlias extends Vue {
+  sale: Sale;
+  mode: string = "grids";
+  imageIndex: null = null;
+  images: string[];
+  previews: string[];
+
+  head() {
     return {
-      mode: 'grids',
-      imageIndex: null,
-      images: [],
-      previews: [],
+      title: this.sale.title,
+      meta: [
+        {
+          hid: "description",
+          description:
+            "Условия акции" + this.sale.title + ", срок действия, магазины"
+        }
+      ]
     };
-  },
-  computed: {},
+  }
+
   mounted() {
-    if(this.sale.images){
-      for (let image of this.sale.images) {
-        this.images.push('/' + image.regular);
-        this.previews.push('/' + image.small);
+    if (this.sale.images) {
+      for (const image of this.sale.images) {
+        this.images.push("/" + image.regular);
+        this.previews.push("/" + image.small);
       }
     }
-  },
-  methods: {
-    switchMode(mode) {
-      this.mode = mode;
-    },
-  },
-};
+  }
+
+  switchMode(mode) {
+    this.mode = mode;
+  }
+}
 </script>
 <style lang="postcss" scoped>
 .sale-card__image {

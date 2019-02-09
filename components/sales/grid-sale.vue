@@ -3,7 +3,8 @@
     <div class="mb-2">
       <sale-class
         :sale="sale"
-        :grid="true" />
+        :grid="true"
+      />
     </div>
     <nuxt-link :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}">
       <div class="grid-sale__img-container">
@@ -13,17 +14,20 @@
           :data-src="'/' + sale.images[0].small"
           :alt="sale.title"
           src="~assets/images/placeholder.png"
-          class="h-full my-0 mx-auto">
+          class="h-full my-0 mx-auto"
+        >
         <img
           v-else
           :alt="sale.title"
           src="~assets/images/placeholder.png"
-          class="h-full  my-0 mx-auto">
+          class="h-full  my-0 mx-auto"
+        >
       </div>
     </nuxt-link>
     <nuxt-link
       :to="{ name: 'city-sales-alias', params: { city: city.alias, alias: sale.id + '-' + sale.alias }}"
-      class="grid-sale__title no-underline h-10 leading-tight text-center text-blue-matisse mt-2 hover:text-red-akcion">
+      class="grid-sale__title no-underline h-10 leading-tight text-center text-blue-matisse mt-2 hover:text-red-akcion"
+    >
       {{ sale.title | truncate(38) }}
     </nuxt-link>
 
@@ -33,53 +37,49 @@
       </div>
       <div
         v-if="sale.old_price"
-        class="grid-sale__old-price font-bold text-base sm:text-xl line-through  text-blue-matisse">
+        class="grid-sale__old-price font-bold text-base sm:text-xl line-through  text-blue-matisse"
+      >
         {{ sale.old_price }} ₸
       </div>
     </div>
     <p
       v-if="sale.future"
-      class="mb-1 font-semibold">Начало с {{ sale.date_start | dateFormat }}</p>
+      class="mb-1 font-semibold"
+    >Начало с {{ sale.date_start | dateFormat }}</p>
     <p
       v-else
-      class="mb-1 font-semibold">До {{ sale.date_end | dateFormat }}</p>
+      class="mb-1 font-semibold"
+    >До {{ sale.date_end | dateFormat }}</p>
     <nuxt-link
       v-if="sale.category"
       :to="{ name: 'categories-alias', params: { alias: sale.category.id + '-' + sale.category.alias }}"
-      class="self-center my-1 bg-transparent text-grey-darker text-xs py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter">
+      class="self-center my-1 bg-transparent text-grey-darker text-xs py-1 px-2 border border-grey rounded no-underline hover:bg-grey-lighter"
+    >
       {{ sale.category.title }}
     </nuxt-link>
   </div>
 </template>
-<script>
-import saleClass from '../sales/class.vue';
-import { mapGetters } from 'vuex';
-
-export default {
+<script lang="ts">
+import { Component, Vue, Prop } from "vue-property-decorator";
+import saleClass from "../sales/class.vue";
+import { mapGetters } from "vuex";
+import Sale from "types/Sale";
+@Component({
   components: {
     saleClass
   },
-  props: {
-    sale: {
-      type: Object,
-      required: true
-    }
-  },
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters({
-      city: 'cities/city'
-    }),
-  },
-  mounted() {},
-  methods: {}
-};
+      city: "cities/city"
+    })
+  }
+})
+export default class GridSale extends Vue {
+  @Prop({ type: Object, required: true }) sale: Sale;
+}
 </script>
 
 <style lang="postcss" scoped>
-
 .grid-sale__img-container {
   height: 110px;
 }
