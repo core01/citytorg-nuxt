@@ -37,7 +37,7 @@
 <script>
 import { Component, Vue, Prop } from "vue-property-decorator";
 @Component
-export default class extends Vue {
+export default class SalesClass extends Vue {
   @Prop({ type: Object, default: { sale: true } }) sale;
   @Prop({ type: Boolean, default: false }) grid;
 

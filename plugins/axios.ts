@@ -1,9 +1,9 @@
-export default ({ $axios, error, app }) => {
+export default ({ $axios, redirect, app }) => {
+  $axios.onRequest(config => {
+    config.timeout = 3000;
+  });
   // TODO разобраться с кодами ошибок
   $axios.onError(err => {
-    if (err.code === 408 || err.code === "ECONNABORTED") {
-      error({ statusCode: 408, message: "Network Error" });
-    }
     if (process.client) {
       // Отправляем данные об ошибке в sentry.io
       app.$sentry.configureScope(scope => {
@@ -11,6 +11,6 @@ export default ({ $axios, error, app }) => {
         app.$sentry.captureException(err.response.data);
       });
     }
-    error({ statusCode: err.code, message: err.message });
+    redirect("/400");
   });
 };

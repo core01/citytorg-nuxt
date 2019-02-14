@@ -40,9 +40,14 @@
     "vue-scrollto": "^2.11.0",
     "vue-tiny-lazyload-img": "0.0.3",
     "vue2-leaflet": "^1.2.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-class": "^0.3.1"
   },
   "devDependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.1",
+    "@types/express-session": "^1.15.12",
     "babel-eslint": "^10.0.1",
     "eslint": "^5.13.0",
     "eslint-config-prettier": "^4.0.0",

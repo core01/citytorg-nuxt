@@ -24,7 +24,8 @@ export const actions = {
       }
       await dispatch('cities/setCity', currentCity);
     } catch (err) {
-      error({ statusCode: err.code, message: err.message });
+      // @TODO не работает, починить
+      // error({ statusCode: err.code, message: err.message });
     }
   }
 };

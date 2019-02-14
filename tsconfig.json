@@ -11,7 +11,9 @@
       "@nuxt/vue-app",
       "vee-validate/types",
       "@nuxtjs/axios",
-      "vue2-leaflet/types"
+      "vue2-leaflet/types",
+      "@types/express",
+      "@types/body-parser"
     ],
     "strictPropertyInitialization": false,
     "strict": true

@@ -6,19 +6,17 @@
     <footerComponent />
   </div>
 </template>
-<script>
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
 import spinner from "../components/spinner.vue";
 import footerComponent from "../components/footer.vue";
 import navbar from "../components/navbar/navbar.vue";
-export default {
+@Component({
   components: {
     spinner,
     footerComponent,
     navbar
-  },
-  data() {
-    return {};
-  },
-  computed: {}
-};
+  }
+})
+export default class DefaultLayout extends Vue {}
 </script>

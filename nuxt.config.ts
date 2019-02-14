@@ -1,9 +1,8 @@
 import * as dotenv from "dotenv";
 
 dotenv.config();
-
 process.env.DEBUG = "nuxt:*";
-module.exports = {
+export default {
   debug: true,
   mode: "universal",
   messages: {
@@ -156,7 +155,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    "@nuxtjs/proxy",
+    // "@nuxtjs/proxy",
     "@nuxtjs/pwa",
     // Doc: https://github.com/nuxt-community/axios-module#usage
     "@nuxtjs/axios",
@@ -194,7 +193,7 @@ module.exports = {
   proxy: {
     "/api": {
       target: process.env.YII_API,
-      pathRewrite: { "^/api": "" }
+      pathRewrite: { "^/api": "", logLevel: "debug" }
     },
     "/uploads": process.env.YII_URL
   },
