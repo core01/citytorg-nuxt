@@ -1,3 +1,4 @@
+require('dotenv').config();
 const postCSSConfig = require('./postcss.config.js');
 module.exports = {
   debug: true,
