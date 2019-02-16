@@ -1,29 +1,26 @@
 <template>
   <on-click-outside :do="handleClickOutside">
     <div class="relative">
-      <div
-        role="button"
-        class="inline-block select-none"
-        @click="showMenu()">
-        <div class="appearance-none flex items-center inline-block text-black-tundora p-2 ">
+      <div role="button" class="inline-block select-none" @click="showMenu()">
+        <div
+          class="appearance-none flex items-center inline-block text-black-tundora p-2 "
+        >
           <span class="mr-1">{{ currentCity.title }}</span>
           <svg
             class="h-6 w-6 fill-current"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20">
+            viewBox="0 0 20 20"
+          >
             <path
               d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
             />
           </svg>
         </div>
       </div>
-      <div
-        v-show="show"
-        class="absolute pin-l mt-px z-20">
+      <div v-show="show" class="absolute pin-l mt-px z-20">
         <div class="bg-white border overflow-hidden">
           <a
-            v-for="(city,index) in cities"
-            v-if="currentCity.id !== city.id"
+            v-for="(city, index) in filteredCity"
             :key="index"
             class="no-underline w-48 block py-2 px-4 border-b text-black-tundora bg-white hover:text-black hover:bg-indigo-lightest whitespace-no-wrap cursor-pointer"
             @click="setCity(city)"
@@ -41,18 +38,22 @@ import OnClickOutside from '../on-click-outside';
 
 export default {
   components: {
-    OnClickOutside
+    OnClickOutside,
   },
   data() {
     return {
-      show: false
+      show: false,
     };
   },
   computed: {
     ...mapGetters({
       cities: 'cities/cities',
-      currentCity: 'cities/city'
-    })
+      currentCity: 'cities/city',
+    }),
+    filteredCity() {
+      let current = this.currentCity;
+      return this.cities.filter(city => city.id !== current.id);
+    },
   },
   methods: {
     showMenu() {
@@ -67,7 +68,7 @@ export default {
       if (this.show) {
         this.show = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>

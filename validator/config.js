@@ -4,7 +4,7 @@ export const config = {
   locale: 'ru',
   dictionary: {
     ru: {
-      attributes: attributes
+      attributes: attributes,
     },
   },
   events: '',

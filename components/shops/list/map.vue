@@ -5,13 +5,10 @@
     :center="center"
     :max-zoom="maxZoom"
     :min-zoom="minZoom"
-    :options="{ scrollWheelZoom:false }"
+    :options="{ scrollWheelZoom: false }"
     class="map_shop-map"
   >
-    <l-tile-layer
-      :url="url"
-      :attribution="attribution"
-    />
+    <l-tile-layer :url="url" :attribution="attribution" />
     <map-marker
       v-for="shop in filteredShops"
       :key="shop.id"
@@ -25,6 +22,7 @@
 </template>
 <script>
 import 'leaflet/dist/leaflet.css';
+import mapMarker from '../../map/marker.vue';
 let Vue2Leaflet = {};
 let L = {
   icon: () => {},
@@ -33,7 +31,6 @@ if (process.browser) {
   Vue2Leaflet = require('vue2-leaflet');
   L = require('leaflet');
 }
-import mapMarker from '../../map/marker.vue';
 
 export default {
   components: {
@@ -59,7 +56,7 @@ export default {
     return {
       url: '/osm/?z={z}&x={x}&y={y}&s={s}',
       attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       // marker: L.latLng(49.9553, 82.6134),
       maxZoom: 18,
       minZoom: 11,
@@ -90,10 +87,7 @@ export default {
       let markers = [];
       for (let i = 0; i < this.filteredShops.length; i++) {
         if (this.shops[i].lat && this.shops[i].lon) {
-          markers.push([
-            this.shops[i].lat,
-            this.shops[i].lon,
-          ]);
+          markers.push([this.shops[i].lat, this.shops[i].lon]);
         }
       }
 
@@ -101,8 +95,8 @@ export default {
     },
     center() {
       if (this.currentId !== -1) {
-        for(let i =0; i<this.shops.length; i++){
-          if(this.shops[i].id === this.currentId){
+        for (let i = 0; i < this.shops.length; i++) {
+          if (this.shops[i].id === this.currentId) {
             let currentShop = this.shops[i];
             if (currentShop.lat && currentShop.lon) {
               return [currentShop.lat, currentShop.lon];
@@ -111,15 +105,18 @@ export default {
         }
       }
 
-      return [this.$store.getters['cities/city'].lat, this.$store.getters['cities/city'].lon];
+      return [
+        this.$store.getters['cities/city'].lat,
+        this.$store.getters['cities/city'].lon,
+      ];
     },
     filteredShops() {
       return this.shops.filter(shop => shop.shopType.alias !== 'network');
     },
   },
   mounted() {
-    let options = { padding : [50,50] };
-    if(this.currentId === -1 && this.markers.length === 1){
+    let options = { padding: [50, 50] };
+    if (this.currentId === -1 && this.markers.length === 1) {
       options.maxZoom = 16;
     }
     if (this.currentId === -1 && this.markers.length > 0) {

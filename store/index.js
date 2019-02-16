@@ -26,5 +26,5 @@ export const actions = {
     } catch (err) {
       error({ statusCode: err.code, message: err.message });
     }
-  }
+  },
 };

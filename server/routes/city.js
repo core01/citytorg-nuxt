@@ -8,7 +8,7 @@ router.post('/set', async function(req, res) {
   let { data } = await axios.get(process.env.YII_API + 'cities');
   if (data.cities && req.body.city.id) {
     for (let city of data.cities) {
-      if(city.id === req.body.city.id){
+      if (city.id === req.body.city.id) {
         res.cookie('city_id', city.id, {
           maxAge: 60 * 60 * 1000 * 24 * 14,
           httpOnly: true,

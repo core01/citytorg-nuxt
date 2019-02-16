@@ -1,32 +1,35 @@
 <template>
-  <div
-    class="flex text-center text-sm justify-center"
-  >
+  <div class="flex text-center text-sm justify-center">
     <span
       v-if="classes.sale"
       class="rounded bg-green-dark text-white py-1 px-2 mx-2"
       title="Скидка на товар"
-    >Скидка</span>
+      >Скидка</span
+    >
     <span
       v-if="classes.akcion"
       class="rounded text-white bg-red-akcion py-1 px-2 mx-2"
       title="Продажа товаров на основое специального ценового предложения"
-    >Акцион</span>
+      >Акцион</span
+    >
     <span
       v-if="classes.one_plus_one"
       class="rounded text-white bg-blue-matisse py-1 px-2 mx-2"
       title="Скидка при покупке комплекта из двух товаров"
-    >1+1</span>
+      >1+1</span
+    >
     <span
       v-if="classes.two_equals_three"
       class="rounded text-black bg-yellow-dark py-1 px-2 mx-2"
       title="Три товара по цене двух"
-    >1+1=3</span>
+      >1+1=3</span
+    >
     <span
       v-if="classes.new"
       class="rounded text-white bg-blue-dark py-1 px-2 mx-2"
       title="Новинка"
-    >Новинка</span>
+      >Новинка</span
+    >
     <span
       v-if="classes.social"
       class="rounded text-white bg-blue-light py-1 px-2 mx-2"
@@ -41,14 +44,14 @@ export default {
   props: {
     sale: {
       default() {
-        return {'sale': true};
+        return { sale: true };
       },
       type: Object,
     },
     grid: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   data() {
     return {
@@ -62,19 +65,19 @@ export default {
       },
     };
   },
-  created(){
+  created() {
     let j = 0;
-    for (let property in this.classes){
+    for (let property in this.classes) {
       // Если это страница плиток и если элементов 2, то больше не показываем
-      if(this.grid && j === 2){
+      if (this.grid && j === 2) {
         break;
       }
-      if(this.sale[property]){
+      if (this.sale[property]) {
         this.classes[property] = true;
         j++;
       }
     }
-  }
+  },
 };
 </script>
 <style lang="postcss" scoped>

@@ -1,11 +1,7 @@
 <template>
   <div class="flex flex-wrap">
-    <div
-      v-for="shop in shops"
-      :key="shop.id"
-      class="w-1/2 sm:w-1/3 lg:w-1/4"
-    >
-      <grid-shop :shop="shop"/>
+    <div v-for="shop in shops" :key="shop.id" class="w-1/2 sm:w-1/3 lg:w-1/4">
+      <grid-shop :shop="shop" />
     </div>
   </div>
 </template>
@@ -14,18 +10,18 @@ import gridShop from '../grid-shop.vue';
 
 export default {
   components: {
-    gridShop
+    gridShop,
   },
   props: {
     shops: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {};
   },
   mounted() {},
-  methods: {}
+  methods: {},
 };
 </script>

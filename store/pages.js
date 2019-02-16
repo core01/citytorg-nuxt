@@ -28,7 +28,7 @@ export const mutations = {
   SET_SHOPS_MODE(state, mode) {
     state.shops.mode = mode;
   },
-  SET_SALES_TYPE(state, type){
+  SET_SALES_TYPE(state, type) {
     state.sales.type = type;
   },
 };

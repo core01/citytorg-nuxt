@@ -1,38 +1,28 @@
 <template>
-  <section
-    id="shops"
-    class="is-fullheight shops"
-  >
+  <section id="shops" class="is-fullheight shops">
     <div class="content">
-      <h2 class="text-center content_h2">Магазины</h2>
+      <h2 class="text-center content_h2">
+        Магазины
+      </h2>
     </div>
     <div class="container mx-auto mb-6 px-1 md:px-0">
       <div class="flex">
         <div class="w-full lg:w-1/2">
-          <shops-tabs
-            :mode="mode"
-            @switch-mode="switchMode"
-          />
+          <shops-tabs :mode="mode" @switch-mode="switchMode" />
         </div>
       </div>
     </div>
     <div class="container mx-auto px-1 md:px-0">
-      <shopListGrids
-        v-if="mode === 'grids'"
-        :shops="shops"
-      />
-      <shop-list-map
-        v-else
-        :shops="shops"/>
+      <shopListGrids v-if="mode === 'grids'" :shops="shops" />
+      <shop-list-map v-else :shops="shops" />
     </div>
   </section>
 </template>
 <script>
-import navbar from '../../../components/navbar/navbar.vue';
 import shopListMap from '../../../components/shops/list/map.vue';
 import shopListGrids from '../../../components/shops/list/grids.vue';
 import shopsTabs from '../../../components/tabs/shops.vue';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   head: {
@@ -45,11 +35,7 @@ export default {
       },
     ],
   },
-  async asyncData({store}) {
-    await store.dispatch('shops/getShops');
-  },
   components: {
-    navbar,
     shopListMap,
     shopListGrids,
     shopsTabs,
@@ -66,6 +52,9 @@ export default {
       shops: 'shops/shops',
       mode: 'pages/shopsMode',
     }),
+  },
+  async asyncData({ store }) {
+    await store.dispatch('shops/getShops');
   },
   mounted() {},
   methods: {

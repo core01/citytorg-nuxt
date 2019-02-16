@@ -17,3 +17,4 @@ dist
 assets/tiles
 sw.*
 sessions
+.DS_Store

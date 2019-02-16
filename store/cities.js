@@ -1,10 +1,10 @@
 export const state = () => ({
   city: {
-    'id': 1,
-    'title': 'Усть-Каменогорск',
-    'alias': 'ust-kamenogorsk',
-    'lat': '49.96427057155009',
-    'lon': '82.59572865600605',
+    id: 1,
+    title: 'Усть-Каменогорск',
+    alias: 'ust-kamenogorsk',
+    lat: '49.96427057155009',
+    lon: '82.59572865600605',
   },
   cities: [],
 });

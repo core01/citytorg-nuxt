@@ -1,26 +1,24 @@
 <template>
-
-  <div class="is-shady grid-shop my-2 bg-white overflow-hidden text-center flex flex-col p-1">
+  <div
+    class="is-shady grid-shop my-2 bg-white overflow-hidden text-center flex flex-col p-1"
+  >
     <nuxt-link :to="{ path: path }">
       <div class="grid-shop__img-container relative">
         <img
-          v-lazyload
           v-if="shop.images"
+          v-lazyload
           :data-src="'/' + shop.images[0].small"
           :alt="shop.title"
           src="~assets/images/placeholder.png"
           class="grid-shop__img h-full my-0 mx-auto"
-        >
+        />
         <img
           v-else
           :alt="shop.title"
           src="~assets/images/placeholder.png"
           class="grid-shop__img h-full my-0 mx-auto"
-        >
-        <div
-          v-if="shop.sample"
-          class="shop-image__text"
-        >
+        />
+        <div v-if="shop.sample" class="shop-image__text">
           Образец
         </div>
       </div>
@@ -35,10 +33,9 @@
       {{ shop.address }}
     </div>
   </div>
-
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {},
@@ -56,7 +53,9 @@ export default {
       city: 'cities/city',
     }),
     path() {
-      return '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias;
+      return (
+        '/' + this.city.alias + '/shops/' + this.shop.id + '-' + this.shop.alias
+      );
     },
   },
   mounted() {},
@@ -66,17 +65,17 @@ export default {
 
 <style lang="postcss" scoped>
 .grid-shop {
-	height: 245px;
+  height: 245px;
 }
 
 @media (min-width: 360px) {
   .grid-shop {
-    height: 320px
+    height: 320px;
   }
 }
 
 .grid-shop__img {
-	object-fit: contain;
+  object-fit: contain;
 }
 
 .grid-shop__img-container {

@@ -1,9 +1,9 @@
 <template>
   <div class="font-sans text-black leading-normal">
-    <navbar/>
-    <nuxt/>
-    <spinner/>
-    <footerComponent/>
+    <navbar />
+    <nuxt />
+    <spinner />
+    <footerComponent />
   </div>
 </template>
 <script>

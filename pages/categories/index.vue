@@ -1,9 +1,9 @@
 <template>
-  <section
-    id="categories"
-    class="min-h-screen">
+  <section id="categories" class="min-h-screen">
     <div class="content">
-      <h2 class="text-center content_h2">Категории</h2>
+      <h2 class="text-center content_h2">
+        Категории
+      </h2>
     </div>
     <div class="container mx-auto">
       <category-list :categories="categories" />
@@ -19,33 +19,26 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: 'Категории'
-      }
-    ]
+        content: 'Категории',
+      },
+    ],
   },
-  async asyncData({app}) {
+  components: {
+    categoryList,
+  },
+  data() {
+    return {};
+  },
+  computed: {},
+  async asyncData({ app }) {
     let data = {};
     let response = await app.$axios.$get('api/categories?sort=-priority');
     data.categories = response.categories;
 
     return data;
   },
-  components: {
-    categoryList
-  },
-  data() {
-    return {
-    };
-  },
-  computed: {
-  },
-  mounted() {
-
-  },
-  methods: {
-
-  }
+  mounted() {},
+  methods: {},
 };
 </script>
-<style>
-</style>
+<style></style>

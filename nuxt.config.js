@@ -1,5 +1,3 @@
-require('dotenv').config();
-process.env.DEBUG = 'nuxt:*';
 const postCSSConfig = require('./postcss.config.js');
 module.exports = {
   debug: true,
@@ -14,7 +12,7 @@ module.exports = {
     name: 'Торговая сеть акционных продаж',
     short_name: 'Citytorg',
     description: 'Акции, скидки в магазинах города на карте',
-    theme_color: '#ffffff'
+    theme_color: '#ffffff',
   },
   meta: {
     name: 'Citytorg',
@@ -23,10 +21,10 @@ module.exports = {
     ogSiteName: 'Citytorg',
     viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
     author: false,
-    twitterCard: 'summary'
+    twitterCard: 'summary',
   },
   router: {
-    middleware: ['cityCheck', 'pageHistory']
+    middleware: ['cityCheck', 'pageHistory'],
   },
   /*
    ** Headers of the page
@@ -35,80 +33,80 @@ module.exports = {
     titleTemplate: '%s - Citytorg.kz',
     meta: [
       {
-        charset: 'utf-8'
+        charset: 'utf-8',
       },
       {
         name: 'viewport',
         content:
-          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'
+          'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no',
       },
       {
         hid: 'description',
         name: 'description',
-        content: 'Citytorg.kz'
+        content: 'Citytorg.kz',
       },
       {
         name: 'theme-color',
-        content: '#ffffff'
+        content: '#ffffff',
       },
       {
         name: 'msapplication-TileColor',
-        content: '#00a300'
+        content: '#00a300',
       },
       {
         property: 'og:image',
-        content: process.env.BASE_URL + '/citytorg_og_image.jpg'
+        content: process.env.BASE_URL + '/citytorg_og_image.jpg',
       },
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: '/favicon.ico'
+        href: '/favicon.ico',
       },
       {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/apple-touch-icon.png'
+        href: '/apple-touch-icon.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: '/favicon-32x32.png'
+        href: '/favicon-32x32.png',
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '16x16',
-        href: '/favicon-16x16.png'
+        href: '/favicon-16x16.png',
       },
       {
         rel: 'mask-icon',
         href: '/safari-pinned-tab.svg',
-        color: '#5bbad5'
+        color: '#5bbad5',
       },
       {
         rel: 'stylesheet',
         href: 'https://use.fontawesome.com/releases/v5.0.10/css/all.css',
         integrity:
           'sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg',
-        crossorigin: 'anonymous'
-      }
+        crossorigin: 'anonymous',
+      },
     ],
     script: [
       {
         src:
-          'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver'
-      }
-    ]
+          'https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver',
+      },
+    ],
   },
 
   /*
    ** Customize the progress-bar color
    */
   loading: {
-    color: '#204B98'
+    color: '#204B98',
   },
 
   /*
@@ -117,8 +115,8 @@ module.exports = {
   css: [
     {
       src: '~assets/css/app.css',
-      lang: 'postcss'
-    }
+      lang: 'postcss',
+    },
   ],
 
   /*
@@ -127,27 +125,27 @@ module.exports = {
   plugins: [
     {
       src: '~plugins/vue-scrollto',
-      ssr: false
+      ssr: false,
     },
     {
-      src: '~plugins/date-format'
+      src: '~plugins/date-format',
     },
     {
-      src: '~plugins/truncate'
+      src: '~plugins/truncate',
     },
     {
-      src: '~plugins/veevalidate'
+      src: '~plugins/veevalidate',
     },
     {
       src: '~plugins/lazy-img',
-      ssr: false
+      ssr: false,
     },
     {
       src: '~plugins/gallery.js',
-      ssr: false
+      ssr: false,
     },
     {
-      src: '~plugins/axios'
+      src: '~plugins/axios',
     },
   ],
   /*
@@ -167,16 +165,18 @@ module.exports = {
         clickmap: true,
         // useCDN:false,
         trackLinks: true,
-        accurateTrackBounce: true
-      }
+        accurateTrackBounce: true,
+      },
     ],
     ['@nuxtjs/moment', ['ru']],
     // Doc: https://github.com/nuxt-community/analytics-module
-    ['@nuxtjs/google-analytics', {
-      id: 'UA-107573642-2'
-    }]
+    [
+      '@nuxtjs/google-analytics',
+      {
+        id: 'UA-107573642-2',
+      },
+    ],
   ],
-
   /*
    ** Axios module configuration
    */
@@ -188,7 +188,7 @@ module.exports = {
   proxy: {
     '/api': {
       target: process.env.YII_API,
-      pathRewrite: { '^/api': '' }
+      pathRewrite: { '^/api': '' },
     },
     '/uploads': process.env.YII_URL,
   },
@@ -211,36 +211,19 @@ module.exports = {
      */
     extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && process.client) {
+      if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
-          exclude: /(node_modules)/
+          exclude: /(node_modules)/,
         });
       }
-      config.module.rules.push({
-        test: /\.postcss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'postcss-loader',
-        ]
-      });
-    }
-  },
-  env: {
-    ADMIN_EMAIL: process.env.ADMIN_EMAIL,
-    SMTP_HOST: process.env.SMTP_HOST,
-    SMTP_USER: process.env.SMTP_USER,
-    SMTP_PASS: process.env.SMTP_PASS,
-    SMTP_PORT: process.env.SMTP_PORT,
-    BASE_URL: process.env.BASE_URL,
-    YII_API : process.env.YII_API,
+    },
   },
   render: {
     http2: {
-      push: true
+      push: true,
     },
     static: {
       maxAge: '1y',
@@ -248,8 +231,8 @@ module.exports = {
         if (path.includes('sw.js')) {
           res.setHeader('Cache-Control', `public, max-age=${15 * 60}`);
         }
-      }
-    }
+      },
+    },
   },
   workbox: {
     runtimeCaching: [
@@ -262,10 +245,10 @@ module.exports = {
           cacheableResponse: { statuses: [0, 200] },
           cacheExpiration: {
             maxEntries: 100,
-            maxAgeSeconds: 180
-          }
-        }
-      }
-    ]
-  }
+            maxAgeSeconds: 180,
+          },
+        },
+      },
+    ],
+  },
 };

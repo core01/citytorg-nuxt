@@ -1,19 +1,15 @@
 <template>
-  <l-marker
-    :lat-lng="[shop.lat, shop.lon]"
-    :icon="icon"
-    @add="openPopup"
-  >
+  <l-marker :lat-lng="[shop.lat, shop.lon]" :icon="icon" @add="openPopup">
     <l-popup :options="{ autoClose: false }">
       <p>
         <b>{{ shop.title }}</b>
       </p>
-      <p>
-        <b>Адрес:</b> {{ shop.address }}
-      </p>
+      <p><b>Адрес:</b> {{ shop.address }}</p>
       <nuxt-link
         v-if="!isCurrent"
-        :to="{ path: '/' + city.alias + '/shops/' + shop.id + '-' + shop.alias }"
+        :to="{
+          path: '/' + city.alias + '/shops/' + shop.id + '-' + shop.alias,
+        }"
       >
         Перейти в магазин
       </nuxt-link>
@@ -21,7 +17,7 @@
   </l-marker>
 </template>
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 let Vue2Leaflet = {};
 

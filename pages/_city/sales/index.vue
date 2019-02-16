@@ -1,17 +1,14 @@
 <template>
-  <section
-    id="sales"
-    class="sales"
-  >
+  <section id="sales" class="sales">
     <div class="content">
-      <h2 class="text-center content_h2">Акции</h2>
+      <h2 class="text-center content_h2">
+        Акции
+      </h2>
     </div>
     <div class="container mx-auto mb-6 px-1 md:px-0">
       <div class="flex zero-side-margin">
         <div class="w-full lg:w-1/2">
-          <sales-type
-            :type="type"
-            @switch-type="switchType"/>
+          <sales-type :type="type" @switch-type="switchType" />
         </div>
       </div>
     </div>
@@ -36,7 +33,7 @@
 import salesGridsList from '../../../components/sales/list/grids.vue';
 import futureSalesGridsList from '../../../components/sales/list/future-grids.vue';
 import salesType from '../../../components/tabs/sales-type.vue';
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   head: {
@@ -49,15 +46,10 @@ export default {
       },
     ],
   },
-  async asyncData({store}) {
-    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
-      await store.dispatch('sales/getSales');
-    }
-  },
   components: {
     salesGridsList,
     salesType,
-    futureSalesGridsList
+    futureSalesGridsList,
   },
   data() {
     return {
@@ -72,21 +64,25 @@ export default {
       type: 'pages/salesType',
     }),
   },
+  async asyncData({ store }) {
+    if (process.browser && store.state.pages.previous !== 'city-sales-alias') {
+      await store.dispatch('sales/getSales');
+    }
+  },
   mounted() {
     // let vm = this
   },
   methods: {
-    async getMoreSales(){
+    async getMoreSales() {
       this.loading = true;
       await this.$store.dispatch('sales/getMoreSales');
       this.loading = false;
     },
-    async switchType(type){
+    async switchType(type) {
       await this.$store.dispatch('sales/getFutureSales');
       this.$store.commit('pages/SET_SALES_TYPE', type);
-    }
+    },
   },
 };
 </script>
-<style>
-</style>
+<style></style>
