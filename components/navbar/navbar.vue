@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar bg-white mb-16">
+  <div class="navbar bg-white lg:mb-16 mb-4">
     <header
       :class="headerClass"
       class="container flex items-stretch w-full mx-auto px-1 md:px-0 border-b border-grey-light lg:fixed lg:pin-x lg:pin-t lg:z-20"
