@@ -35,22 +35,6 @@
             >Личный кабинет</a
           >
         </p>
-        <p class="footer-phones mb-4">
-          <a href="tel:+77776461355" class="p-1 no-underline">
-            <span class="justify-center items-center inline-flex w-6 h-6">
-              <i class="fas fa-mobile-alt" />
-            </span>
-            +77776461355
-          </a>
-          (по Казахстану)
-          <a class="p-1 no-underline">
-            <span class="justify-center items-center inline-flex w-6 h-6">
-              <i class="fas fa-phone" />
-            </span>
-            1355
-          </a>
-          (г. Усть-Каменогорск)
-        </p>
         <p class="mb-4">
           ©
           <strong>Citytorg.kz</strong> - Торговая сеть акционных продаж.

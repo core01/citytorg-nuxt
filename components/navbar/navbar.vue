@@ -22,15 +22,6 @@
         <div class="flex flex-no-shrink">
           <navbar-cities />
         </div>
-        <div class="lg:flex items-center flex-no-shrink px-2 hidden">
-          <span class="justify-center items-center inline-flex w-6 h-6">
-            <i class="fas fa-phone-volume" />
-          </span>
-          Call-center:&nbsp;
-          <a href="tel:+77776461355" class="text-blue-matisse no-underline"
-            >+7-777-646-13-55</a
-          >
-        </div>
         <div class="text-right lg:hidden flex-grow">
           <button
             type="button"
